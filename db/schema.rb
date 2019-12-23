@@ -10,6 +10,82 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_12_23_183416) do
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "address"
+    t.string "city"
+    t.string "country"
+    t.string "zipcode"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "candidates", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "profile_id"
+    t.index ["email"], name: "index_candidates_on_email", unique: true
+    t.index ["profile_id"], name: "index_candidates_on_profile_id"
+    t.index ["reset_password_token"], name: "index_candidates_on_reset_password_token", unique: true
+  end
+
+  create_table "headhunters", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_headhunters_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_headhunters_on_reset_password_token", unique: true
+  end
+
+  create_table "opportunities", force: :cascade do |t|
+    t.string "title"
+    t.text "work_description"
+    t.text "required_abilities"
+    t.string "salary"
+    t.string "grade"
+    t.string "address"
+    t.date "submit_end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "name"
+    t.date "birth_date"
+    t.string "document"
+    t.string "scholarity"
+    t.text "professional_resume"
+    t.boolean "highlighted", default: false
+    t.integer "candidate_id", null: false
+    t.integer "address_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["address_id"], name: "index_profiles_on_address_id"
+    t.index ["candidate_id"], name: "index_profiles_on_candidate_id"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer "candidate_id", null: false
+    t.integer "opportunity_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_registrations_on_candidate_id"
+    t.index ["opportunity_id"], name: "index_registrations_on_opportunity_id"
+  end
+
+  add_foreign_key "candidates", "profiles"
+  add_foreign_key "profiles", "addresses"
+  add_foreign_key "profiles", "candidates"
+  add_foreign_key "registrations", "candidates"
+  add_foreign_key "registrations", "opportunities"
 end

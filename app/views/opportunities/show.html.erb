@@ -1,0 +1,28 @@
+<h1><%= @opportunity.title %></h1>
+
+<dl>
+    <dt><%= t('work_description') %>:</dt>
+    <dd><%= @opportunity.work_description %></dd>
+    <dt><%= t('required_abilities') %>:</dt>
+    <dd><%= @opportunity.required_abilities %></dd>
+    <dt><%= t('salary') %>:</dt>
+    <dd><%= @opportunity.salary %></dd>
+    <dt><%= t('grade') %>:</dt>
+    <dd><%= @opportunity.grade %></dd>
+    <dt><%= t('address') %>:</dt>
+    <dd><%= @opportunity.address %></dd>
+    <dt><%= t('submit_end_date') %>:</dt>
+    <dd><%= I18n.localize @opportunity.submit_end_date %></dd>
+</dl>
+
+<% if candidate_signed_in? %>
+    <% if @registration == nil%>
+        <h3><%= link_to 'Inscreva-se', register_opportunity_path(@opportunity), method: :post %></h3>
+    <% else %>
+        <h3>Você já está inscrito nesta vaga. Aguarde instruções do recrutador.</h3>
+    <% end %>
+<% end %>
+
+<% if headhunter_signed_in? %>
+    <h2>Candidatos Inscritos</h2>
+<% end %>

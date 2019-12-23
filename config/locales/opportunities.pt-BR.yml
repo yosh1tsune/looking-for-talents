@@ -1,0 +1,20 @@
+pt-BR:
+  title: 'Título'
+  work_description: 'Descrição da vaga'
+  required_abilities: 'Habilidades necessárias'
+  salary: 'Salário'
+  grade: 'Nível'
+  submit_end_date: 'Data de encerramento das inscrições'
+  address: 'Endereço'
+  activerecord:
+    attributes:
+      opportunity:
+        title: 'Título'
+        work_description: 'Descrição da vaga'
+        required_abilities: 'Habilidades necessárias'
+        salary: 'Salário'
+        grade: 'Nível'
+        submit_end_date: 'Data de encerramento das inscrições'
+        address: 'Endereço'
+    model:
+      opportunity: 'Oportunidade'

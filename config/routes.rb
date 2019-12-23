@@ -1,3 +1,14 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :candidates
+  devise_for :headhunters
+
+  root to: 'home#index'
+
+  resources :opportunities do
+    post 'register', on: :member
+  end
+
+  resources :profiles do
+    get 'verify', on: :member
+  end
 end

@@ -1,0 +1,12 @@
+<h1>Painel de vagas</h1>
+
+<%= link_to 'Publicar vaga', new_opportunity_path %>
+
+<% @opportunities.each do |op| %>
+    <dl>
+        <dt><%= t('title') %>:</dt>
+        <dd><%= link_to op.title, opportunity_path(op) %></dd>
+        <dt><%= t('grade') %>:</dt>
+        <dd><%= op.grade %></dd>
+    <dl>
+<% end %>
