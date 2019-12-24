@@ -8,7 +8,5 @@ Rails.application.routes.draw do
     post 'register', on: :member
   end
 
-  resources :profiles do
-    get 'verify', on: :member
-  end
+  resources :profiles
 end

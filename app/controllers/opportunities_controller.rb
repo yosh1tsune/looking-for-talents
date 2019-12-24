@@ -1,4 +1,6 @@
 class OpportunitiesController < ApplicationController
+    before_action :authenticate_candidate!, only: [:register]
+    # before_action :authenticate_headhunter!, only: [:new, :create]
     before_action :registered?, only: [:show]
 
     def index
@@ -7,8 +9,8 @@ class OpportunitiesController < ApplicationController
 
     def show
         @opportunity = Opportunity.find(params[:id])
-        id = @opportunity.registrations.ids
-        @candidates = Candidate.where('id in ?' "%#{id}%")
+        ids = @opportunity.registrations.ids
+        @candidates = Candidate.where(id: ids)
     end
 
     def new
@@ -36,7 +38,9 @@ class OpportunitiesController < ApplicationController
     end
 
     def registered?
-        @registration = Registration.find_by(candidate_id: current_candidate.id)
+        if candidate_signed_in?
+            @registration = Registration.find_by(candidate_id: current_candidate.id)
+        end
     end
 
     private

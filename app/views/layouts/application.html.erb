@@ -6,15 +6,23 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <nav>
       <%= link_to 'Vagas', opportunities_path %>
-      <%# <%= link_to 'Perfil', profile_path %> %>
-      <%= link_to 'Login Headhunters', new_headhunter_session_path %>
-      <%= link_to 'Login Candidatos', new_candidate_session_path %>
+      <%= link_to 'Perfil', profiles_path %>
+      <% if !candidate_signed_in? && !headhunter_signed_in?%>
+        <%= link_to 'Login Headhunters', new_headhunter_session_path %>
+        <%= link_to 'Login Candidatos', new_candidate_session_path %>
+      <% end %>
+      <% if candidate_signed_in? %>
+        <%= link_to 'Sair', destroy_candidate_session_path, method: :delete %>
+      <% end %>
+      <% if headhunter_signed_in? %>
+        <%= link_to 'Sair', destroy_headhunter_session_path, method: :delete %>
+      <% end %>
     </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

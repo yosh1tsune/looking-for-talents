@@ -1,11 +1,12 @@
 <h1>Painel de vagas</h1>
 
+<%# if headhunter_signed_in? %>
 <%= link_to 'Publicar vaga', new_opportunity_path %>
+<%# end %>
 
 <% @opportunities.each do |op| %>
+    <h3><%= link_to op.title, opportunity_path(op) %></h3>
     <dl>
-        <dt><%= t('title') %>:</dt>
-        <dd><%= link_to op.title, opportunity_path(op) %></dd>
         <dt><%= t('grade') %>:</dt>
         <dd><%= op.grade %></dd>
     <dl>

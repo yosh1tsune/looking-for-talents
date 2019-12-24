@@ -7,8 +7,8 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
       t.string :scholarity
       t.text :professional_resume
       t.boolean :highlighted, default: false
+      t.string :address
       t.references :candidate, null: false, foreign_key: true
-      t.references :address, null: false, foreign_key: true
 
       t.timestamps
     end

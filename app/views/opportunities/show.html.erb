@@ -23,6 +23,10 @@
     <% end %>
 <% end %>
 
-<% if headhunter_signed_in? %>
+<%# if headhunter_signed_in? %>
     <h2>Candidatos Inscritos</h2>
-<% end %>
+
+    <% @candidates.each do |c| %>
+        <%= c.email %>
+    <% end %>
+<%# end %>

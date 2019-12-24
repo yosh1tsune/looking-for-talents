@@ -1,1 +1,18 @@
-<%= @profile %>
+<h1>Perfil pessoal</h1>
+
+<h3><%= link_to 'Editar perfil', edit_profile_path(@profile) %>
+
+<h2><%= @profile.name %></h2>
+
+<dl>
+    <dt><%= I18n.t('birth_date') %>:</dt>
+    <dd><%= I18n.l(@profile.birth_date) %></dd>
+    <dt><%= I18n.t('document') %>:</dt>
+    <dd><%= @profile.document %></dd>
+    <dt><%= I18n.t('professional_resume') %>:</dt>
+    <dd><%= @profile.professional_resume %></dd>
+    <dt><%= I18n.t('scholarity') %>:</dt>
+    <dd><%= @profile.scholarity %></dd>
+    <dt><%= I18n.t('address') %>:</dt>
+    <dd><%= @profile.address %></dd>
+</dl>

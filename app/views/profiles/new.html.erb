@@ -1,0 +1,38 @@
+<h1>Atualize seu perfil</h1>
+
+<% if @profile.errors.any? %>
+  <p>Você deve corrigir os seguintes erros: </p>
+  <ul>
+  <% @profile.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+  <% end %>
+  </ul><br><br>
+<% end %>
+
+<%= form_with model: @profile, local: true do |form| %>
+    <p>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+    </p>
+    <p>
+        <%= form.label :birth_date %>
+        <%= form.date_field :birth_date %>
+    </p>
+    <p>
+        <%= form.label :document %>
+        <%= form.text_field :document %>
+    </p>
+    <p>
+        <%= form.label :scholarity %>
+        <%= form.text_field :scholarity %>
+    </p>
+    <p>
+        <%= form.label :professional_resume %>
+        <%= form.text_area :professional_resume %>
+    </p>
+    <p>
+        <%= form.label :address %>
+        <%= form.text_field :address %>
+    </p>
+    <%= form.submit 'Enviar' %>
+<% end %>

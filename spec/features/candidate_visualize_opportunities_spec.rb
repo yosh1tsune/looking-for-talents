@@ -3,13 +3,13 @@ require 'rails_helper'
 feature 'candidate visualize opportunities' do
     scenario 'list at index' do
         candidate = Candidate.create(email: 'candidate@email.com', password: 'cand1234')
-        Opportunity.create(title: 'Desenvolvedor Júnior Ruby on Rails', work_description: 'Desenvolvimento de aplicações web', 
+        opportunity = Opportunity.create(title: 'Desenvolvedor Júnior Ruby on Rails', work_description: 'Desenvolvimento de aplicações web', 
                             required_abilities: 'Ruby on Rails, TDD, Banco de dados, HTML', salary: '3.000,00', grade: 'Júnior', 
                             submit_end_date: 7.days.from_now, address: 'Avenida Paulista, 1000 - Beça Vista')
-        Opportunity.create(title: 'Analista de Suporte Pleno', work_description: 'Suporte ao usuário interno e externo', 
+        another_opportunity = Opportunity.create(title: 'Analista de Suporte Pleno', work_description: 'Suporte ao usuário interno e externo', 
                             required_abilities: 'Windows, Linux, Bancos de Dados', salary: '2.500,00', grade: 'Pleno', 
                             submit_end_date: 7.days.from_now, address: 'Avenida Paulista, 1000 - Beça Vista')
-        Opportunity.create(title: 'Engenheiro de Software', work_description: 'Desenvolvimento de aplicações web', 
+        third_opportunity = Opportunity.create(title: 'Engenheiro de Software', work_description: 'Desenvolvimento de aplicações web', 
                             required_abilities: 'Graduação em T.I., Modelagem de Banco de dados, Metodologias Ágeis', salary: '8.000,00', 
                             grade: 'Especialista', submit_end_date: 14.days.from_now, address: 'Avenida Paulista, 1000 - Beça Vista')
 
@@ -17,11 +17,11 @@ feature 'candidate visualize opportunities' do
         visit root_path
         click_on 'Vagas'
 
-        expect(page).to have_content("#{I18n.t('title')}: Desenvolvedor Júnior Ruby on Rails")
+        expect(page).to have_content(opportunity.title)
         expect(page).to have_content("#{I18n.t('grade')}: Júnior")
-        expect(page).to have_content("#{I18n.t('title')}: Analista de Suporte Pleno")
+        expect(page).to have_content(another_opportunity.title)
         expect(page).to have_content("#{I18n.t('grade')}: Pleno")
-        expect(page).to have_content("#{I18n.t('title')}: Engenheiro de Software")
+        expect(page).to have_content(third_opportunity.title)
         expect(page).to have_content("#{I18n.t('grade')}: Especialista")
     end
 

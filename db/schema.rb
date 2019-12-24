@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_23_183416) do
+ActiveRecord::Schema.define(version: 2019_12_24_055849) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "address"
@@ -29,9 +29,7 @@ ActiveRecord::Schema.define(version: 2019_12_23_183416) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "profile_id"
     t.index ["email"], name: "index_candidates_on_email", unique: true
-    t.index ["profile_id"], name: "index_candidates_on_profile_id"
     t.index ["reset_password_token"], name: "index_candidates_on_reset_password_token", unique: true
   end
 
@@ -66,11 +64,10 @@ ActiveRecord::Schema.define(version: 2019_12_23_183416) do
     t.string "scholarity"
     t.text "professional_resume"
     t.boolean "highlighted", default: false
+    t.string "address"
     t.integer "candidate_id", null: false
-    t.integer "address_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["address_id"], name: "index_profiles_on_address_id"
     t.index ["candidate_id"], name: "index_profiles_on_candidate_id"
   end
 
@@ -83,8 +80,6 @@ ActiveRecord::Schema.define(version: 2019_12_23_183416) do
     t.index ["opportunity_id"], name: "index_registrations_on_opportunity_id"
   end
 
-  add_foreign_key "candidates", "profiles"
-  add_foreign_key "profiles", "addresses"
   add_foreign_key "profiles", "candidates"
   add_foreign_key "registrations", "candidates"
   add_foreign_key "registrations", "opportunities"
