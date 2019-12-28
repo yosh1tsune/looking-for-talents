@@ -1,0 +1,14 @@
+<h1>Perfis cadastrados</h1>
+
+<% if @profiles.blank? %>
+    <h2>Ainda não há perfis cadastrados<h2>
+<% else %>
+    <% @profiles.each do |p| %>
+        <dl>
+            <dt><%= I18n.t('name') %></dt>
+            <dd><%= link_to p.name, profile_path(p) %></dd>
+            <dt><%= I18n.t('professional_resume') %></dt>
+            <dd><%= p.professional_resume %></dd>
+        </dl>
+    <% end %>
+<% end %>

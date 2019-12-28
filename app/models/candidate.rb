@@ -3,5 +3,6 @@ class Candidate < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :registrations
+  has_many :candidate_registrations
+  has_one :profile
 end

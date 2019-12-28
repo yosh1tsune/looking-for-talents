@@ -3,15 +3,22 @@ class ProfilesController < ApplicationController
 
     def index
         if candidate_signed_in?
-            show
+            @profile = Profile.find_by(candidate_id: current_candidate.id)
+            if @profile == nil
+                redirect_to new_profile_path
+            else
+                redirect_to @profile
+            end
+        elsif headhunter_signed_in?
+            @profiles = Profile.all
         end
     end
 
     def show
-        @profile = Profile.find_by(candidate_id: params[:id])
-
-        if @profile == nil
-            redirect_to new_profile_path
+        if headhunter_signed_in?
+            @profile = Profile.find_by(candidate_id: params[:id])
+        elsif candidate_signed_in?
+            @profile = Profile.find_by(candidate_id: current_candidate.id)
         end
     end
 
@@ -42,6 +49,18 @@ class ProfilesController < ApplicationController
         else
             render :edit
         end
+    end
+
+    def highlight
+        @profile = Profile.find(params[:id])
+
+        @profile.toggle(:highlighted).save
+
+        redirect_to @profile
+    end
+
+    def comments
+
     end
 
     private

@@ -1,0 +1,20 @@
+pt-BR:
+  registration_resume: 'Resumo da inscrição'
+  highlighted: 'Destacado'
+  status: 'Status'
+  feedback: 'Feedback'
+  in_progress: 'Em andamento'
+  approved: 'Aprovado'
+  refused: 'Recusado'
+  activerecord:
+    attributes:
+      candidate_registration:
+        registration_resume: 'Resumo da inscrição'
+        status: 'Status'
+        feedback: 'Feedback'
+        highlighted: 'Destacado'
+        in_progress: 'Em andamento'
+        approved: 'Aprovado'
+        refused: 'Recusado'
+    model:
+      candidate_registration: 'Inscrições'

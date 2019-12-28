@@ -4,7 +4,7 @@ feature 'candidate updates profile' do
     scenario "candidate still don't have profile" do
         candidate = Candidate.create!(email: 'candidate@email.com', password: 'cand1234')
 
-        login_as(candidate)
+        login_as(candidate, scope: :candidate)
         visit root_path
         click_on 'Perfil'
 
@@ -16,7 +16,8 @@ feature 'candidate updates profile' do
         candidate = Candidate.create!(email: 'candidate@email.com', password: 'cand1234')
 
         login_as(candidate)
-        visit profile_path(candidate)
+        visit root_path
+        click_on 'Perfil'
 
         fill_in I18n.t('name'), with: 'Bruno Silva'
         fill_in I18n.t('birth_date'), with: '22/04/1996'
@@ -40,8 +41,9 @@ feature 'candidate updates profile' do
         profile = Profile.create!(name: 'Bruno Silva', birth_date: '22/04/1996', document: '996.490.558-00', scholarity: 'Superior Incompleto', 
                                 professional_resume: 'Desenvolvimento web com Dart 2', address: 'Alameda Santos, 1293', candidate: candidate)
         
-        login_as(candidate)
-        visit profile_path(candidate)
+        login_as(candidate, scope: :candidate)
+        visit root_path
+        click_on 'Perfil'
         click_on 'Editar perfil'
         fill_in I18n.t('professional_resume'), with: 'Desenvolvimento web com Dart 2, Ruby on Rails, TDD'
         fill_in I18n.t('address'), with: 'Avenida Paulista, 1000'
@@ -61,8 +63,9 @@ feature 'candidate updates profile' do
         profile = Profile.create!(name: 'Bruno Silva', birth_date: '22/04/1996', document: '996.490.558-00', scholarity: 'Superior Incompleto', 
                                 professional_resume: 'Desenvolvimento web com Dart 2', address: 'Alameda Santos, 1293', candidate: candidate)
         
-        login_as(candidate)
-        visit profile_path(candidate)
+        login_as(candidate, scope: :candidate)
+        visit root_path
+        click_on 'Perfil'
         click_on 'Editar perfil'
 
         fill_in I18n.t('name'), with: 'Bruno Silva'

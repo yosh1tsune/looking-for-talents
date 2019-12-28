@@ -1,6 +1,8 @@
 <h1>Perfil pessoal</h1>
 
+<% if candidate_signed_in? %>
 <h3><%= link_to 'Editar perfil', edit_profile_path(@profile) %>
+<% end %>
 
 <h2><%= @profile.name %></h2>
 
@@ -16,3 +18,11 @@
     <dt><%= I18n.t('address') %>:</dt>
     <dd><%= @profile.address %></dd>
 </dl>
+
+<% if headhunter_signed_in? %>
+    <% if !@profile.highlighted %>
+        <%= link_to 'Destacar perfil', highlight_profile_path(@profile), method: :post %>
+    <% else %>
+        <%= link_to 'Remover destaque', highlight_profile_path(@profile), method: :post %>
+    <% end %>
+<% end %>

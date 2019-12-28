@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_24_055849) do
+ActiveRecord::Schema.define(version: 2019_12_28_024556) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "address"
@@ -19,6 +19,19 @@ ActiveRecord::Schema.define(version: 2019_12_24_055849) do
     t.string "zipcode"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "candidate_registrations", force: :cascade do |t|
+    t.integer "candidate_id", null: false
+    t.integer "opportunity_id", null: false
+    t.text "registration_resume"
+    t.boolean "highlighted"
+    t.integer "status", default: 0
+    t.text "feedback"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_candidate_registrations_on_candidate_id"
+    t.index ["opportunity_id"], name: "index_candidate_registrations_on_opportunity_id"
   end
 
   create_table "candidates", force: :cascade do |t|
@@ -31,6 +44,16 @@ ActiveRecord::Schema.define(version: 2019_12_24_055849) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_candidates_on_email", unique: true
     t.index ["reset_password_token"], name: "index_candidates_on_reset_password_token", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "comment"
+    t.integer "profile_id", null: false
+    t.integer "headhunter_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["headhunter_id"], name: "index_comments_on_headhunter_id"
+    t.index ["profile_id"], name: "index_comments_on_profile_id"
   end
 
   create_table "headhunters", force: :cascade do |t|
@@ -55,6 +78,10 @@ ActiveRecord::Schema.define(version: 2019_12_24_055849) do
     t.date "submit_end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0, null: false
+    t.string "company"
+    t.integer "headhunter_id"
+    t.index ["headhunter_id"], name: "index_opportunities_on_headhunter_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -71,16 +98,10 @@ ActiveRecord::Schema.define(version: 2019_12_24_055849) do
     t.index ["candidate_id"], name: "index_profiles_on_candidate_id"
   end
 
-  create_table "registrations", force: :cascade do |t|
-    t.integer "candidate_id", null: false
-    t.integer "opportunity_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["candidate_id"], name: "index_registrations_on_candidate_id"
-    t.index ["opportunity_id"], name: "index_registrations_on_opportunity_id"
-  end
-
+  add_foreign_key "candidate_registrations", "candidates"
+  add_foreign_key "candidate_registrations", "opportunities"
+  add_foreign_key "comments", "headhunters"
+  add_foreign_key "comments", "profiles"
+  add_foreign_key "opportunities", "headhunters"
   add_foreign_key "profiles", "candidates"
-  add_foreign_key "registrations", "candidates"
-  add_foreign_key "registrations", "opportunities"
 end

@@ -6,7 +6,12 @@ Rails.application.routes.draw do
 
   resources :opportunities do
     post 'register', on: :member
+    post 'close', on: :member
   end
 
-  resources :profiles
+  resources :candidate_registrations
+
+  resources :profiles do
+    post 'highlight', on: :member
+  end
 end

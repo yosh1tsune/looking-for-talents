@@ -12,6 +12,7 @@
   <body>
     <nav>
       <%= link_to 'Vagas', opportunities_path %>
+      <%= link_to 'Minhas vagas', candidate_registrations_path %>
       <%= link_to 'Perfil', profiles_path %>
       <% if !candidate_signed_in? && !headhunter_signed_in?%>
         <%= link_to 'Login Headhunters', new_headhunter_session_path %>

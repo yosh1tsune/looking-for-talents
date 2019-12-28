@@ -1,16 +1,18 @@
 require 'rails_helper'
 
-feature 'candidate register to opportunity' do
+feature 'candidate apply to opportunity' do
     scenario 'successfully' do
         candidate = Candidate.create!(email: 'candidate@email.com', password: 'cand1234')
-        Opportunity.create!(title: 'Engenheiro de Software', work_description: 'Desenvolvimento de aplicações web', 
+        headhunter = Headhunter.create!(email: 'headhunter@email.com', password: 'head1234')
+        Opportunity.create!(title: 'Engenheiro de Software', company: 'RR System', work_description: 'Desenvolvimento de aplicações web', 
                             required_abilities: 'Graduação em T.I., Modelagem de Banco de dados, Metodologias Ágeis', salary: '8.000,00', 
-                            grade: 'Especialista', submit_end_date: 14.days.from_now, address: 'Avenida Paulista, 1000 - Bela Vista')
+                            grade: 'Especialista', submit_end_date: 14.days.from_now, address: 'Avenida Paulista, 1000 - Bela Vista', headhunter: headhunter)
 
-        login_as(candidate)
+        login_as(candidate, scope: :candidate)
         visit root_path
         click_on 'Vagas'
         click_on 'Engenheiro de Software'
+        fill_in I18n.t('registration_resume'), with: '2 anos de experiência com gerenciamento de BD'
         click_on I18n.t('register')
 
         expect(page).to have_content('Inscrição realizada com sucesso!')
@@ -19,9 +21,10 @@ feature 'candidate register to opportunity' do
     end
 
     scenario 'and must be loged' do
-        Opportunity.create!(title: 'Engenheiro de Software', work_description: 'Desenvolvimento de aplicações web', 
+        headhunter = Headhunter.create!(email: 'headhunter@email.com', password: 'head1234')
+        Opportunity.create!(title: 'Engenheiro de Software', company: 'RR Systems', work_description: 'Desenvolvimento de aplicações web', 
                             required_abilities: 'Graduação em T.I., Modelagem de Banco de dados, Metodologias Ágeis', salary: '8.000,00', 
-                            grade: 'Especialista', submit_end_date: 14.days.from_now, address: 'Avenida Paulista, 1000 - Bela Vista')
+                            grade: 'Especialista', submit_end_date: 14.days.from_now, address: 'Avenida Paulista, 1000 - Bela Vista', headhunter: headhunter)
 
         visit opportunities_path
         click_on 'Engenheiro de Software'
@@ -31,12 +34,13 @@ feature 'candidate register to opportunity' do
 
     scenario 'and must be not already registered' do
         candidate = Candidate.create!(email: 'candidate@email.com', password: 'cand1234')
-        opportunity = Opportunity.create!(title: 'Engenheiro de Software', work_description: 'Desenvolvimento de aplicações web', 
+        headhunter = Headhunter.create!(email: 'headhunter@email.com', password: 'head1234')
+        opportunity = Opportunity.create!(title: 'Engenheiro de Software', company: 'RR Systems', work_description: 'Desenvolvimento de aplicações web', 
                             required_abilities: 'Graduação em T.I., Modelagem de Banco de dados, Metodologias Ágeis', salary: '8.000,00', 
-                            grade: 'Especialista', submit_end_date: 14.days.from_now, address: 'Avenida Paulista, 1000 - Bela Vista')
-        Registration.create!(opportunity: opportunity, candidate: candidate)
+                            grade: 'Especialista', submit_end_date: 14.days.from_now, address: 'Avenida Paulista, 1000 - Bela Vista', headhunter: headhunter)
+        CandidateRegistration.create!(opportunity: opportunity, candidate: candidate, registration_resume: '2 anos de experiência com gerenciamento de BD')
 
-        login_as(candidate)
+        login_as(candidate, scope: :candidate)
         visit opportunities_path
         click_on 'Engenheiro de Software'
         

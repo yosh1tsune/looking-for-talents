@@ -1,16 +1,20 @@
 class OpportunitiesController < ApplicationController
     before_action :authenticate_candidate!, only: [:register]
-    # before_action :authenticate_headhunter!, only: [:new, :create]
+    before_action :authenticate_headhunter!, only: [:new, :create]
     before_action :registered?, only: [:show]
 
     def index
-        @opportunities = Opportunity.all
+        if headhunter_signed_in?
+            headhunter = current_headhunter
+            @opportunities = headhunter.opportunities
+        else
+            @opportunities = Opportunity.all
+        end
     end
 
     def show
         @opportunity = Opportunity.find(params[:id])
-        ids = @opportunity.registrations.ids
-        @candidates = Candidate.where(id: ids)
+        @registrations = @opportunity.candidate_registrations
     end
 
     def new
@@ -18,8 +22,9 @@ class OpportunitiesController < ApplicationController
     end
 
     def create
-        @opportunity = Opportunity.new(opportunity_params)
-
+        headhunter = current_headhunter
+        @opportunity = headhunter.opportunities.new(opportunity_params)
+        
         if @opportunity.save
             flash[:notice] = 'Vaga publicada com sucesso!'
             redirect_to @opportunity
@@ -28,24 +33,24 @@ class OpportunitiesController < ApplicationController
         end
     end
 
-    def register
-        candidate = current_candidate
-        @opportunity = Opportunity.find(params[:id])
-        @opportunity.registrations.create!(candidate: candidate)
-
-        flash[:notice] = 'Inscrição realizada com sucesso!'
-        redirect_to @opportunity
-    end
-
     def registered?
         if candidate_signed_in?
-            @registration = Registration.find_by(candidate_id: current_candidate.id)
+            @registered = CandidateRegistration.find_by(candidate_id: current_candidate.id)
         end
+    end
+
+    def close
+        @opportunity = Opportunity.find(params[:id])
+        @opportunity.closed!
+
+        redirect_to @opportunity
+
+        flash[:notice] = 'Inscrições encerradas com sucesso.'
     end
 
     private
 
     def opportunity_params
-        params.require(:opportunity).permit(:title, :work_description, :required_abilities, :salary, :grade, :submit_end_date, :address)
+        params.require(:opportunity).permit(:title, :work_description, :required_abilities, :salary, :grade, :submit_end_date, :address, :company)
     end
 end

@@ -1,6 +1,8 @@
 <h1><%= @opportunity.title %></h1>
 
 <dl>
+    <dt><%= t('company') %>:</dt>
+    <dd><%= @opportunity.company %></dd>
     <dt><%= t('work_description') %>:</dt>
     <dd><%= @opportunity.work_description %></dd>
     <dt><%= t('required_abilities') %>:</dt>
@@ -16,17 +18,31 @@
 </dl>
 
 <% if candidate_signed_in? %>
-    <% if @registration == nil%>
-        <h3><%= link_to 'Inscreva-se', register_opportunity_path(@opportunity), method: :post %></h3>
+    <% if @registered == nil %>
+        <%= form_with model: @registration, url: candidate_registrations_path, method: :post do |form| %>
+            <%= hidden_field_tag(:opportunity_id, @opportunity.id) %>
+            <%= form.label :registration_resume, 'Resumo da inscrição' %>
+            <%= form.text_area :registration_resume %>
+            <%= form.submit 'Inscreva-se' %>
+        <% end %>
     <% else %>
         <h3>Você já está inscrito nesta vaga. Aguarde instruções do recrutador.</h3>
     <% end %>
 <% end %>
 
-<%# if headhunter_signed_in? %>
+<% if headhunter_signed_in? %>
+    <% if @opportunity.open? %>
+        <%= link_to 'Encerrar inscrições', close_opportunity_path(@opportunity), method: :post%>
+    <% end %>
+
     <h2>Candidatos Inscritos</h2>
 
-    <% @candidates.each do |c| %>
-        <%= c.email %>
+    <% @registrations.each do |r| %>
+        <dl>
+            <dt><%= I18n.t('name') %></dt>
+            <dd><%= link_to r.profile.name, profile_path(r) %></dd>
+            <dt><%= I18n.t('registration_resume') %></dt>
+            <dd><%= r.registration_resume %><dd>
+        </dl>
     <% end %>
-<%# end %>
+<% end %>
