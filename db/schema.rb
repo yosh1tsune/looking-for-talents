@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_30_003705) do
+ActiveRecord::Schema.define(version: 2019_12_30_111116) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "address"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2019_12_30_003705) do
     t.integer "opportunity_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0
     t.index ["opportunity_id"], name: "index_proposals_on_opportunity_id"
     t.index ["subscription_id"], name: "index_proposals_on_subscription_id"
   end

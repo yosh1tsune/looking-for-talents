@@ -5,4 +5,5 @@ class Candidate < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :subscriptions
   has_one :profile
+  has_many :proposals, through: :subscriptions
 end

@@ -1,0 +1,28 @@
+<h1>Proposta: <%= @proposal.id %></h1>
+
+<dl>
+    <dt>Vaga:</dt>
+    <dd><%= @proposal.opportunity.title %></dd>
+    <dt><%= I18n.t('start_date') %>:</dt>
+    <dd><%= I18n.l(@proposal.start_date) %></dd>
+    <dt><%= I18n.t('salary') %>:</dt>
+    <dd><%= @proposal.salary %></dd>
+    <dt><%= I18n.t('role') %>:</dt>
+    <dd><%= @proposal.role %></dd>
+    <dt><%= I18n.t('benefits') %>:</dt>
+    <dd><%= @proposal.benefits %></dd>
+    <dt><%= I18n.t('expectations') %>:</dt>
+    <dd><%= @proposal.expectations %></dd>
+    <dt><%= I18n.t('bonuses') %>:</dt>
+    <dd><%= @proposal.bonuses %></dd>
+    <dt><%= I18n.t('status') %>:</dt>
+    <dd><%= I18n.t(@proposal.status) %></dd>
+</dl>
+
+<% if candidate_signed_in? %>
+    <% if @proposal.in_progress? %>
+        <%= link_to 'Aceitar proposta', accept_proposal_path(@proposal), method: :post %>
+
+        <%= link_to 'Recusar proposta', refuse_proposal_path(@proposal), method: :post %>
+    <% end %>
+<% end %>

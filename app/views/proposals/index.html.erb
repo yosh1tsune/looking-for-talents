@@ -1,0 +1,12 @@
+<h1>Minhas propostas</h1>
+
+<% @proposals.each do |p| %>
+    <dl>
+        <dt>Vaga:</dt>
+        <dd><%= p.opportunity.title %></dd>
+        <dt><%= I18n.t('role') %>:</dt>
+        <dd><%= link_to p.role, proposal_path(p) %></dd>
+        <dt><%= I18n.t('status') %>:</dt>
+        <dd><%= I18n.t(p.status) %></dd>
+    </dl>
+<% end %>

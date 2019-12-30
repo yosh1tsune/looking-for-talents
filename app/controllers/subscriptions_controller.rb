@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
 before_action :authenticate_candidate!, only: [:index, :create]
-before_action :authenticate_headhunter!, only: [:update]
+before_action :authenticate_headhunter!, only: [:update, :highlight]
 
     def index
         candidate = current_candidate
@@ -10,6 +10,7 @@ before_action :authenticate_headhunter!, only: [:update]
 
     def show
         @registration = Subscription.find(params[:id])
+        @proposal = Proposal.new
     end
 
     def create

@@ -16,4 +16,9 @@ Rails.application.routes.draw do
   resources :profiles do
     post 'comment', on: :member
   end
+
+  resources :proposals do
+    post 'accept', on: :member
+    post 'refuse', on: :member
+  end
 end

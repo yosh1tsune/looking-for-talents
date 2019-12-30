@@ -38,3 +38,41 @@
             <%= form.submit 'Avaliar' %>
     <% end %>
 <% end %>
+
+<%#= if @registration.approved? %>
+    <h3>Enviar proposta ao candidato</h3>
+
+    <%= form_with model: @proposal, url: proposals_path, method: :post do |form| %>
+        <p>
+            <%= hidden_field_tag(:opportunity_id, @registration.opportunity.id) %>
+        </p>
+        <p>
+            <%= hidden_field_tag(:subscription_id, @registration.id) %>
+        </p>
+        <p>
+            <%= form.label :start_date %>
+            <%= form.text_field :start_date %>
+        </p>
+        <p>
+            <%= form.label :salary %>
+            <%= form.number_field :salary %>
+        </p>
+        <p>
+            <%= form.label :role %>
+            <%= form.text_field :role %>
+        </p>
+        <p>
+            <%= form.label :benefits %>
+            <%= form.text_field :benefits %>
+        </p>
+        <p>
+            <%= form.label :expectations %>
+            <%= form.text_field :expectations %>
+        </p>
+        <p>
+            <%= form.label :bonuses %>
+            <%= form.text_field :bonuses %>
+        </p>
+        <%= form.submit 'Enviar proposta'%>
+    <% end %>
+<%# end %>
