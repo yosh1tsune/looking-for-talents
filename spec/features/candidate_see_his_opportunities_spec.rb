@@ -46,7 +46,7 @@ feature 'candidate see his opportunities and feedbacks' do
         click_on 'Minhas vagas'
 
         expect(page).to have_content(registration.opportunity.title)
-        expect(page).to have_content('Status: Recusado')
+        expect(page).to have_content('Status: Recusada')
         expect(page).to have_content("#{I18n.t('feedback')}: #{registration.feedback}")
     end
 
