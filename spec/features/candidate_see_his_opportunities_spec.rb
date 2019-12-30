@@ -14,8 +14,8 @@ feature 'candidate see his opportunities and feedbacks' do
                                 required_abilities: 'Graduação em T.I., Modelagem de Banco de dados, Metodologias Ágeis', salary: '8.000,00', 
                                 grade: 'Especialista', submit_end_date: 14.days.from_now, address: 'Avenida Paulista, 1000 - Bela Vista', headhunter: headhunter)
 
-        registration = CandidateRegistration.create!(opportunity: opportunity, candidate: candidate, registration_resume: '1 ano de estágio com desenvolvimento web')
-        another_registration = CandidateRegistration.create!(opportunity: another_opportunity, candidate: candidate, registration_resume: '1 ano de estágio com desenvolvimento web')
+        registration = Subscription.create!(opportunity: opportunity, candidate: candidate, registration_resume: '1 ano de estágio com desenvolvimento web')
+        another_registration = Subscription.create!(opportunity: another_opportunity, candidate: candidate, registration_resume: '1 ano de estágio com desenvolvimento web')
         
         login_as(candidate, scope: :candidate)
         visit root_path
@@ -38,7 +38,7 @@ feature 'candidate see his opportunities and feedbacks' do
                                 required_abilities: 'Graduação em T.I., Modelagem de Banco de dados, Metodologias Ágeis', salary: '8.000,00', 
                                 grade: 'Especialista', submit_end_date: 14.days.from_now, address: 'Avenida Paulista, 1000 - Bela Vista', headhunter: headhunter)
 
-        registration = CandidateRegistration.create!(opportunity: opportunity, candidate: candidate, registration_resume: '1 ano de estágio com desenvolvimento web',
+        registration = Subscription.create!(opportunity: opportunity, candidate: candidate, registration_resume: '1 ano de estágio com desenvolvimento web',
                                                     status: 2, feedback: 'Pouca experiência')
         
         login_as(candidate, scope: :candidate)
@@ -60,7 +60,7 @@ feature 'candidate see his opportunities and feedbacks' do
                                     required_abilities: 'Ruby on Rails, TDD, Banco de dados, HTML', salary: '3.000,00', grade: 'Júnior', 
                                     submit_end_date: 7.days.from_now, address: 'Avenida Paulista, 1000 - Beça Vista', headhunter: headhunter)
 
-        registration = CandidateRegistration.create!(opportunity: opportunity, candidate: candidate, registration_resume: '1 ano de estágio com desenvolvimento web',
+        registration = Subscription.create!(opportunity: opportunity, candidate: candidate, registration_resume: '1 ano de estágio com desenvolvimento web',
                                                     status: 1, feedback: 'Parabéns, você foi aprovado! Aguarde o contato do recrutador')
         
         login_as(candidate, scope: :candidate)

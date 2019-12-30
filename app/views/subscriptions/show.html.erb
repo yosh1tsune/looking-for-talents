@@ -1,0 +1,40 @@
+<h1>
+    Inscrição: <%= @registration.id %>
+    <% if @registration.highlighted == true %>
+        <img src="assets/images/highlighted.png" title="Highlight">
+    <% end %>
+<h1>
+
+<dl>
+    <dt>Vaga:</dt>
+    <dd><%= @registration.opportunity.title %></dd>
+    <dt>Candidato:</dt>
+    <dd><%= @registration.profile.name %></dd>
+    <dt><%= I18n.t('status')%>:</dt>
+    <dd><%= I18n.t(@registration.status) %></dd>
+    <dt><%= I18n.t('feedback')%>:</dt>
+    <dd><%= @registration.feedback %></dd>
+</dl>
+
+<% if headhunter_signed_in? %>
+    <% if !@registration.highlighted %>
+        <%= link_to 'Destacar perfil', highlight_subscription_path, method: :post %>
+    <% else %>
+        <%= link_to 'Remover destaque', highlight_subscription_path, method: :post %>
+    <% end %>
+<% end %>
+
+<% if @registration.in_progress? %>
+    <h3>Avaliar candidato<h3>
+    <%= form_with model: @registration, url: subscription_path, method: :put do |form| %>
+        <p>
+            <%= form.label :status %>
+            <%= form.collection_select(:status, Subscription.statuses.map{ |s| [s.first]}, :first, :first ) %>
+        </p>
+        <p>
+            <%= form.label :feedback %>
+            <%= form.text_area :feedback %>
+        </p>
+            <%= form.submit 'Avaliar' %>
+    <% end %>
+<% end %>

@@ -1,4 +1,4 @@
-class CandidateRegistration < ApplicationRecord
+class Subscription < ApplicationRecord
   validates :candidate_id, :opportunity_id, :registration_resume, presence: true
   belongs_to :candidate
   belongs_to :opportunity

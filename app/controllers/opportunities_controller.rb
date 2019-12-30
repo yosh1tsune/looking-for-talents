@@ -14,7 +14,7 @@ class OpportunitiesController < ApplicationController
 
     def show
         @opportunity = Opportunity.find(params[:id])
-        @registrations = @opportunity.candidate_registrations
+        @registrations = @opportunity.subscriptions
     end
 
     def new
@@ -35,7 +35,7 @@ class OpportunitiesController < ApplicationController
 
     def registered?
         if candidate_signed_in?
-            @registered = CandidateRegistration.find_by(candidate_id: current_candidate.id)
+            @registered = Subscription.find_by(candidate_id: current_candidate.id)
         end
     end
 

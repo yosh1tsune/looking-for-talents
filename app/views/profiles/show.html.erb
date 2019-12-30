@@ -1,5 +1,14 @@
 <h1>Perfil pessoal</h1>
 
+<% if @profile.errors.any? %>
+  <p>Você deve corrigir os seguintes erros: </p>
+  <ul>
+  <% @profile.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+  <% end %>
+  </ul><br><br>
+<% end %>
+
 <% if candidate_signed_in? %>
 <h3><%= link_to 'Editar perfil', edit_profile_path(@profile) %>
 <% end %>
@@ -19,10 +28,26 @@
     <dd><%= @profile.address %></dd>
 </dl>
 
+<h3>Comentários<h3>
+
 <% if headhunter_signed_in? %>
-    <% if !@profile.highlighted %>
-        <%= link_to 'Destacar perfil', highlight_profile_path(@profile), method: :post %>
-    <% else %>
-        <%= link_to 'Remover destaque', highlight_profile_path(@profile), method: :post %>
+    <%= form_with model: @comment, url: comment_profile_path, method: :post do |form| %>
+            <%= hidden_field_tag(:profile_id, @profile.id) %>
+        <%= form.label :comment, I18n.t('comment') %>
+        <%= form.text_field :comment %>
+        <%= form.submit 'Comentar' %>
     <% end %>
+<% end %>
+
+<% if @comments.blank? %>
+    <h1>Sem comentários nesse perfil</h1>
+<% elsif %>
+    <% @comments.each do |c| %>
+        <dl>
+            <dt>Autor:</dt>
+            <dd><%= c.headhunter.email %></dd>
+            <dt>Comentário:</dt>
+            <dd><%= c.comment %></dd>
+        <dl
+    <% end %>>
 <% end %>

@@ -1,0 +1,8 @@
+pt-BR:
+  comment: 'Comentário'
+  activerecord:
+    attributes:
+      comment:
+        comment: 'Comentário'
+    model:
+      comment: 'Comentário'

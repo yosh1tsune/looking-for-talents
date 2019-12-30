@@ -16,10 +16,11 @@ class ProfilesController < ApplicationController
 
     def show
         if headhunter_signed_in?
-            @profile = Profile.find_by(candidate_id: params[:id])
+            @profile = Profile.find(params[:id])
         elsif candidate_signed_in?
             @profile = Profile.find_by(candidate_id: current_candidate.id)
         end
+        @comments = @profile.comments
     end
 
     def new
@@ -51,16 +52,16 @@ class ProfilesController < ApplicationController
         end
     end
 
-    def highlight
-        @profile = Profile.find(params[:id])
+    def comment
+        @profile = Profile.find(params[:profile_id])
+        @profile.comments.new(headhunter: current_headhunter, profile: @profile, comment: params[:comment])
 
-        @profile.toggle(:highlighted).save
-
-        redirect_to @profile
-    end
-
-    def comments
-
+        if @profile.save
+            flash[:notice] = 'Comentário enviado!'
+            redirect_to @profile
+        else
+            render :show
+        end
     end
 
     private

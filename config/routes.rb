@@ -9,9 +9,11 @@ Rails.application.routes.draw do
     post 'close', on: :member
   end
 
-  resources :candidate_registrations
+  resources :subscriptions do
+    post 'highlight', on: :member
+  end
 
   resources :profiles do
-    post 'highlight', on: :member
+    post 'comment', on: :member
   end
 end

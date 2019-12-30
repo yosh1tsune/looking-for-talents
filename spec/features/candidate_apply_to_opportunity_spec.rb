@@ -38,7 +38,7 @@ feature 'candidate apply to opportunity' do
         opportunity = Opportunity.create!(title: 'Engenheiro de Software', company: 'RR Systems', work_description: 'Desenvolvimento de aplicações web', 
                             required_abilities: 'Graduação em T.I., Modelagem de Banco de dados, Metodologias Ágeis', salary: '8.000,00', 
                             grade: 'Especialista', submit_end_date: 14.days.from_now, address: 'Avenida Paulista, 1000 - Bela Vista', headhunter: headhunter)
-        CandidateRegistration.create!(opportunity: opportunity, candidate: candidate, registration_resume: '2 anos de experiência com gerenciamento de BD')
+        Subscription.create!(opportunity: opportunity, candidate: candidate, registration_resume: '2 anos de experiência com gerenciamento de BD')
 
         login_as(candidate, scope: :candidate)
         visit opportunities_path

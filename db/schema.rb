@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_28_024556) do
+ActiveRecord::Schema.define(version: 2019_12_30_003705) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "address"
@@ -98,10 +98,42 @@ ActiveRecord::Schema.define(version: 2019_12_28_024556) do
     t.index ["candidate_id"], name: "index_profiles_on_candidate_id"
   end
 
+  create_table "proposals", force: :cascade do |t|
+    t.date "start_date"
+    t.decimal "salary"
+    t.text "benefits"
+    t.text "role"
+    t.text "expectations"
+    t.text "bonuses"
+    t.integer "subscription_id", null: false
+    t.integer "opportunity_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["opportunity_id"], name: "index_proposals_on_opportunity_id"
+    t.index ["subscription_id"], name: "index_proposals_on_subscription_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "candidate_id", null: false
+    t.integer "opportunity_id", null: false
+    t.text "registration_resume"
+    t.boolean "highlighted"
+    t.integer "status", default: 0
+    t.text "feedback"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_subscriptions_on_candidate_id"
+    t.index ["opportunity_id"], name: "index_subscriptions_on_opportunity_id"
+  end
+
   add_foreign_key "candidate_registrations", "candidates"
   add_foreign_key "candidate_registrations", "opportunities"
   add_foreign_key "comments", "headhunters"
   add_foreign_key "comments", "profiles"
   add_foreign_key "opportunities", "headhunters"
   add_foreign_key "profiles", "candidates"
+  add_foreign_key "proposals", "opportunities"
+  add_foreign_key "proposals", "subscriptions"
+  add_foreign_key "subscriptions", "candidates"
+  add_foreign_key "subscriptions", "opportunities"
 end
