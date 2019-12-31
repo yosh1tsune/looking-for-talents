@@ -28,7 +28,8 @@ class ProposalsController < ApplicationController
     def accept
         @proposal = Proposal.find(params[:id])
 
-        proposals = Proposal.all
+        candidate = current_candidate
+        proposals = candidate.proposals
         proposals.each do |p| 
             p.refused!
         end
