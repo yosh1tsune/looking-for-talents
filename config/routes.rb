@@ -21,4 +21,10 @@ Rails.application.routes.draw do
     post 'accept', on: :member
     post 'refuse', on: :member
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :opportunities, only: [:index, :show, :create, :update, :destroy]
+    end
+  end
 end
