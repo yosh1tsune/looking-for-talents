@@ -1,0 +1,22 @@
+<h1>Olá <%= @subscription.candidate.profile.name%></h3>
+<p>Seu registro na vaga <%= @subscription.opportunity.title %> foi concluido com sucesso!</p>
+<p>As proxímas atualizações serão feitas diretamente pelo recrutador<p>
+
+<h3>Informações da vaga</h3>
+
+<dl>
+    <dt>Título:</dt>
+    <dd><%= @subscription.opportunity.title %></dd>
+    <dt>Descrição:</dt>
+    <dd><%= @subscription.opportunity.work_description %></dd>
+    <dt>Habilidades necessárias:</dt>
+    <dd><%= @subscription.opportunity.required_abilities %></dd>
+    <dt>Salário:</dt>
+    <dd><%= @subscription.opportunity.salary %></dd>
+    <dt>Nível:</dt>
+    <dd><%= @subscription.opportunity.grade %></dd>
+    <dt>Endereço:</dt>
+    <dd><%= @subscription.opportunity.address %></dd>
+    <dt>Empresa:</dt>
+    <dd><%= @subscription.opportunity.company %></dd>
+<dl>

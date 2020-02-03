@@ -18,8 +18,9 @@ before_action :authenticate_headhunter!, only: [:update, :highlight]
         candidate = current_candidate
 
         if @opportunity.open?
-            @opportunity.subscriptions.create!(candidate: candidate, opportunity: @opportunity, registration_resume: params[:registration_resume])
+            subscription = @opportunity.subscriptions.create!(candidate: candidate, opportunity: @opportunity, registration_resume: params[:registration_resume])
             flash[:notice] = 'Inscrição realizada com sucesso!'
+            SubscriptionMailer.confirm_subscription(subscription.id)
             redirect_to @opportunity
         else
             flash[:notice] = 'As inscrições para essa vaga foram encerradas!'

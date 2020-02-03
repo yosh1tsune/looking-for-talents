@@ -1,4 +1,7 @@
 class ProposalsController < ApplicationController
+    before_action :authenticate_headhunter!, only: [:create]
+    before_action :authenticate_candidate!, only: [:accept, :refuse]
+
     def index
         candidate = current_candidate
         @proposals = candidate.proposals
