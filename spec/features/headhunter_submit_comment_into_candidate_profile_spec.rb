@@ -2,10 +2,9 @@ require 'rails_helper'
 
 feature 'headhunter submit comment into candidate profile' do
     scenario 'succesfully' do
-        headhunter = Headhunter.create!(email: 'headhunter@email.com', password: 'head1234')
-        candidate = Candidate.create!(email: 'candidate@email.com', password: 'cand1234')
-        profile = Profile.create!(name: 'Bruno Silva', birth_date: '22/04/1996', document: '996.490.558-00', scholarity: 'Superior Incompleto', 
-                                professional_resume: 'Desenvolvimento web com Dart 2', address: 'Alameda Santos, 1293', candidate: candidate)
+        candidate = create(:candidate, email: 'candidate@email.com')
+        headhunter = create(:headhunter, email: 'headhunter@email.com')
+        profile = create(:profile, name: 'Bruno Silva', candidate: candidate)
 
         login_as(headhunter, scope: :headhunter)
         visit root_path
@@ -20,10 +19,9 @@ feature 'headhunter submit comment into candidate profile' do
     end
 
     scenario 'and must send a not blank comment' do
-        headhunter = Headhunter.create!(email: 'headhunter@email.com', password: 'head1234')
-        candidate = Candidate.create!(email: 'candidate@email.com', password: 'cand1234')
-        profile = Profile.create!(name: 'Bruno Silva', birth_date: '22/04/1996', document: '996.490.558-00', scholarity: 'Superior Incompleto', 
-                                professional_resume: 'Desenvolvimento web com Dart 2', address: 'Alameda Santos, 1293', candidate: candidate)
+        candidate = create(:candidate, email: 'candidate@email.com')
+        headhunter = create(:headhunter, email: 'headhunter@email.com')
+        profile = create(:profile, name: 'Bruno Silva', candidate: candidate)
 
         login_as(headhunter, scope: :headhunter)
         visit root_path

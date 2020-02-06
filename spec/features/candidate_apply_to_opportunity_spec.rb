@@ -29,7 +29,7 @@ feature 'candidate apply to opportunity' do
     scenario 'and must be not already registered' do
         candidate = create(:candidate, email: 'candidate@email.com')
         opportunity = create(:opportunity, title: 'Engenheiro de Software')
-        Subscription.create!(opportunity: opportunity, candidate: candidate, registration_resume: '2 anos de experiência com gerenciamento de BD')
+        create(:subscription, opportunity: opportunity, candidate: candidate)
 
         login_as(candidate, scope: :candidate)
         visit opportunities_path

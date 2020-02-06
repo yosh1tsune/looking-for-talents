@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'candidate updates profile' do
     scenario "candidate still don't have profile" do
-        candidate = Candidate.create!(email: 'candidate@email.com', password: 'cand1234')
+        candidate = create(:candidate, email: 'candidate@email.com')
 
         login_as(candidate, scope: :candidate)
         visit root_path
@@ -13,7 +13,7 @@ feature 'candidate updates profile' do
     end
 
     scenario 'and create if not' do
-        candidate = Candidate.create!(email: 'candidate@email.com', password: 'cand1234')
+        candidate = create(:candidate, email: 'candidate@email.com')
 
         login_as(candidate)
         visit root_path
@@ -40,7 +40,7 @@ feature 'candidate updates profile' do
 
     scenario 'or edit if already have' do
         candidate = Candidate.create!(email: 'candidate@email.com', password: 'cand1234')
-        profile = Profile.create!(name: 'Bruno Silva', birth_date: '22/04/1996', document: '996.490.558-00', scholarity: 'Superior Incompleto', 
+        profile = create(:profile, name: 'Bruno Silva', birth_date: '22/04/1996', document: '996.490.558-00', scholarity: 'Superior Incompleto', 
                                 professional_resume: 'Desenvolvimento web com Dart 2', address: 'Alameda Santos, 1293', candidate: candidate)
         
         login_as(candidate, scope: :candidate)
@@ -61,9 +61,8 @@ feature 'candidate updates profile' do
     end
 
     scenario 'and must fill all fields' do
-        candidate = Candidate.create!(email: 'candidate@email.com', password: 'cand1234')
-        profile = Profile.create!(name: 'Bruno Silva', birth_date: '22/04/1996', document: '996.490.558-00', scholarity: 'Superior Incompleto', 
-                                professional_resume: 'Desenvolvimento web com Dart 2', address: 'Alameda Santos, 1293', candidate: candidate)
+        candidate = create(:candidate, email: 'candidate@email.com')
+        profile = create(:profile, name: 'Bruno Silva', candidate: candidate)
         
         login_as(candidate, scope: :candidate)
         visit root_path

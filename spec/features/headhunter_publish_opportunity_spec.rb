@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'headhunter publish opportunity' do
     scenario 'successfully' do
-        headhunter = Headhunter.create!(email: 'headhunter@email.com', password: 'head1234')
+        headhunter = create(:headhunter, email: 'headhunter@email.com')
 
         login_as(headhunter, scope: :headhunter)
         visit root_path
@@ -31,7 +31,7 @@ feature 'headhunter publish opportunity' do
     end
 
     scenario 'and must fill all fields' do
-        headhunter = Headhunter.create!(email: 'headhunter@email.com', password: 'head1234')
+        headhunter = create(:headhunter, email: 'headhunter@email.com')
 
         login_as(headhunter, scope: :headhunter)
         visit opportunities_path
