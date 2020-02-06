@@ -1,15 +1,13 @@
 class Api::V1::ProfilesController < Api::V1::ApiController
     def create
         @profile = Profile.new(profile_params)
-        # byebug
-        @profile.avatar.attach(profile_params[:avatar])
+        @profile.avatar.attach(io: File.open(Rails.root.join('spec/support/user.jpg'), filename: 'user.jpg'))
         if @profile.valid?
             @profile.save!
-            render json: @profile, status: :created
+            render json: url_for(@profile.avatar), status: :created
         else
             render json: 'Object not created', status: :precondition_failed
         end
-        byebug
     end
 
     def profile_params

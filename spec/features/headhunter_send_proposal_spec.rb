@@ -17,7 +17,7 @@ feature 'headhunter send proposal' do
         visit opportunities_path
         click_on 'Desenvolvedor Júnior Ruby on Rails'
         click_on "#{registration.id}"
-        fill_in I18n.t('start_date'), with: '01/02/2020'
+        fill_in I18n.t('start_date'), with: '01/02/2030'
         fill_in I18n.t('salary'), with: 2800
         fill_in I18n.t('role'), with: 'Desenvolvedor Júnior'
         fill_in I18n.t('benefits'), with: 'Vale Transporte, Vale Refeição, Convênio Médico'
@@ -27,7 +27,7 @@ feature 'headhunter send proposal' do
 
         expect(page).to have_content('Proposta enviada!')
         expect(page).to have_content("Vaga: #{opportunity.title}")
-        expect(page).to have_content("#{I18n.t('start_date')}: 01/02/2020")
+        expect(page).to have_content("#{I18n.t('start_date')}: 01/02/2030")
         expect(page).to have_content("#{I18n.t('salary')}: 2800")
         expect(page).to have_content("#{I18n.t('role')}: Desenvolvedor Júnior")
         expect(page).to have_content("#{I18n.t('benefits')}: Vale Transporte, Vale Refeição, Convênio Médico")

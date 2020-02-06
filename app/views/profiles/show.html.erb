@@ -15,6 +15,10 @@
 
 <h2><%= @profile.name %></h2>
 
+<% if @profile.avatar.attached? %>
+  <%= image_tag(@profile.avatar, size: "400x400") %>
+<% end %>
+
 <dl>
     <dt><%= I18n.t('birth_date') %>:</dt>
     <dd><%= I18n.l(@profile.birth_date) %></dd>

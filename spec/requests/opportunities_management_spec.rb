@@ -92,7 +92,6 @@ describe 'Opportunities Management' do
             expect(opportunity.required_abilities).to eq 'Graduação em T.I., Metodologias de desenvolvimento ágil'
             expect(opportunity.salary).to eq '8.000,00'
             expect(opportunity.grade).to eq 'Especialista'
-            expect(opportunity.submit_end_date).to eq 28.days.from_now
             expect(opportunity.address).to eq 'Alameda Santos, 1239'
         end
 

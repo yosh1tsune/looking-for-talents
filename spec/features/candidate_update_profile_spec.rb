@@ -25,6 +25,7 @@ feature 'candidate updates profile' do
         fill_in I18n.t('scholarity'), with: 'Superior Incompleto'
         fill_in I18n.t('professional_resume'), with: 'Desenvolvimento web com Dart 2'
         fill_in I18n.t('address'), with: 'Alameda Santos, 1293'
+        attach_file 'Avatar', Rails.root.join('spec/support/user.jpg')
         click_on 'Enviar'
 
         expect(page).to have_content('Perfil atualizado com sucesso')
@@ -32,7 +33,8 @@ feature 'candidate updates profile' do
         expect(page).to have_content("#{I18n.t('birth_date')}: 22/04/1996")        
         expect(page).to have_content("#{I18n.t('document')}: 996.490.558-00")
         expect(page).to have_content("#{I18n.t('scholarity')}: Superior Incompleto")   
-        expect(page).to have_content("#{I18n.t('professional_resume')}: Desenvolvimento web com Dart 2")   
+        expect(page).to have_content("#{I18n.t('professional_resume')}: Desenvolvimento web com Dart 2")
+        expect(page).to have_css("img[src*='user.jpg']")
         expect(page).to have_content("#{I18n.t('address')}: Alameda Santos, 1293")   
     end
 
