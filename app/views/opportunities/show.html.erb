@@ -39,7 +39,7 @@
 
     <% @registrations.each do |r| %>
         <dl>
-            <h3>Inscrição: <%= link_to r.id, subscription_path(r) %>
+            <h3>Inscrição: <%= link_to r.opportunity.title, subscription_path(r) %>
             <dt><%= I18n.t('name') %>:</dt>
             <dd><%= link_to r.profile.name, profile_path(r) %></dd>
             <dt><%= I18n.t('registration_resume') %>:</dt>

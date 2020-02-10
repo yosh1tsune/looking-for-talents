@@ -5,5 +5,5 @@ class Subscription < ApplicationRecord
   has_one :proposal
   has_one :profile, through: :candidate
 
-  enum status: [:in_progress, :approved, :refused]
+  enum status: { in_progress: 0, approved: 1, refused: 2 }
 end

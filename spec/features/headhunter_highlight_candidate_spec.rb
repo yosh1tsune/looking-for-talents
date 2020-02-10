@@ -1,45 +1,53 @@
 require 'rails_helper'
 
-feature 'headhunter highlight candidate'do
-    scenario 'successfully' do
-        candidate = create(:candidate, email: 'candidate@email.com')
-        headhunter = create(:headhunter, email: 'headhunter@email.com')
-        profile = create(:profile, name: 'Bruno Silva', candidate: candidate)
-                                
-        opportunity = create(:opportunity, title: 'Desenvolvedor Júnior Ruby on Rails', headhunter: headhunter)
+feature 'headhunter highlight candidate' do
+  scenario 'successfully' do
+    candidate = create(:candidate, email: 'candidate@email.com')
+    headhunter = create(:headhunter, email: 'headhunter@email.com')
+    create(:profile, name: 'Bruno Silva', candidate: candidate)
 
-        subscription = create(:subscription, opportunity: opportunity, candidate: candidate, highlighted: false)
+    opportunity = create(:opportunity,
+                         title: 'Desenvolvedor Júnior Ruby on Rails',
+                         headhunter: headhunter)
 
-        login_as(headhunter, scope: :headhunter)
-        visit opportunities_path
-        click_on opportunity.title
-        click_on subscription.id
-        click_on 'Destacar perfil'
+    subscription = create(:subscription, opportunity: opportunity,
+                                         candidate: candidate,
+                                         highlighted: false)
 
-        expect(page).to have_content(subscription.opportunity.title)
-        expect(page).to have_content(subscription.profile.name)
-        expect(page).to have_content(subscription.status)
-        expect(page).to have_link 'Remover destaque'
-    end
+    login_as(headhunter, scope: :headhunter)
+    visit opportunities_path
+    click_on opportunity.title
+    click_on subscription.opportunity.title
+    click_on 'Destacar perfil'
 
-    scenario 'and remove hightlights successfully' do
-        candidate = create(:candidate, email: 'candidate@email.com')
-        headhunter = create(:headhunter, email: 'headhunter@email.com')
-        profile = create(:profile, name: 'Bruno Silva', candidate: candidate)
-                                
-        opportunity = create(:opportunity, title: 'Desenvolvedor Júnior Ruby on Rails', headhunter: headhunter)
+    expect(page).to have_content(subscription.opportunity.title)
+    expect(page).to have_content(subscription.profile.name)
+    expect(page).to have_content(subscription.status)
+    expect(page).to have_link 'Remover destaque'
+  end
 
-        subscription = create(:subscription, opportunity: opportunity, candidate: candidate, highlighted: true)
+  scenario 'and remove hightlights successfully' do
+    candidate = create(:candidate, email: 'candidate@email.com')
+    headhunter = create(:headhunter, email: 'headhunter@email.com')
+    create(:profile, name: 'Bruno Silva', candidate: candidate)
 
-        login_as(headhunter, scope: :headhunter)
-        visit opportunities_path
-        click_on opportunity.title
-        click_on subscription.id
-        click_on 'Remover destaque'
+    opportunity = create(:opportunity,
+                         title: 'Desenvolvedor Júnior Ruby on Rails',
+                         headhunter: headhunter)
 
-        expect(page).to have_content(subscription.opportunity.title)
-        expect(page).to have_content(subscription.profile.name)
-        expect(page).to have_content(subscription.status)
-        expect(page).to have_link 'Destacar perfil'
-    end
+    subscription = create(:subscription, opportunity: opportunity,
+                                         candidate: candidate,
+                                         highlighted: true)
+
+    login_as(headhunter, scope: :headhunter)
+    visit opportunities_path
+    click_on opportunity.title
+    click_on subscription.opportunity.title
+    click_on 'Remover destaque'
+
+    expect(page).to have_content(subscription.opportunity.title)
+    expect(page).to have_content(subscription.profile.name)
+    expect(page).to have_content(subscription.status)
+    expect(page).to have_link 'Destacar perfil'
+  end
 end
