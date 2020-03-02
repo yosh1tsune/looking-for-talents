@@ -17,9 +17,10 @@ class SubscriptionsController < ApplicationController
     @opportunity = Opportunity.find(params[:opportunity_id])
     candidate = current_candidate
     if @opportunity.open?
-      subscription = @opportunity.subscriptions.create!(candidate: candidate,
-                                                        opportunity: @opportunity,
-                                                        registration_resume: params[:registration_resume])
+      subscription = @opportunity.subscriptions
+                                 .create!(candidate: candidate,
+                                          opportunity: @opportunity,
+                                          registration_resume: params[:registration_resume])
       flash[:notice] = 'Inscrição realizada com sucesso!'
       SubscriptionMailer.confirm_subscription(subscription.id)
     else
@@ -30,11 +31,14 @@ class SubscriptionsController < ApplicationController
 
   def update
     @registration = Subscription.find(params[:id])
-    if @registration.update(registration_params)
+    @registration.assign_attributes(registration_params)
+    if @registration.in_progress? || @registration.feedback.blank?
+      flash[:alert] = 'Altere o status da inscrição e preencha o feedback'
+      render :show
+    else
+      @registration.update(registration_params)
       flash[:notice] = 'Inscrição atualizada com sucesso!'
       redirect_to @registration
-    else
-      render :show
     end
   end
 

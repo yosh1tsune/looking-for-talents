@@ -11,7 +11,8 @@ feature 'headhunter send proposal' do
                          headhunter: headhunter)
 
     subscription = create(:subscription, opportunity: opportunity,
-                                         candidate: candidate)
+                                         candidate: candidate,
+                                         status: :approved)
 
     login_as(headhunter, scope: :headhunter)
     visit opportunities_path
@@ -49,7 +50,8 @@ feature 'headhunter send proposal' do
                          headhunter: headhunter)
 
     subscription = create(:subscription, opportunity: opportunity,
-                                         candidate: candidate)
+                                         candidate: candidate,
+                                         status: :approved)
 
     login_as(headhunter, scope: :headhunter)
     visit opportunities_path

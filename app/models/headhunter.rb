@@ -3,6 +3,6 @@ class Headhunter < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :opportunities
-  has_many :comments
+  has_many :opportunities, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end

@@ -12,17 +12,17 @@ class ProposalsController < ApplicationController
   end
 
   def create
-    @registration = Subscription.find(params[:subscription_id])
-    @opportunity = Opportunity.find(params[:opportunity_id])
+    @subscription = Subscription.find(params[:subscription_id])
+    # @opportunity = Opportunity.find(params[:opportunity_id])
     @proposal = Proposal.new(proposals_params)
-    @proposal.opportunity_id = @opportunity.id
-    @proposal.subscription_id = @registration.id
-    if @proposal.save
+    # @proposal.opportunity_id = @opportunity.id
+    # @proposal.subscription_id = @registration.id
+    if @proposal.save!
       flash[:notice] = 'Proposta enviada!'
       redirect_to @proposal
     else
       flash[:notice] = 'Proposta não enviada, preencha todos os campos!'
-      redirect_to @registration
+      redirect_to @subscription
     end
   end
 
@@ -50,6 +50,7 @@ class ProposalsController < ApplicationController
 
   def proposals_params
     params.require(:proposal).permit(:start_date, :salary, :role, :benefits,
-                                     :expectations, :bonuses)
+                                     :expectations, :bonuses, :opportunity_id,
+                                     :subscription_id)
   end
 end

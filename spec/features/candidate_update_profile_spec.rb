@@ -39,6 +39,28 @@ feature 'candidate updates profile' do
     expect(page).to have_content("#{I18n.t('address')}: Alameda Santos, 1293")
   end
 
+  scenario 'and must fill all fields' do
+    candidate = create(:candidate, email: 'candidate@email.com')
+
+    login_as(candidate)
+    visit root_path
+    click_on 'Perfil'
+
+    fill_in I18n.t('name'), with: 'Bruno Silva'
+    fill_in I18n.t('birth_date'), with: ''
+    fill_in I18n.t('document'), with: '996.490.558-00'
+    fill_in I18n.t('scholarity'), with: ''
+    fill_in I18n.t('professional_resume'), with: 'Desenvolvimento web com Dart2'
+    fill_in I18n.t('address'), with: 'Alameda Santos, 1293'
+    attach_file 'Avatar', Rails.root.join('spec/support/user.jpg')
+    click_on 'Enviar'
+
+    expect(page).to have_content("#{I18n.t('birth_date')} não pode ficar em "\
+                                                                      'branco')
+    expect(page).to have_content("#{I18n.t('scholarity')} não pode ficar em "\
+                                                                      'branco')
+  end
+
   scenario 'or edit if already have' do
     candidate = create(:candidate, email: 'candidate@email.com')
     create(:profile, name: 'Bruno Silva',

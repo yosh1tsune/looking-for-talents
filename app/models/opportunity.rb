@@ -3,9 +3,9 @@ class Opportunity < ApplicationRecord
             :address, :submit_end_date, :company, presence: true
   validate :date_validator
   belongs_to :headhunter
-  has_many :subscriptions
+  has_many :subscriptions, dependent: :destroy
   has_many :candidates, through: :subscriptions
-  has_many :proposals
+  has_many :proposals, dependent: :destroy
 
   enum status: { open: 0, closed: 1 }
 

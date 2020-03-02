@@ -9,6 +9,8 @@ pt-BR:
   in_progress: 'Em andamento'
   accepted: 'Aceita'
   refused: 'Recusada'
+  opportunity_id: ID da Oportunidade
+  subscription_id: ID da Inscrição
   activerecord:
     attributes:
       proposal:
@@ -22,5 +24,7 @@ pt-BR:
         in_progress: 'Em andamento'
         accepted: 'Aceita'
         refused: 'Recusada'
+        opportunity_id: ID da Oportunidade
+        subscription_id: ID da Inscrição
     model:
       proposal: 'Proposta'

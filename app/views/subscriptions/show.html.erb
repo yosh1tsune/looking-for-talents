@@ -25,6 +25,14 @@
 <% end %>
 
 <% if @registration.in_progress? %>
+    <% if @registration.errors.any? %>
+      <p>Você deve corrigir os seguintes erros: </p>
+      <ul>
+      <% @registration.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+      <% end %>
+      </ul><br><br>
+    <% end %>
     <h3>Avaliar candidato<h3>
     <%= form_with model: @registration, url: subscription_path, method: :put do |form| %>
         <p>
@@ -39,9 +47,16 @@
     <% end %>
 <% end %>
 
-<%#= if @registration.approved? %>
+<% if @registration.approved? %>
     <h3>Enviar proposta ao candidato</h3>
-
+    <% if @proposal.errors.any? %>
+      <p>Você deve corrigir os seguintes erros: </p>
+      <ul>
+      <% @proposal.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+      <% end %>
+      </ul><br><br>
+    <% end %>
     <%= form_with model: @proposal, url: proposals_path, method: :post do |form| %>
         <p>
             <%= hidden_field_tag(:opportunity_id, @registration.opportunity.id) %>
@@ -75,4 +90,4 @@
         </p>
         <%= form.submit 'Enviar proposta'%>
     <% end %>
-<%# end %>
+<% end %>
