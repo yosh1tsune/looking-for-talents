@@ -1,40 +1,40 @@
 <h1>
-    Inscrição: <%= @registration.id %>
-    <% if @registration.highlighted == true %>
+    Inscrição: <%= @subscription.id %>
+    <% if @subscription.highlighted == true %>
         <img src="assets/images/highlighted.png" title="Highlight">
     <% end %>
 <h1>
 
 <dl>
     <dt>Vaga:</dt>
-    <dd><%= @registration.opportunity.title %></dd>
+    <dd><%= @subscription.opportunity.title %></dd>
     <dt>Candidato:</dt>
-    <dd><%= @registration.profile.name %></dd>
+    <dd><%= @subscription.profile.name %></dd>
     <dt><%= I18n.t('status')%>:</dt>
-    <dd><%= I18n.t(@registration.status) %></dd>
+    <dd><%= I18n.t(@subscription.status) %></dd>
     <dt><%= I18n.t('feedback')%>:</dt>
-    <dd><%= @registration.feedback %></dd>
+    <dd><%= @subscription.feedback %></dd>
 </dl>
 
 <% if headhunter_signed_in? %>
-    <% if !@registration.highlighted %>
+    <% if !@subscription.highlighted %>
         <%= link_to 'Destacar perfil', highlight_subscription_path, method: :post %>
     <% else %>
         <%= link_to 'Remover destaque', highlight_subscription_path, method: :post %>
     <% end %>
 <% end %>
 
-<% if @registration.in_progress? %>
-    <% if @registration.errors.any? %>
+<% if @subscription.in_progress? %>
+    <% if @subscription.errors.any? %>
       <p>Você deve corrigir os seguintes erros: </p>
       <ul>
-      <% @registration.errors.full_messages.each do |message| %>
+      <% @subscription.errors.full_messages.each do |message| %>
           <li><%= message %></li>
       <% end %>
       </ul><br><br>
     <% end %>
     <h3>Avaliar candidato<h3>
-    <%= form_with model: @registration, url: subscription_path, method: :put do |form| %>
+    <%= form_with model: @subscription, url: subscription_path, method: :put do |form| %>
         <p>
             <%= form.label :status %>
             <%= form.collection_select(:status, Subscription.statuses.map{ |s| [s.first]}, :first, :first ) %>
@@ -47,7 +47,7 @@
     <% end %>
 <% end %>
 
-<% if @registration.approved? %>
+<% if @subscription.approved? %>
     <h3>Enviar proposta ao candidato</h3>
     <% if @proposal.errors.any? %>
       <p>Você deve corrigir os seguintes erros: </p>
@@ -57,13 +57,7 @@
       <% end %>
       </ul><br><br>
     <% end %>
-    <%= form_with model: @proposal, url: proposals_path, method: :post do |form| %>
-        <p>
-            <%= hidden_field_tag(:opportunity_id, @registration.opportunity.id) %>
-        </p>
-        <p>
-            <%= hidden_field_tag(:subscription_id, @registration.id) %>
-        </p>
+    <%= form_for ([@subscription, @proposal]) do |form| %>  
         <p>
             <%= form.label :start_date %>
             <%= form.text_field :start_date %>

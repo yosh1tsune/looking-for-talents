@@ -11,15 +11,16 @@ Rails.application.routes.draw do
 
   resources :subscriptions do
     post 'highlight', on: :member
+    resources :proposals, only: %i[new create]
+  end
+
+  resources :proposals, only: %i[index show] do
+    post 'accept', on: :member
+    post 'refuse', on: :member
   end
 
   resources :profiles do
     post 'comment', on: :member
-  end
-
-  resources :proposals do
-    post 'accept', on: :member
-    post 'refuse', on: :member
   end
 
   namespace :api do

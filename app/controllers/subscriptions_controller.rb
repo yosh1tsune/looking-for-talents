@@ -5,11 +5,11 @@ class SubscriptionsController < ApplicationController
   def index
     candidate = current_candidate
 
-    @registrations = candidate.subscriptions
+    @subscription = candidate.subscriptions
   end
 
   def show
-    @registration = Subscription.find(params[:id])
+    @subscription = Subscription.find(params[:id])
     @proposal = Proposal.new
   end
 
@@ -30,29 +30,29 @@ class SubscriptionsController < ApplicationController
   end
 
   def update
-    @registration = Subscription.find(params[:id])
-    @registration.assign_attributes(registration_params)
-    if @registration.in_progress? || @registration.feedback.blank?
+    @subscription = Subscription.find(params[:id])
+    @subscription.assign_attributes(subscription)
+    if @subscription.in_progress? || @subscription.feedback.blank?
       flash[:alert] = 'Altere o status da inscrição e preencha o feedback'
       render :show
     else
-      @registration.update(registration_params)
+      @subscription.update(subscription_params)
       flash[:notice] = 'Inscrição atualizada com sucesso!'
-      redirect_to @registration
+      redirect_to @subscription
     end
   end
 
   def highlight
-    @registrations = Subscription.find(params[:id])
+    @subscription = Subscription.find(params[:id])
 
-    @registrations.toggle(:highlighted).save
+    @subscription.toggle(:highlighted).save
 
-    redirect_to @registrations
+    redirect_to @subscription
   end
 
   private
 
-  def registration_params
+  def subscription_params
     params.require(:subscription).permit(:status, :feedback)
   end
 end

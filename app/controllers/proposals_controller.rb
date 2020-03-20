@@ -13,11 +13,9 @@ class ProposalsController < ApplicationController
 
   def create
     @subscription = Subscription.find(params[:subscription_id])
-    # @opportunity = Opportunity.find(params[:opportunity_id])
     @proposal = Proposal.new(proposals_params)
-    # @proposal.opportunity_id = @opportunity.id
-    # @proposal.subscription_id = @registration.id
-    if @proposal.save!
+    @proposal.opportunity_id = @subscription.opportunity_id
+    if @proposal.save
       flash[:notice] = 'Proposta enviada!'
       redirect_to @proposal
     else
