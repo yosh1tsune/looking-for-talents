@@ -14,12 +14,13 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
-    pp params
     @opportunity = Opportunity.find(params[:opportunity_id])
     if @opportunity.open?
-      subscription = @opportunity.subscriptions
-                                 .create!(candidate: current_candidate,
-                                          registration_resume: params[:subscription][:registration_resume])
+      subscription = @opportunity
+                     .subscriptions
+                     .create!(candidate: current_candidate,
+                              registration_resume:
+                                params[:subscription][:registration_resume])
       flash[:notice] = 'Inscrição realizada com sucesso!'
       SubscriptionMailer.confirm_subscription(subscription.id)
     else
