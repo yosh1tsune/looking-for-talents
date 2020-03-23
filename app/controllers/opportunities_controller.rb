@@ -13,7 +13,7 @@ class OpportunitiesController < ApplicationController
 
   def show
     @opportunity = Opportunity.find(params[:id])
-    @registrations = @opportunity.subscriptions
+    @subscription = Subscription.new
   end
 
   def new

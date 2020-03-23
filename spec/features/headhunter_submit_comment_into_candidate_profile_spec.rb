@@ -30,6 +30,6 @@ feature 'headhunter submit comment into candidate profile' do
     fill_in 'Comentário', with: ''
     click_on 'Comentar'
 
-    expect(page).to have_content('Comments não é válido')
+    expect(page).to have_content('Comentário não pode ser nulo')
   end
 end

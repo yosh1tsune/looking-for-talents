@@ -19,8 +19,7 @@
 
 <% if candidate_signed_in? %>
     <% if @registered == nil %>
-        <%= form_with model: @registration, url: subscriptions_path, method: :post do |form| %>
-            <%= hidden_field_tag(:opportunity_id, @opportunity.id) %>
+        <%= form_for ([@opportunity, @subscription]) do |form| %>
             <%= form.label :registration_resume, 'Resumo da inscrição' %>
             <%= form.text_area :registration_resume %>
             <%= form.submit 'Inscreva-se' %>
@@ -37,7 +36,7 @@
 
     <h2>Candidatos Inscritos</h2>
 
-    <% @registrations.each do |r| %>
+    <% @opportunity.subscriptions.each do |r| %>
         <dl>
             <h3>Inscrição: <%= link_to r.opportunity.title, subscription_path(r) %>
             <dt><%= I18n.t('name') %>:</dt>

@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
     elsif candidate_signed_in?
       @profile = Profile.find_by(candidate_id: current_candidate.id)
     end
-    @comments = @profile.comments
+    @comment = Comment.new
   end
 
   def new
@@ -49,19 +49,6 @@ class ProfilesController < ApplicationController
       redirect_to @profile
     else
       render :edit
-    end
-  end
-
-  def comment
-    @profile = Profile.find(params[:profile_id])
-    @profile.comments.new(headhunter: current_headhunter,
-                          profile: @profile, comment: params[:comment])
-
-    if @profile.save
-      flash[:notice] = 'Comentário enviado!'
-      redirect_to @profile
-    else
-      render :show
     end
   end
 

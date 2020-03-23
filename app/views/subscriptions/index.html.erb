@@ -1,9 +1,9 @@
 <h1>Minhas inscrições</h1>
 
-<% if @registrations.blank? %>
+<% if @subscriptions.blank? %>
     <h3>Você ainda não se inscreveu em nenhuma vaga</h3>
 <% elsif %>
-    <% @registrations.each do |r| %>
+    <% @subscriptions.each do |r| %>
         <h3><%= r.opportunity.title %></h3>
         <dl>
             <dt><%= I18n.t('status') %>:</dt>

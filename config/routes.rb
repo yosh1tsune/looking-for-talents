@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   resources :opportunities do
     post 'register', on: :member
     post 'close', on: :member
+    resources :subscriptions, only: %i[create]
   end
 
-  resources :subscriptions do
+  resources :subscriptions, except: %i[create] do
     post 'highlight', on: :member
     resources :proposals, only: %i[new create]
   end
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :profiles do
-    post 'comment', on: :member
+    resources :comments, only: %i[create]
   end
 
   namespace :api do

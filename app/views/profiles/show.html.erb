@@ -35,18 +35,17 @@
 <h3>Comentários<h3>
 
 <% if headhunter_signed_in? %>
-    <%= form_with model: @comment, url: comment_profile_path, method: :post do |form| %>
-        <%= hidden_field_tag(:profile_id, @profile.id) %>
+    <%= form_for ([@profile, @comment]) do |form| %>
         <%= form.label :comment, I18n.t('comment') %>
         <%= form.text_field :comment %>
         <%= form.submit 'Comentar' %>
     <% end %>
 <% end %>
 
-<% if @comments.blank? %>
+<% if @profile.comments.blank? %>
     <h1>Sem comentários nesse perfil</h1>
 <% elsif %>
-    <% @comments.each do |c| %>
+    <% @profile.comments.each do |c| %>
         <dl>
             <dt>Autor:</dt>
             <dd><%= c.headhunter.email %></dd>

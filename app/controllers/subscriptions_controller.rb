@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
   def index
     candidate = current_candidate
 
-    @subscription = candidate.subscriptions
+    @subscriptions = candidate.subscriptions
   end
 
   def show
@@ -14,13 +14,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def create
+    pp params
     @opportunity = Opportunity.find(params[:opportunity_id])
-    candidate = current_candidate
     if @opportunity.open?
       subscription = @opportunity.subscriptions
-                                 .create!(candidate: candidate,
-                                          opportunity: @opportunity,
-                                          registration_resume: params[:registration_resume])
+                                 .create!(candidate: current_candidate,
+                                          registration_resume: params[:subscription][:registration_resume])
       flash[:notice] = 'Inscrição realizada com sucesso!'
       SubscriptionMailer.confirm_subscription(subscription.id)
     else
@@ -31,7 +30,8 @@ class SubscriptionsController < ApplicationController
 
   def update
     @subscription = Subscription.find(params[:id])
-    @subscription.assign_attributes(subscription)
+    @subscription.feedback = subscription_params[:feedback]
+    @subscription.status = subscription_params[:status]
     if @subscription.in_progress? || @subscription.feedback.blank?
       flash[:alert] = 'Altere o status da inscrição e preencha o feedback'
       render :show
