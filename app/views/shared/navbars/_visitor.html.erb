@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-red">
+  <a class="navbar-brand" href="#">Looking for Talents</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+      <li class="nav-item">
+        <%= link_to 'Vagas', opportunities_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Login Headhunters', new_headhunter_session_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Login Candidatos', new_candidate_session_path, class: 'nav-link' %>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -5,29 +5,21 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <nav>
-      <%= link_to 'Vagas', opportunities_path %>
-      <%= link_to 'Minhas vagas', subscriptions_path %>
-      <%= link_to 'Minhas propostas', proposals_path %>
-      <%= link_to 'Perfil', profiles_path %>
-      <% if !candidate_signed_in? && !headhunter_signed_in?%>
-        <%= link_to 'Login Headhunters', new_headhunter_session_path %>
-        <%= link_to 'Login Candidatos', new_candidate_session_path %>
-      <% end %>
-      <% if candidate_signed_in? %>
-        <%= link_to 'Sair', destroy_candidate_session_path, method: :delete %>
-      <% end %>
-      <% if headhunter_signed_in? %>
-        <%= link_to 'Sair', destroy_headhunter_session_path, method: :delete %>
-      <% end %>
-    </nav>
+    <% if !headhunter_signed_in? && !candidate_signed_in? %>
+      <%= render 'shared/navbars/visitor'%>
+    <% elsif candidate_signed_in? %>
+      <%= render 'shared/navbars/candidate'%>
+    <% elsif headhunter_signed_in? %>
+      <%= render 'shared/navbars/headhunter'%>
+    <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </body>
+    <div class="container mt-2">
+      <%= yield %>
+    </div>  </body>
 </html>
