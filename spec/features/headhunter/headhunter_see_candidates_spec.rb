@@ -17,7 +17,7 @@ feature 'headhunter see candidates' do
 
     login_as(headhunter, scope: :headhunter)
     visit root_path
-    click_on 'Perfil'
+    click_on 'Perfis'
 
     expect(page).to have_content(profile.name)
     expect(page).to have_content(profile.professional_resume)
@@ -32,7 +32,7 @@ feature 'headhunter see candidates' do
 
     login_as(headhunter, scope: :headhunter)
     visit root_path
-    click_on 'Perfil'
+    click_on 'Perfis'
 
     expect(page).to have_content('Ainda não há perfis cadastrados')
   end

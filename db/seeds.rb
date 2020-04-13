@@ -1,7 +1,139 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+headhunter_a = Headhunter.create(email: 'first_headhunter@email.com',
+                              password: 'head1234')
+headhunter_b = Headhunter.create(email: 'second_headhunter@email.com',
+                              password: 'head5678')
+
+candidate_a = Candidate.create(email: 'first_candidate@email.com',
+                            password: 'cand1234')
+
+Profile.create(name: 'Bruno Silva', birth_date: '22/04/1996',
+               document: '467.642.068-48', scholarity: 'Superior Incompleto',
+               professional_resume: 'Estágio em Desenvolvimento Web e '\
+                                    'Suporte ao Usuário',
+               address: 'Avenida Raimundos Pereira de Magalhães, 2000',
+               candidate: candidate_a)
+
+Candidate.create(email: 'second_candidate@email.com', password: 'cand5678')
+
+opportunity_a = Opportunity.create(title: 'Desenvolvedor Júnior Ruby on Rails',
+                                   grade: 'Júnior', salary: 3_500,
+                                   work_description: 'Desenvolver aplicações',
+                                   required_abilities: 'Ruby on Rails, '\
+                                   'conhecimento de TDD metodologias ágeis, '\
+                                   'bancos de dados',
+                                   address: 'Avenida Paulista, 4000',
+                                   company: 'RR Systems',
+                                   submit_end_date: '29/06/3020',
+                                   headhunter: headhunter_a)
+
+opportunity_b = Opportunity.create(title: 'Desenvolvedor Pleno Ruby on Rails',
+                                   grade: 'Pleno', salary: 12_000,
+                                   work_description: 'Coordenar a equipe de '\
+                                                     'desenvolvimento',
+                                   required_abilities: 'Ruby on Rails, '\
+                                   'conhecimento de TDD, metodologias ágeis, '\
+                                   'bancos de dados, 5 anos de experiência',
+                                   address: 'Avenida Paulista, 4000',
+                                   company: 'RR Systems',
+                                   submit_end_date: '29/06/3020',
+                                   headhunter: headhunter_a)
+
+Opportunity.create(title: 'Desenvolvedor Front-End', grade: 'Senior',
+                   work_description: 'Desenvolver interfaces de aplicações, '\
+                                      'lançamentos de hotsites e landing pages',
+                   required_abilities: 'React, Node, Adobe DW e PS, '\
+                                        'metodologias ágeis',
+                   salary: 7500, address: 'Avenida Paulista, 4000',
+                   company: 'RR Systems', submit_end_date: '29/06/3020',
+                   headhunter: headhunter_a)
+
+Opportunity.create(title: 'Analista de Suporte', grade: 'Senior',
+                   work_description: 'Auxiliar usuários internos e externos, '\
+                                     'relatar possíveis bugs e falhas ao time '\
+                                     'de desenvolvimento',
+                   required_abilities: 'React, Node, Adobe DW e PS, '\
+                                       'metodologias ágeis',
+                   salary: 5000, address: 'Avenida Paulista, 4000',
+                   company: 'RR Systems', submit_end_date: '29/06/3020',
+                   headhunter: headhunter_a)
+
+Opportunity.create(title: 'Engenheiro de Software', grade: 'Pleno',
+                   work_description: 'Coordenar projetos e equipes, resolver '\
+                                     'problemas, implementar métodos ágeis',
+                   required_abilities: 'Programação OO, SOLID, TDD, React, '\
+                                       'Ruby, Node, metodologias ágeis',
+                   salary: 7500, address: 'Avenida Paulista, 4000',
+                   company: 'RR Systems', submit_end_date: '29/06/3020',
+                   headhunter: headhunter_a)
+
+Opportunity.create(title: 'Desenvolvedor Java', grade: 'Senior',
+                   work_description: 'Desenvolver aplicações financeiras',
+                   required_abilities: 'Java, Banco de Dados ORACLE, TDD '\
+                                       'Design Patterns',
+                   salary: 7500, address: 'Avenida Paulista, 4000',
+                   company: 'FinDevs', submit_end_date: '29/06/3020',
+                   headhunter: headhunter_b)
+
+Opportunity.create(title: 'Desenvolvedor Back-End', grade: 'Pleno',
+                   work_description: 'Desenvolvimento em Java com Spring, '\
+                                     'Framework, resolução de problemas, '\
+                                     'criação de portais/websites',
+                   required_abilities: 'JPA, SQL Server, arquitetura e, '\
+                                       'microsserviços',
+                   salary: 7500, address: 'Avenida Nove de Julho, 2561',
+                   company: 'SF Devs', submit_end_date: '04/10/3020',
+                   headhunter: headhunter_b)
+
+opportunity_c = Opportunity.create(title: 'Desenvolvedor Full-Stack',
+                                   grade: 'Júnior',
+                                   work_description: 'Manutenção e '\
+                                   'desenvolvimento de plataformas web',
+                                   required_abilities: 'React, Ruby on Rails',
+                                   salary: 4_500, address: 'Remoto',
+                                   company: 'CP Web',
+                                   submit_end_date: '29/08/3020',
+                                   headhunter: headhunter_b)
+
+subscription_a = Subscription.create(candidate: candidate_a,
+                                     opportunity: opportunity_a,
+                                     registration_resume: 'Graduando em ADS, '\
+                                     'estágio em desenvolvimento com Dart 2, '\
+                                      'TreinaDev 2 Campus Code',
+                                     highlighted: true, status: :approved,
+                                     feedback: 'Gostamos do seu perfil! '\
+                                     'Vamos conversar mais')
+
+subscription_b = Subscription.create(candidate: candidate_a,
+                                     opportunity: opportunity_c,
+                                     registration_resume: 'Graduando em ADS, '\
+                                     'estágio em desenvolvimento com Dart 2, '\
+                                     'TreinaDev 2 Campus Code',
+                                     highlighted: true, status: :approved,
+                                     feedback: 'Seu perfil nos chamou a '\
+                                     'atenção! Entraremos em contato em breve')
+
+Subscription.create(candidate: candidate_a, opportunity: opportunity_b,
+                    registration_resume: 'Graduando em ADS, estágio em '\
+                                         'desenvolvimento com Dart 2, '\
+                                         'TreinaDev 2 Campus Code',
+                    status: :refused,
+                    feedback: 'Você está indo bem mas precisamos de alguém '\
+                              'mais experiente')
+
+Proposal.create(start_date: '19/07/3020', salary: 3_500,
+                benefits: 'VR, VA, Convênio Médico',
+                role: 'Desenvolvedor Ruby Júnior',
+                expectations: 'Se encaixar bem na equipe e contribuir '\
+                'positivamente para o andamento do projeto',
+                bonuses: 'Participação de Lucros',
+                opportunity: opportunity_a,
+                subscription: subscription_a)
+
+Proposal.create(start_date: '19/07/3020', salary: 4_500,
+                benefits: 'VR, VA, Convênio Médico',
+                role: 'Desenvolvedor Full-Stack Júnior',
+                expectations: 'Desenvolver aplicações totalmente funcionais a '\
+                'médio prazo',
+                bonuses: 'Participação de Lucros',
+                opportunity: opportunity_c,
+                subscription: subscription_b)

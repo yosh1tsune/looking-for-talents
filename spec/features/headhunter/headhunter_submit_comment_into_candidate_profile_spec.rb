@@ -8,7 +8,7 @@ feature 'headhunter submit comment into candidate profile' do
 
     login_as(headhunter, scope: :headhunter)
     visit root_path
-    click_on 'Perfil'
+    click_on 'Perfis'
     click_on profile.name
     fill_in I18n.t('comment'), with: 'Gostei do seu resumo profissional'
     click_on 'Comentar'
@@ -25,7 +25,7 @@ feature 'headhunter submit comment into candidate profile' do
 
     login_as(headhunter, scope: :headhunter)
     visit root_path
-    click_on 'Perfil'
+    click_on 'Perfis'
     click_on profile.name
     fill_in 'Comentário', with: ''
     click_on 'Comentar'
