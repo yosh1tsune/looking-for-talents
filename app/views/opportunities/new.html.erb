@@ -1,46 +1,5 @@
 <h1>Cadastro de vagas</h1>
 
-<% if @opportunity.errors.any? %>
-  <p>Você deve corrigir os seguintes erros: </p>
-  <ul>
-  <% @opportunity.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-  <% end %>
-  </ul><br><br>
-<% end %>
+<hr class="my-4">
 
-<%= form_with model: @opportunity, local: true do |form| %>
-    <p>
-        <%= form.label :title %>
-        <%= form.text_field :title %>
-    </p>
-    <p>
-        <%= form.label :company %>
-        <%= form.text_area :company %>
-    </p>
-    <p>
-        <%= form.label :work_description %>
-        <%= form.text_area :work_description %>
-    </p>
-    <p>
-        <%= form.label :required_abilities %>
-        <%= form.text_area :required_abilities %>
-    </p>
-    <p>
-        <%= form.label :salary %>
-        <%= form.text_field :salary %>
-    </p>
-    <p>
-        <%= form.label :grade %>
-        <%= form.text_field :grade %>
-    </p>
-    <p>
-        <%= form.label :address %>
-        <%= form.text_field :address %>
-    </p>
-    <p>
-        <%= form.label :submit_end_date %>
-        <%= form.date_field :submit_end_date %>
-    </p>
-    <%= form.submit 'Enviar' %>
-<% end %>
+<%= render partial: 'form' %>

@@ -8,7 +8,7 @@ feature 'candidate updates profile' do
     visit root_path
     click_on 'Perfil'
 
-    expect(page).to have_content('Atualize seu perfil')
+    expect(page).to have_content('Complete seu perfil')
     expect(current_path).to eq(new_profile_path)
   end
 

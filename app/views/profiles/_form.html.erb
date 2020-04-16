@@ -1,0 +1,42 @@
+<div class='col-md-4'>
+  <% if @profile.errors.any? %>
+    <p>Você deve corrigir os seguintes erros: </p>
+    <ul>
+    <% @profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+    </ul><br><br>
+  <% end %>
+
+  <%= form_with model: @profile, local: true do |form| %>
+      <div class='form'>
+          <%= form.label :name %>
+          <%= form.text_field :name, class: 'form-control' %>
+      </div>
+      <div class='form'>
+          <%= form.label :birth_date %>
+          <%= form.date_field :birth_date, class: 'form-control'  %>
+      </div>
+      <div class='form'>
+          <%= form.label :document %>
+          <%= form.text_field :document, class: 'form-control'  %>
+      </div>
+      <div class='form'>
+          <%= form.label :scholarity %>
+          <%= form.text_field :scholarity, class: 'form-control'  %>
+      </div>
+      <div class='form'>
+          <%= form.label :professional_resume, 'Resumo profissional'%>
+          <%= form.text_area :professional_resume, class: 'form-control'  %>
+      </div>
+      <div class='form'>
+          <%= form.label :address, 'Endereço' %>
+          <%= form.text_field :address, class: 'form-control'  %>
+      </div>
+      <div class='form'>
+          <%= form.label :avatar %>
+          <%= form.file_field :avatar, class: 'form-control'  %>
+      </div>
+      <%= form.submit 'Enviar', class: 'btn btn-primary'  %>
+  <% end %>
+</div>

@@ -21,8 +21,8 @@
 
 <% if candidate_signed_in? %>
     <% if @proposal.in_progress? %>
-        <%= link_to 'Aceitar proposta', accept_proposal_path(@proposal), method: :post %>
+        <%= link_to 'Aceitar proposta', accept_proposal_path(@proposal), method: :post, class: 'btn btn-success' %>
 
-        <%= link_to 'Recusar proposta', refuse_proposal_path(@proposal), method: :post %>
+        <%= link_to 'Recusar proposta', refuse_proposal_path(@proposal), method: :post, class: 'btn btn-danger' %>
     <% end %>
 <% end %>
