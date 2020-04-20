@@ -23,7 +23,8 @@ feature 'headhunter highlight candidate' do
     expect(page).to have_content(subscription.opportunity.title)
     expect(page).to have_content(subscription.profile.name)
     expect(page).to have_content(subscription.status)
-    expect(page).to have_link 'Remover destaque'
+    expect(page).not_to have_button 'Destacar perfil'
+    expect(page).to have_button 'Remover destaque'
   end
 
   scenario 'and remove hightlights successfully' do
@@ -48,6 +49,7 @@ feature 'headhunter highlight candidate' do
     expect(page).to have_content(subscription.opportunity.title)
     expect(page).to have_content(subscription.profile.name)
     expect(page).to have_content(subscription.status)
-    expect(page).to have_link 'Destacar perfil'
+    expect(page).not_to have_button 'Remover destaque'
+    expect(page).to have_button 'Destacar perfil'
   end
 end

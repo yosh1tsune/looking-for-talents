@@ -4,10 +4,14 @@
 <%= link_to 'Publicar vaga', new_opportunity_path %>
 <% end %>
 
-<% @opportunities.each do |op| %>
-    <h3><%= link_to op.title, opportunity_path(op) %></h3>
-    <dl>
-        <dt><%= t('grade') %>:</dt>
-        <dd><%= op.grade %></dd>
-    <dl>
-<% end %>
+<div class="row justify-content-md-center">
+  <% @opportunities.each do |op| %>
+    <div class="card col-md-3 m-5" style="width: 18rem;">
+      <div class="card-body">
+          <h5 class="card-title"><%= link_to op.title, opportunity_path(op) %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= t('grade') %>: <%= op.grade %></h6>
+          <p class="card-text"><%= op.work_description %></p>
+        </div>
+    </div>
+  <% end %>
+</div>
