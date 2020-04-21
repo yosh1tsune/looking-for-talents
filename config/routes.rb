@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :opportunities do
     post 'register', on: :member
     post 'close', on: :member
+    get 'search', on: :collection
     resources :subscriptions, only: %i[create]
   end
 

@@ -47,6 +47,14 @@ class OpportunitiesController < ApplicationController
     flash[:notice] = 'Inscrições encerradas com sucesso.'
   end
 
+  def search
+    @opportunities = Opportunity.where('title LIKE ? OR '\
+                                       'required_abilities LIKE ?',
+                                       "%#{params[:q]}%", "%#{params[:q]}%")
+
+    render :index
+  end
+
   private
 
   def opportunity_params
