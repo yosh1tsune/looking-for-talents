@@ -48,7 +48,6 @@ describe 'Opportunities Management' do
                                     'Banco de dados, Metodologias Ágeis',
                  salary: '8.000,00', grade: 'Especialista',
                  submit_end_date: 14.days.from_now,
-                 address: 'Avenida Paulista, 1000 - Bela Vista',
                  headhunter_id: headhunter.id }
 
       post api_v1_opportunities_path, params: params
@@ -74,7 +73,6 @@ describe 'Opportunities Management' do
                                           'Banco de dados, Metodologias Ágeis',
                  salary: '8.000,00', grade: 'Especialista',
                  submit_end_date: 14.days.from_now,
-                 address: 'Avenida Paulista, 1000 - Bela Vista',
                  headhunter_id: headhunter.id }
 
       post api_v1_opportunities_path, params: params
@@ -93,7 +91,6 @@ describe 'Opportunities Management' do
                  required_abilities: 'Graduação em T.I., desenvolvimento ágil',
                  salary: '8.000,00', grade: 'Especialista',
                  submit_end_date: 14.days.from_now,
-                 address: 'Alameda Santos, 1239',
                  headhunter_id: opportunity.headhunter_id }
 
       patch api_v1_opportunity_path(opportunity), params: params
@@ -109,7 +106,6 @@ describe 'Opportunities Management' do
                                                    'desenvolvimento ágil'
       expect(opportunity.salary).to eq '8.000,00'
       expect(opportunity.grade).to eq 'Especialista'
-      expect(opportunity.address).to eq 'Alameda Santos, 1239'
     end
 
     it 'or fail if not all fields are filled' do
@@ -122,7 +118,6 @@ describe 'Opportunities Management' do
                             'Banco de dados, Metodologias Ágeis',
                  salary: '8.000,00', grade: 'Especialista',
                  submit_end_date: 14.days.from_now,
-                 address: 'Avenida Paulista, 1000 - Bela Vista',
                  headhunter_id: opportunity.headhunter_id }
 
       patch api_v1_opportunity_path(opportunity), params: params
@@ -146,7 +141,6 @@ describe 'Opportunities Management' do
                             'Banco de dados, Metodologias Ágeis',
                  salary: '8.000,00', grade: 'Especialista',
                  submit_end_date: 14.days.from_now,
-                 address: 'Avenida Paulista, 1000 - Bela Vista',
                  headhunter_id: opportunity.headhunter_id }
 
       allow_any_instance_of(Opportunity).to receive(:update!)

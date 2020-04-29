@@ -24,7 +24,12 @@ feature 'candidate updates profile' do
     fill_in I18n.t('document'), with: '996.490.558-00'
     fill_in I18n.t('scholarity'), with: 'Superior Incompleto'
     fill_in I18n.t('professional_resume'), with: 'Desenvolvimento web com Dart2'
-    fill_in I18n.t('address'), with: 'Alameda Santos, 1293'
+    fill_in 'Endereço', with: 'Avenida Paulista, 1000'
+    fill_in 'Bairro', with: 'Bela Vista'
+    fill_in 'Cidade', with: 'São Paulo'
+    fill_in 'Estado', with: 'SP'
+    fill_in 'País', with: 'Brasil'
+    fill_in 'CEP', with: '00000-000'
     attach_file 'Avatar', Rails.root.join('spec/support/user.jpg')
     click_on 'Enviar'
 
@@ -36,7 +41,8 @@ feature 'candidate updates profile' do
     expect(page).to have_content("#{I18n.t('professional_resume')}: "\
                                  'Desenvolvimento web com Dart2')
     expect(page).to have_css("img[src*='user.jpg']")
-    expect(page).to have_content("#{I18n.t('address')}: Alameda Santos, 1293")
+    expect(page).to have_content('Endereço: Avenida Paulista, 1000')
+    expect(page).to have_content('Cidade: São Paulo')
   end
 
   scenario 'and must fill all fields' do
@@ -68,7 +74,6 @@ feature 'candidate updates profile' do
                      document: '996.490.558-00',
                      scholarity: 'Superior Incompleto',
                      professional_resume: 'Desenvolvimento web com Dart 2',
-                     address: 'Alameda Santos, 1293',
                      candidate: candidate)
 
     login_as(candidate, scope: :candidate)
@@ -77,7 +82,12 @@ feature 'candidate updates profile' do
     click_on 'Editar perfil'
     fill_in I18n.t('professional_resume'), with: 'Desenvolvimento web com '\
                                                  'Dart 2, Rails, TDD'
-    fill_in I18n.t('address'), with: 'Avenida Paulista, 1000'
+    fill_in 'Endereço', with: 'Avenida Paulista, 1000'
+    fill_in 'Bairro', with: 'Bela Vista'
+    fill_in 'Cidade', with: 'São Paulo'
+    fill_in 'Estado', with: 'SP'
+    fill_in 'País', with: 'Brasil'
+    fill_in 'CEP', with: '00000-000'
     click_on 'Enviar'
 
     expect(page).to have_content('Perfil atualizado com sucesso')
@@ -99,17 +109,10 @@ feature 'candidate updates profile' do
     click_on 'Perfil'
     click_on 'Editar perfil'
 
-    fill_in I18n.t('name'), with: 'Bruno Silva'
-    fill_in I18n.t('birth_date'), with: '22/04/1996'
-    fill_in I18n.t('document'), with: '996.490.558-00'
-    fill_in I18n.t('scholarity'), with: 'Superior Incompleto'
-    fill_in I18n.t('professional_resume'), with: 'Desenvolvimento web com '\
-                                                 'Dart 2, Ruby on Rails, TDD'
-    fill_in I18n.t('address'), with: ''
+    fill_in I18n.t('name'), with: ''
     click_on 'Enviar'
 
     expect(current_path).to eq profile_path(candidate)
-    expect(page).to have_content("#{I18n.t('address')} "\
-                                 'não pode ficar em branco')
+    expect(page).to have_content("#{I18n.t('name')} não pode ficar em branco")
   end
 end

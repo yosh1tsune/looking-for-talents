@@ -106,7 +106,5 @@ feature 'headhunter see candidates' do
                                  "#{another_profile.scholarity}")
     expect(page).to have_content("#{I18n.t('professional_resume')}: "\
                                  "#{another_profile.professional_resume}")
-    expect(page).to have_content("#{I18n.t('address')}: "\
-                                 "#{another_profile.address}")
   end
 end

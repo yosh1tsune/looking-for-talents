@@ -22,7 +22,7 @@ class OpportunitiesController < ApplicationController
 
   def create
     @opportunity = current_headhunter.opportunities.new(opportunity_params)
-    if @opportunity.save!
+    if @opportunity.save
       flash[:notice] = 'Vaga publicada com sucesso!'
       redirect_to @opportunity
     else
@@ -58,8 +58,6 @@ class OpportunitiesController < ApplicationController
   def opportunity_params
     params.require(:opportunity).permit(:title, :work_description,
                                         :required_abilities, :salary, :grade,
-                                        :submit_end_date, :company, 
-                                        address_attributes: 
-                                          [:street, :city, :country, :zipcode])
+                                        :submit_end_date, :company)
   end
 end

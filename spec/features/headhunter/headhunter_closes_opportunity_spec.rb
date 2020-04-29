@@ -22,7 +22,6 @@ feature 'headhunter closes opportunity' do
     expect(page).to have_content("#{I18n.t('submit_end_date')}: "\
                                  "#{I18n.l(opportunity.submit_end_date)}")
     expect(page).to have_content("#{I18n.t('grade')}: #{opportunity.grade}")
-    expect(page).to have_content("#{I18n.t('address')}: #{opportunity.address}")
     expect(page).not_to have_link('Encerrar inscrições')
   end
 

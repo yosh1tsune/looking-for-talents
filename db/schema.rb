@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_155619) do
+ActiveRecord::Schema.define(version: 2020_04_29_212901) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 2020_04_29_155619) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "neighborhood"
     t.string "state"
+    t.string "addressable_type"
+    t.integer "addressable_id"
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "candidates", force: :cascade do |t|

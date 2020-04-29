@@ -18,10 +18,6 @@ feature 'headhunter publish opportunity' do
     fill_in I18n.t('salary'), with: 'À combinar'
     fill_in I18n.t('submit_end_date'), with: 7.days.from_now
     fill_in I18n.t('grade'), with: 'Junior'
-    fill_in 'Endereço', with: 'Avenida Paulista, 1000 - Bela Vista'
-    fill_in 'Cidade', with: 'São Paulo'
-    fill_in 'País', with: 'Brasil'
-    fill_in 'CEP', with: '00000-000'
     click_on 'Enviar'
 
     expect(page).to have_content('Desenvolvedor Júnior Ruby on Rails')
@@ -37,18 +33,9 @@ feature 'headhunter publish opportunity' do
     visit opportunities_path
     click_on 'Publicar vaga'
 
-    fill_in I18n.t('title'), with: 'Desenvolvedor Júnior Ruby on Rails'
-    fill_in I18n.t('company'), with: 'RR System'
-    fill_in I18n.t('work_description'), with: 'Desenvolvimento de aplicações '\
-                                              'web com Ruby on Rails'
-    fill_in I18n.t('required_abilities'), with: 'Ruby, Rails, TDD, JavaScript,'\
-                                                'Bancos de Dados, HTML, CSS'
-    fill_in I18n.t('salary'), with: 'À combinar'
-    fill_in I18n.t('submit_end_date'), with: 14.days.from_now
-    fill_in I18n.t('grade'), with: ''
-    # fill_in I18n.t('address'), with: 'Avenida Paulista, 1000 - Bela Vista'
+    fill_in I18n.t('title'), with: ''
     click_on 'Enviar'
 
-    expect(page).to have_content('Nível não pode ficar em branco')
+    expect(page).to have_content('Título não pode ficar em branco')
   end
 end
