@@ -21,7 +21,6 @@ opportunity_a = Opportunity.create(title: 'Desenvolvedor Júnior Ruby on Rails',
                                    required_abilities: 'Ruby on Rails, '\
                                    'conhecimento de TDD metodologias ágeis, '\
                                    'bancos de dados',
-                                   address: 'Avenida Paulista, 4000',
                                    company: 'RR Systems',
                                    submit_end_date: '29/06/3020',
                                    headhunter: headhunter_a)

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :opportunities do
+  resources :companies, only: %i[index show new create]
+
+  resources :opportunities, only: %i[index show new create] do
     post 'register', on: :member
     post 'close', on: :member
     get 'search', on: :collection

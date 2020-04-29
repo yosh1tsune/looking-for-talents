@@ -2,9 +2,11 @@ pt-BR:
   activerecord:
     attributes:
       address:
-        address: 'Endereço'
-        zipcode: 'CEP'
+        street: 'Endereço'
+        neighborhood: 'Bairro'        
         city: 'Cidade'
+        state: 'Estado'
         country: 'País'
+        zipcode: 'CEP'
     model:
       address: 'Endereço'

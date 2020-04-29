@@ -22,7 +22,7 @@
 <div class="row justify-content-md-center">
   <% if @opportunities.blank? %>
       <h3>Ainda não há vagas cadastradas</h1>
-  <% elsif %>
+  <% else %>
     <% @opportunities.each do |op| %>
       <div class="card col-md-3 m-5" style="width: 18rem;">
         <div class="card-body">

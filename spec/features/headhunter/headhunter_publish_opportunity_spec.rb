@@ -18,21 +18,15 @@ feature 'headhunter publish opportunity' do
     fill_in I18n.t('salary'), with: 'À combinar'
     fill_in I18n.t('submit_end_date'), with: 7.days.from_now
     fill_in I18n.t('grade'), with: 'Junior'
-    fill_in I18n.t('address'), with: 'Avenida Paulista, 1000 - Bela Vista'
+    fill_in 'Endereço', with: 'Avenida Paulista, 1000 - Bela Vista'
+    fill_in 'Cidade', with: 'São Paulo'
+    fill_in 'País', with: 'Brasil'
+    fill_in 'CEP', with: '00000-000'
     click_on 'Enviar'
 
     expect(page).to have_content('Desenvolvedor Júnior Ruby on Rails')
-    expect(page).to have_content("#{I18n.t('company')}: RR System")
-    expect(page).to have_content("#{I18n.t('work_description')}: "\
-                                 'Desenvolvimento web com Ruby on Rails')
-    expect(page).to have_content("#{I18n.t('required_abilities')}: "\
-                                 'Ruby, Rails, TDD, JavaScript, HTML, CSS')
-    expect(page).to have_content("#{I18n.t('salary')}: À combinar")
     expect(page).to have_content("#{I18n.t('submit_end_date')}: "\
                                  "#{7.days.from_now.strftime('%d/%m/%Y')}")
-    expect(page).to have_content("#{I18n.t('grade')}: Junior")
-    expect(page).to have_content("#{I18n.t('address')}: Avenida Paulista, "\
-                                 '1000 - Bela Vista')
     expect(page).to have_content('Vaga publicada com sucesso!')
   end
 
@@ -52,7 +46,7 @@ feature 'headhunter publish opportunity' do
     fill_in I18n.t('salary'), with: 'À combinar'
     fill_in I18n.t('submit_end_date'), with: 14.days.from_now
     fill_in I18n.t('grade'), with: ''
-    fill_in I18n.t('address'), with: 'Avenida Paulista, 1000 - Bela Vista'
+    # fill_in I18n.t('address'), with: 'Avenida Paulista, 1000 - Bela Vista'
     click_on 'Enviar'
 
     expect(page).to have_content('Nível não pode ficar em branco')
