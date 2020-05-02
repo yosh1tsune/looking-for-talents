@@ -5,5 +5,5 @@ class Headhunter < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :opportunities, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :companies
+  has_many :companies, dependent: :destroy
 end

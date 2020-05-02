@@ -1,4 +1,6 @@
 class CompaniesController < ApplicationController
+  before_action :authenticate_headhunter!
+
   def index
     @companies = Company.all
   end
@@ -19,6 +21,19 @@ class CompaniesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def link_headhunters
+    @company = Company.find(params[:id])
+    headhunter = Headhunter.find_by(email: params[:email])
+    @servicing_headhunter = ServicingHeadhunter.new(company: @company,
+                                                    headhunter: headhunter)
+    if @servicing_headhunter.save
+      flash[:notice] = 'Headhunter vinculado com sucesso!'
+    else
+      flash[:alert] = 'Insira um headhunter com email válido.'
+    end
+    redirect_to @company
   end
 
   private

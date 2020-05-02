@@ -1,7 +1,30 @@
 <h1><%= @company.name %></h1>
 
-<h4><% @company.description %></h4>
+<p><% @company.description %></p>
 
 <p>CNPJ: <%= @company.document %></p>
 <p>Email: <%= @company.email %></p>
 <p>Telefone: <%= @company.phone %></p>
+
+<hr class="my-4">
+
+<h4>Headhunters vinculados</h4>
+
+<%= form_with url: link_headhunters_company_path do |f| %>
+  <div class="form-group">
+    <%= f.label :email, 'Email' %>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Vincular', class: 'btn btn-success' %>
+  </div>
+<% end %>
+
+<% if @company.headhunters.blank? %>
+
+<% else %>
+  <% @company.headhunters.each do |h| %>
+    <p>Email: <%= h.email %>
+    <%= button_to 'Remover headhunter' %>
+  <% end %>
+<% end %>

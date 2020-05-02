@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_headhunter!
+
   def create
     @profile = Profile.find(params[:profile_id])
     @comment = @profile.comments.new(headhunter: current_headhunter,

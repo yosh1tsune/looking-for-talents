@@ -4,6 +4,6 @@ class Profile < ApplicationRecord
             :candidate_id, presence: true
   belongs_to :candidate
   has_many :comments, dependent: :destroy
-  has_many :addresses, as: :addressable 
+  has_many :addresses, as: :addressable, dependent: :destroy
   accepts_nested_attributes_for :addresses
 end

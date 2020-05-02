@@ -59,7 +59,7 @@ class ProfilesController < ApplicationController
                                     :professional_resume, :scholarity,
                                     :candidate_id, :avatar,
                                     addresses_attributes:
-                                      [:street, :neighborhood, :state, :city,
-                                       :country, :zipcode])
+                                      %i[street neighborhood state city country
+                                         zipcode])
   end
 end

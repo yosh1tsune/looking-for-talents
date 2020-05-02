@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Headhunter register company' do
   scenario 'succesfully' do
     headhunter = create(:headhunter, email: 'headhunter@email.com')
-    
+
     login_as(headhunter, scope: :headhunter)
     visit root_path
     click_on 'Empresas'
@@ -22,7 +22,7 @@ feature 'Headhunter register company' do
 
   scenario 'and must fill all fields' do
     headhunter = create(:headhunter, email: 'headhunter@email.com')
-    
+
     login_as(headhunter, scope: :headhunter)
     visit root_path
     click_on 'Empresas'
