@@ -3,6 +3,8 @@ require 'rails_helper'
 feature 'headhunter publish opportunity' do
   scenario 'successfully' do
     headhunter = create(:headhunter, email: 'headhunter@email.com')
+    company = create(:company, name: 'RR System')
+    create(:servicing_headhunter, headhunter: headhunter, company: company)
 
     login_as(headhunter, scope: :headhunter)
     visit root_path
@@ -10,7 +12,7 @@ feature 'headhunter publish opportunity' do
     click_on 'Publicar vaga'
 
     fill_in I18n.t('title'), with: 'Desenvolvedor Júnior Ruby on Rails'
-    fill_in I18n.t('company'), with: 'RR System'
+    select 'RR System', from: I18n.t('company_id')
     fill_in I18n.t('work_description'), with: 'Desenvolvimento web com '\
                                               'Ruby on Rails'
     fill_in I18n.t('required_abilities'), with: 'Ruby, Rails, TDD, JavaScript,'\

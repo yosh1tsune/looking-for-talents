@@ -1,8 +1,9 @@
 class Opportunity < ApplicationRecord
   validates :title, :work_description, :required_abilities, :salary, :grade,
-            :submit_end_date, :company, presence: true
+            :submit_end_date, presence: true
   validate :date_validator
   belongs_to :headhunter
+  belongs_to :company
   has_many :subscriptions, dependent: :destroy
   has_many :candidates, through: :subscriptions
   has_many :proposals, dependent: :destroy

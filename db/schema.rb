@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_212901) do
+ActiveRecord::Schema.define(version: 2020_05_03_165156) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -89,6 +89,8 @@ ActiveRecord::Schema.define(version: 2020_04_29_212901) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "surname"
     t.index ["email"], name: "index_headhunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_headhunters_on_reset_password_token", unique: true
   end
@@ -103,8 +105,9 @@ ActiveRecord::Schema.define(version: 2020_04_29_212901) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0, null: false
-    t.string "company"
     t.integer "headhunter_id"
+    t.integer "company_id", default: 0, null: false
+    t.index ["company_id"], name: "index_opportunities_on_company_id"
     t.index ["headhunter_id"], name: "index_opportunities_on_headhunter_id"
   end
 
@@ -164,6 +167,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_212901) do
   add_foreign_key "comments", "headhunters"
   add_foreign_key "comments", "profiles"
   add_foreign_key "companies", "headhunters"
+  add_foreign_key "opportunities", "companies"
   add_foreign_key "opportunities", "headhunters"
   add_foreign_key "profiles", "candidates"
   add_foreign_key "proposals", "opportunities"

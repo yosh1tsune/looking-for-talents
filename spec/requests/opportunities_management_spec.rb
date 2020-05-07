@@ -40,15 +40,15 @@ describe 'Opportunities Management' do
   context 'create' do
     it 'successfully' do
       headhunter = create(:headhunter)
+      company = create(:company)
 
       params = { title: 'Engenheiro de Software',
-                 company: 'RR Systems',
                  work_description: 'Desenvolvimento de aplicações web',
-                 required_abilities: 'Graduação em T.I., Modelagem de'\
+                 required_abilities: 'Graduação em T.I., Modelagem de '\
                                     'Banco de dados, Metodologias Ágeis',
                  salary: '8.000,00', grade: 'Especialista',
                  submit_end_date: 14.days.from_now,
-                 headhunter_id: headhunter.id }
+                 company_id: company.id, headhunter_id: headhunter.id }
 
       post api_v1_opportunities_path, params: params
 
@@ -63,13 +63,14 @@ describe 'Opportunities Management' do
 
     it 'or raise error 500 if the params are good but the database fails' do
       headhunter = create(:headhunter)
+      company = create(:company)
 
       allow_any_instance_of(Opportunity).to receive(:save!)
         .and_raise(ActiveRecord::ActiveRecordError)
       params = { title: 'Engenheiro de Software',
-                 company: 'RR Systems',
+                 company_id: company.id,
                  work_description: 'Desenvolvimento de aplicações web',
-                 required_abilities: 'Graduação em T.I., Modelagem de'\
+                 required_abilities: 'Graduação em T.I., Modelagem de '\
                                           'Banco de dados, Metodologias Ágeis',
                  salary: '8.000,00', grade: 'Especialista',
                  submit_end_date: 14.days.from_now,
@@ -84,13 +85,13 @@ describe 'Opportunities Management' do
   context 'update' do
     it 'sucessfully' do
       opportunity = create(:opportunity, title: 'Desenvolvedor Rails')
+      company = create(:company, name: 'Google')
 
       params = { title: 'Engenheiro de Software',
-                 company: 'Google',
                  work_description: 'Análise e desenvolvimento de projetos',
                  required_abilities: 'Graduação em T.I., desenvolvimento ágil',
                  salary: '8.000,00', grade: 'Especialista',
-                 submit_end_date: 14.days.from_now,
+                 submit_end_date: 14.days.from_now, company_id: company.id,
                  headhunter_id: opportunity.headhunter_id }
 
       patch api_v1_opportunity_path(opportunity), params: params
@@ -99,7 +100,7 @@ describe 'Opportunities Management' do
 
       expect(response).to have_http_status(:ok)
       expect(opportunity.title).to eq 'Engenheiro de Software'
-      expect(opportunity.company).to eq 'Google'
+      expect(opportunity.company.name).to eq 'Google'
       expect(opportunity.work_description).to eq 'Análise e desenvolvimento '\
                                                  'de projetos'
       expect(opportunity.required_abilities).to eq 'Graduação em T.I., '\
@@ -112,12 +113,11 @@ describe 'Opportunities Management' do
       opportunity = create(:opportunity, title: 'Desenvolvedor Rails')
 
       params = { title: 'Engenheiro de Software',
-                 company: nil,
                  work_description: nil,
                  required_abilities: 'Graduação em T.I., Modelagem de'\
                             'Banco de dados, Metodologias Ágeis',
                  salary: '8.000,00', grade: 'Especialista',
-                 submit_end_date: 14.days.from_now,
+                 submit_end_date: 14.days.from_now, company_id: nil,
                  headhunter_id: opportunity.headhunter_id }
 
       patch api_v1_opportunity_path(opportunity), params: params

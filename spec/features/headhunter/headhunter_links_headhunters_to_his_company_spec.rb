@@ -2,7 +2,8 @@ require 'rails_helper'
 
 feature 'Headhunter liks headhunters to his company' do
   scenario 'successfully links himself' do
-    headhunter = create(:headhunter, email: 'headhunter@email.com')
+    headhunter = create(:headhunter, name: 'Bruno', surname: 'Silva',
+                                     email: 'headhunter@email.com')
     company = create(:company, name: 'RR System', headhunter: headhunter)
 
     login_as(headhunter, scope: :headhunter)
@@ -13,13 +14,14 @@ feature 'Headhunter liks headhunters to his company' do
     click_on 'Vincular'
 
     expect(page).to have_content('Headhunter vinculado com sucesso!')
-    expect(page).to have_content headhunter.email
+    expect(page).to have_content 'Bruno Silva - headhunter@email.com'
     expect(page).to have_button('Remover headhunter')
   end
 
   scenario 'successfully links another headhunter' do
     owner = create(:headhunter, email: 'owner@email.com')
-    headhunter = create(:headhunter, email: 'headhunter@email.com')
+    headhunter = create(:headhunter, name: 'Bruno', surname: 'Silva',
+                                     email: 'headhunter@email.com')
     company = create(:company, name: 'RR System', headhunter: owner)
 
     login_as(owner, scope: :headhunter)
@@ -30,7 +32,7 @@ feature 'Headhunter liks headhunters to his company' do
     click_on 'Vincular'
 
     expect(page).to have_content('Headhunter vinculado com sucesso!')
-    expect(page).to have_content headhunter.email
+    expect(page).to have_content 'Bruno Silva - headhunter@email.com'
     expect(page).to have_button('Remover headhunter')
   end
 

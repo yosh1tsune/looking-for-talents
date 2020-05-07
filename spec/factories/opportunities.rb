@@ -7,6 +7,6 @@ FactoryBot.define do
     salary { 2800 }
     grade { 'Júnior' }
     submit_end_date { 7.days.from_now }
-    company { 'RR Systems' }
+    company
   end
 end

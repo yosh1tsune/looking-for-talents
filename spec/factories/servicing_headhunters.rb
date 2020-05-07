@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :servicing_headhunter do
-    headhunter { nil }
-    company { nil }
+    headhunter
+    company
   end
 end

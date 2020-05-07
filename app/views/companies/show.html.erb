@@ -13,7 +13,7 @@
 <%= form_with url: link_headhunters_company_path do |f| %>
   <div class="form-group">
     <%= f.label :email, 'Email' %>
-    <%= f.text_field :email, class: 'form-control' %>
+    <%= f.email_field :email, class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.submit 'Vincular', class: 'btn btn-success' %>
@@ -24,7 +24,7 @@
 
 <% else %>
   <% @company.headhunters.each do |h| %>
-    <p>Email: <%= h.email %>
+    <p><%= h.details %>
     <%= button_to 'Remover headhunter' %>
   <% end %>
 <% end %>

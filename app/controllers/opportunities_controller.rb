@@ -58,6 +58,6 @@ class OpportunitiesController < ApplicationController
   def opportunity_params
     params.require(:opportunity).permit(:title, :work_description,
                                         :required_abilities, :salary, :grade,
-                                        :submit_end_date, :company)
+                                        :submit_end_date, :company_id)
   end
 end

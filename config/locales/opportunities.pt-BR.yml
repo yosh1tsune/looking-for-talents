@@ -1,6 +1,6 @@
 pt-BR:
   title: 'Título'
-  company: 'Empresa'
+  company_id: 'Empresa'
   work_description: 'Descrição da vaga'
   required_abilities: 'Habilidades necessárias'
   salary: 'Salário'
@@ -13,7 +13,7 @@ pt-BR:
     attributes:
       opportunity:
         title: 'Título'
-        company: 'Empresa'
+        company_id: 'Empresa'
         work_description: 'Descrição da vaga'
         required_abilities: 'Habilidades necessárias'
         salary: 'Salário'

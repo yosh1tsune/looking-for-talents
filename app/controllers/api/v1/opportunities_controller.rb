@@ -51,8 +51,8 @@ module Api
       private
 
       def opportunity_params
-        params.permit(:title, :company, :work_description, :required_abilities,
-                      :salary, :grade, :submit_end_date, :headhunter_id)
+        params.permit(:title, :work_description, :required_abilities, :grade,
+                      :salary, :submit_end_date, :company_id, :headhunter_id)
       end
     end
   end
