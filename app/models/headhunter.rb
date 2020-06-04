@@ -4,6 +4,7 @@ class Headhunter < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :opportunities, dependent: :destroy
+  has_many :proposals, through: :opportunities
   has_many :comments, dependent: :destroy
   has_many :companies, dependent: :destroy
   has_many :servicing_headhunters, dependent: :nullify

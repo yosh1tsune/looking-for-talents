@@ -1,9 +1,17 @@
 @import '~bootstrap/scss/bootstrap';
 
-.bg-red{
-  background-color: #c52f24;
+.bg-orange{
+  background-color: rgb(244, 125, 8) !important;
 }
 
 .navbar-brand{
   font-family: fantasy;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgb(255, 255, 255);
+}
+
+a {
+  color: rgb(244, 125, 8);
 }

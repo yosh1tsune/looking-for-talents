@@ -102,17 +102,16 @@ feature 'candidate updates profile' do
 
   scenario 'and must fill all fields' do
     candidate = create(:candidate, email: 'candidate@email.com')
-    create(:profile, name: 'Bruno Silva', candidate: candidate)
+    profile = create(:profile, name: 'Bruno Silva', candidate: candidate)
 
     login_as(candidate, scope: :candidate)
     visit root_path
     click_on 'Perfil'
     click_on 'Editar perfil'
-
     fill_in I18n.t('name'), with: ''
     click_on 'Enviar'
 
-    expect(current_path).to eq profile_path(candidate)
+    expect(current_path).to eq profile_path(profile)
     expect(page).to have_content("#{I18n.t('name')} não pode ficar em branco")
   end
 end

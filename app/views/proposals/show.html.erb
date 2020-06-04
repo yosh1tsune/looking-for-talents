@@ -1,8 +1,8 @@
-<h1>Proposta: <%= @proposal.id %></h1>
+<h1>Proposta: <%= link_to @proposal.opportunity.title, opportunity_path(@proposal.opportunity) %></h1>
+
+<hr class="my-4">
 
 <dl>
-    <dt>Vaga:</dt>
-    <dd><%= @proposal.opportunity.title %></dd>
     <dt><%= I18n.t('start_date') %>:</dt>
     <dd><%= I18n.l(@proposal.start_date) %></dd>
     <dt><%= I18n.t('salary') %>:</dt>

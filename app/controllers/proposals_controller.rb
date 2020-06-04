@@ -3,8 +3,11 @@ class ProposalsController < ApplicationController
   before_action :authenticate_candidate!, only: %i[accept refuse]
 
   def index
-    candidate = current_candidate
-    @proposals = candidate.proposals
+    if candidate_signed_in?
+      @proposals = current_candidate.proposals
+    elsif headhunter_signed_in?
+      @proposals = current_headhunter.proposals
+    end
   end
 
   def show

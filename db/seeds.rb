@@ -156,7 +156,7 @@ Proposal.create(start_date: '19/07/3020', salary: 3_500,
                 benefits: 'VR, VA, Convênio Médico',
                 role: 'Desenvolvedor Ruby Júnior',
                 expectations: 'Se encaixar bem na equipe e contribuir '\
-                'positivamente para o andamento do projeto',
+                              'positivamente para o andamento do projeto',
                 bonuses: 'Participação de Lucros',
                 opportunity: opportunity_a,
                 subscription: subscription_a)
@@ -165,7 +165,7 @@ Proposal.create(start_date: '19/07/3020', salary: 4_500,
                 benefits: 'VR, VA, Convênio Médico',
                 role: 'Desenvolvedor Full-Stack Júnior',
                 expectations: 'Desenvolver aplicações totalmente funcionais a '\
-                'médio prazo',
+                              'médio prazo',
                 bonuses: 'Participação de Lucros',
                 opportunity: opportunity_c,
                 subscription: subscription_b)

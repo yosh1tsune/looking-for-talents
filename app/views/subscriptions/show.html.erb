@@ -47,7 +47,9 @@
     <% end %>
 <% end %>
 
-<% if @subscription.approved? %>
+<% if @subscription.proposal %>
+  
+<% elsif @subscription.approved? %>
 
   <h3 class="mt-4">Enviar proposta ao candidato</h3>
   

@@ -1,5 +1,7 @@
 <h1><%= @opportunity.title %></h1>
 
+<hr class="my-4">
+
 <dl>
     <dt><%= t('company') %>:</dt>
     <dd><%= @opportunity.company %></dd>
@@ -8,7 +10,7 @@
     <dt><%= t('required_abilities') %>:</dt>
     <dd><%= @opportunity.required_abilities %></dd>
     <dt><%= t('salary') %>:</dt>
-    <dd><%= @opportunity.salary %></dd>
+    <dd><%= number_to_currency(@opportunity.salary, locale: :'pt-BR') %></dd>
     <dt><%= t('grade') %>:</dt>
     <dd><%= @opportunity.grade %></dd>
     <dt><%= t('submit_end_date') %>:</dt>
@@ -28,21 +30,23 @@
 <% end %>
 
 <% if headhunter_signed_in? %>
-    <% if @opportunity.open? %>
-        <%= link_to 'Encerrar inscrições', close_opportunity_path(@opportunity), method: :post%>
-    <% end %>
+  <% if @opportunity.open? %>
+    <%= link_to 'Encerrar inscrições', close_opportunity_path(@opportunity), method: :post, class: 'btn btn-danger' %>
+  <% end %>
 
-    <h2>Candidatos Inscritos</h2>
+  <hr class="my-4">
 
-    <% @opportunity.subscriptions.each do |r| %>
-        <dl>
-            <h3>Inscrição: <%= link_to r.opportunity.title, subscription_path(r) %>
-            <dt><%= I18n.t('name') %>:</dt>
-            <dd><%= link_to r.profile.name, profile_path(r) %></dd>
-            <dt><%= I18n.t('registration_resume') %>:</dt>
-            <dd><%= r.registration_resume %><dd>
-            <dt><%= I18n.t('status') %>:</dt>
-            <dd><%= r.status %><dd>
-        </dl>
-    <% end %>
+  <h2>Candidatos Inscritos</h2><br>
+
+  <% @opportunity.subscriptions.each do |r| %>
+    <dl>
+      <span>Inscrição: <%= link_to r.opportunity.title, subscription_path(r) %></span>
+      <dt><%= I18n.t('name') %>:</dt>
+      <dd><%= link_to r.profile.name, profile_path(r.profile) %></dd>
+      <dt><%= I18n.t('registration_resume') %>:</dt>
+      <dd><%= r.registration_resume %><dd>
+      <dt><%= I18n.t('status') %>:</dt>
+      <dd><%= r.status %><dd>
+    </dl>
+  <% end %>
 <% end %>

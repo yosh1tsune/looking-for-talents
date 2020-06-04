@@ -1,19 +1,10 @@
-<h1>Perfil pessoal</h1>
+<h1><%= @profile.name %></h1>
 
-<% if @profile.errors.any? %>
-  <p>Você deve corrigir os seguintes erros: </p>
-  <ul>
-  <% @profile.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-  <% end %>
-  </ul><br><br>
-<% end %>
+<hr class="my-4">
 
 <% if candidate_signed_in? %>
 <h3><%= link_to 'Editar perfil', edit_profile_path(@profile) %>
 <% end %>
-
-<h2><%= @profile.name %></h2>
 
 <% if @profile.avatar.attached? %>
   <%= image_tag(@profile.avatar, size: "400x400") %>
@@ -44,18 +35,14 @@
     <% end %>
 </dl>
 
+<hr class="my-4">
+
 <h3>Comentários<h3>
 
-<% if headhunter_signed_in? %>
-    <%= form_for ([@profile, @comment]) do |form| %>
-        <%= form.label :comment, I18n.t('comment') %>
-        <%= form.text_field :comment %>
-        <%= form.submit 'Comentar' %>
-    <% end %>
-<% end %>
+<hr class="my-4">
 
 <% if @profile.comments.blank? %>
-    <h3>Sem comentários nesse perfil</h1>
+    <span>Sem comentários nesse perfil</span>
 <% elsif %>
     <% @profile.comments.each do |c| %>
         <dl>
@@ -65,4 +52,13 @@
             <dd><%= c.comment %></dd>
         <dl
     <% end %>>
+<% end %>
+
+<hr class="my-4">
+
+<% if headhunter_signed_in? %>
+    <%= form_for ([@profile, @comment]) do |form| %>
+        <%= form.text_field :comment, placeholder: :comment %>
+        <%= form.submit 'Comentar', class: 'btn btn-success' %>
+    <% end %>
 <% end %>
