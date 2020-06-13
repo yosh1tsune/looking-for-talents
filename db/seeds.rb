@@ -4,32 +4,31 @@ headhunter_a = Headhunter.create(email: 'first_headhunter@email.com',
 
 headhunter_b = Headhunter.create(email: 'second_headhunter@email.com',
                                  password: 'head5678',
-                                 name: 'John', surname: 'Wayne')
+                                 name: 'Rocky', surname: 'Balboa')
 
 company_a = Company.create(name: 'RR Systems', document: '46.318.224/0001-47',
                            description: 'Soluções em aplicações web baseadas '\
                                         'em Ruby on Rails',
-                           email: 'rrsystem@lookingfortalents.com',
-                           phone: '(11) 0000-0000', headhunter: headhunter_a)
+                                        email: 'rrsystem@lookingfortalents.com',
+                                        phone: '(11) 0000-0000', headhunter: headhunter_a)
 
+Address.create(street: 'Avenida Paulista, 9000', neighborhood: 'Bela Vista',
+               city: 'São Paulo', state: 'SP', country: 'Brasil',
+               zipcode: '00000-000', addressable: company_a)
+                                        
 company_b = Company.create(name: 'FinDevs', document: '31.516.545/0001-89',
                            description: 'Aplicações financeiras',
                            email: 'findevs@lookingfortalents.com',
                            phone: '(11) 0000-0000', headhunter: headhunter_b)
-
+Address.create(street: 'Avenida Rebouças, 5000', neighborhood: 'Pinheiros',
+               city: 'São Paulo', state: 'SP', country: 'Brasil',
+               zipcode: '00000-000', addressable: company_b)
+              
 company_c = Company.create(name: 'SF Devs', document: '92.015.880/0001-98',
                            description: 'Desenvolvimento de softwares Java',
                            email: 'sfdevs@lookingfortalents.com',
                            phone: '(11) 0000-0000', headhunter: headhunter_b)
 
-Address.create(street: 'Avenida Paulista, 9000', neighborhood: 'Bela Vista',
-              city: 'São Paulo', state: 'SP', country: 'Brasil',
-              zipcode: '00000-000', addressable: company_a)
-
-Address.create(street: 'Avenida Rebouças, 5000', neighborhood: 'Pinheiros',
-              city: 'São Paulo', state: 'SP', country: 'Brasil',
-              zipcode: '00000-000', addressable: company_b)
-              
 Address.create(street: 'Avenida Tiradentes, 1100', neighborhood: 'Bom Retiro',
               city: 'São Paulo', state: 'SP', country: 'Brasil',
               zipcode: '00000-000', addressable: company_c)

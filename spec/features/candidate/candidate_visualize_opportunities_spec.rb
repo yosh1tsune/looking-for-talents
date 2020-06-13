@@ -44,11 +44,6 @@ feature 'candidate visualize opportunities' do
     expect(page).to have_content(opportunity.title)
     expect(page).to have_content("#{I18n.t('work_description')}: "\
                                  "#{opportunity.work_description}")
-    expect(page).to have_content("#{I18n.t('required_abilities')}: "\
-                                 "#{opportunity.required_abilities}")
-    expect(page).to have_content("#{I18n.t('salary')}: #{opportunity.salary}")
-    expect(page).to have_content("#{I18n.t('grade')}: #{opportunity.grade}")
-    expect(page).to have_content(I18n.l(opportunity.submit_end_date))
     expect(page).to have_button(I18n.t('register'))
   end
 end

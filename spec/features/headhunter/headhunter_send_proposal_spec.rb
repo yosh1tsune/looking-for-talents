@@ -29,7 +29,7 @@ feature 'headhunter send proposal' do
     click_on 'Enviar proposta'
 
     expect(page).to have_content('Proposta enviada!')
-    expect(page).to have_content("Vaga: #{opportunity.title}")
+    expect(page).to have_content("Proposta para a vaga: #{opportunity.title}")
     expect(page).to have_content("#{I18n.t('start_date')}: 01/02/2030")
     expect(page).to have_content("#{I18n.t('salary')}: 2800")
     expect(page).to have_content("#{I18n.t('role')}: Desenvolvedor Júnior")

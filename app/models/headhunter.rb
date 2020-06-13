@@ -3,6 +3,7 @@ class Headhunter < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  validates :name, :surname, presence: true
   has_many :opportunities, dependent: :destroy
   has_many :proposals, through: :opportunities
   has_many :comments, dependent: :destroy

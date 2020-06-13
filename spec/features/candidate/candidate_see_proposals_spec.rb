@@ -57,7 +57,8 @@ feature 'candidate see proposals' do
     click_on 'Minhas propostas'
     click_on proposal.role
 
-    expect(page).to have_content("Vaga: #{proposal.opportunity.title}")
+    expect(page).to have_content("Proposta para a vaga: "\
+                                 "#{proposal.opportunity.title}")
     expect(page).to have_content("#{I18n.t('start_date')}: "\
                                  "#{I18n.l(proposal.start_date)}")
     expect(page).to have_content("#{I18n.t('salary')}: #{proposal.salary}")
@@ -105,7 +106,8 @@ feature 'candidate see proposals' do
     click_on proposal.role
     click_on 'Recusar proposta'
 
-    expect(page).to have_content("Vaga: #{proposal.opportunity.title}")
+    expect(page).to have_content("Proposta para a vaga: "\
+                                 "#{proposal.opportunity.title}")
     expect(page).to have_content("#{I18n.t('start_date')}: "\
                                  "#{I18n.l(proposal.start_date)}")
     expect(page).to have_content("#{I18n.t('salary')}: #{proposal.salary}")
@@ -152,7 +154,8 @@ feature 'candidate see proposals' do
     click_on proposal.role
     click_on 'Aceitar proposta'
 
-    expect(page).to have_content("Vaga: #{proposal.opportunity.title}")
+    expect(page).to have_content("Proposta para a vaga: "\
+                                 "#{proposal.opportunity.title}")
     expect(page).to have_content("#{I18n.t('start_date')}: "\
                                  "#{I18n.l(proposal.start_date)}")
     expect(page).to have_content("#{I18n.t('salary')}: #{proposal.salary}")

@@ -5,7 +5,6 @@ ruby '2.5.1'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
-gem 'devise-i18n'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '1.2.3'
 gem 'puma', '~> 3.12'
