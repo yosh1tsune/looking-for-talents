@@ -31,13 +31,6 @@ feature 'headhunter send proposal' do
     expect(page).to have_content('Proposta enviada!')
     expect(page).to have_content("Proposta para a vaga: #{opportunity.title}")
     expect(page).to have_content("#{I18n.t('start_date')}: 01/02/2030")
-    expect(page).to have_content("#{I18n.t('salary')}: 2800")
-    expect(page).to have_content("#{I18n.t('role')}: Desenvolvedor Júnior")
-    expect(page).to have_content("#{I18n.t('benefits')}: Vale Transporte, "\
-                                 'Vale Refeição, Convênio Médico')
-    expect(page).to have_content("#{I18n.t('expectations')}: Colaborar com as "\
-                                 'rotinas de testes do time de desenvolvimento')
-    expect(page).to have_content("#{I18n.t('bonuses')}: Participação de lucros")
   end
 
   scenario 'and must fill all fields' do

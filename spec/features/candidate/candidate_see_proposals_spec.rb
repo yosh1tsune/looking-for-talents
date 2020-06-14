@@ -61,12 +61,6 @@ feature 'candidate see proposals' do
                                  "#{proposal.opportunity.title}")
     expect(page).to have_content("#{I18n.t('start_date')}: "\
                                  "#{I18n.l(proposal.start_date)}")
-    expect(page).to have_content("#{I18n.t('salary')}: #{proposal.salary}")
-    expect(page).to have_content("#{I18n.t('role')}: #{proposal.role}")
-    expect(page).to have_content("#{I18n.t('benefits')}: #{proposal.benefits}")
-    expect(page).to have_content("#{I18n.t('expectations')}: "\
-                                 "#{proposal.expectations}")
-    expect(page).to have_content("#{I18n.t('bonuses')}: #{proposal.bonuses}")
     expect(page).to have_content("#{I18n.t('status')}: "\
                                  "#{I18n.t('in_progress')}")
     expect(page).to have_link('Aceitar proposta')
@@ -110,12 +104,6 @@ feature 'candidate see proposals' do
                                  "#{proposal.opportunity.title}")
     expect(page).to have_content("#{I18n.t('start_date')}: "\
                                  "#{I18n.l(proposal.start_date)}")
-    expect(page).to have_content("#{I18n.t('salary')}: #{proposal.salary}")
-    expect(page).to have_content("#{I18n.t('role')}: #{proposal.role}")
-    expect(page).to have_content("#{I18n.t('benefits')}: #{proposal.benefits}")
-    expect(page).to have_content("#{I18n.t('expectations')}: "\
-                                 "#{proposal.expectations}")
-    expect(page).to have_content("#{I18n.t('bonuses')}: #{proposal.bonuses}")
     expect(page).to have_content("#{I18n.t('status')}: #{I18n.t('refused')}")
     expect(page).not_to have_link('Aceitar proposta')
     expect(page).not_to have_link('Recusar proposta')
@@ -158,12 +146,6 @@ feature 'candidate see proposals' do
                                  "#{proposal.opportunity.title}")
     expect(page).to have_content("#{I18n.t('start_date')}: "\
                                  "#{I18n.l(proposal.start_date)}")
-    expect(page).to have_content("#{I18n.t('salary')}: #{proposal.salary}")
-    expect(page).to have_content("#{I18n.t('role')}: #{proposal.role}")
-    expect(page).to have_content("#{I18n.t('benefits')}: #{proposal.benefits}")
-    expect(page).to have_content("#{I18n.t('expectations')}: "\
-                                 "#{proposal.expectations}")
-    expect(page).to have_content("#{I18n.t('bonuses')}: #{proposal.bonuses}")
     expect(page).to have_content("#{I18n.t('status')}: #{I18n.t('accepted')}")
     expect(page).not_to have_link('Aceitar proposta')
     expect(page).not_to have_link('Recusar proposta')

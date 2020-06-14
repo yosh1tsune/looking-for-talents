@@ -7,6 +7,8 @@
 <% else %>
   <% @proposals.each do |p| %>
       <dl>
+          <dt>Candidato:</dt>
+          <dd><%= p.candidate.profile.name %></dd>
           <dt>Vaga:</dt>
           <dd><%= p.opportunity.title %></dd>
           <dt><%= I18n.t('role') %>:</dt>

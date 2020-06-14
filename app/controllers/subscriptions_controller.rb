@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_candidate!, only: %i[index create]
   before_action :authenticate_headhunter!, only: %i[update highlight]
+  before_action :candidate_have_profile?, only: %i[create]
 
   def index
     candidate = current_candidate
@@ -52,6 +53,14 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+
+  def candidate_have_profile?
+    profile = Profile.find_by(candidate: current_candidate)
+    if profile.blank?
+      flash[:alert] = 'Preencha o perfil de canidato antes de se registrar a uma vaga'
+      redirect_to new_profile_path
+    end
+  end
 
   def subscription_params
     params.require(:subscription).permit(:status, :feedback)

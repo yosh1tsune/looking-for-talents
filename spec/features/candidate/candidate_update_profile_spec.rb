@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 feature 'candidate updates profile' do
+  scenario 'receive a hint at home page to create his profile' do
+    candidate = create(:candidate, email: 'candidate@email.com')
+
+    login_as(candidate, scope: :candidate)
+    visit root_path
+
+    expect(page).to have_content 'Seu perfil está incompleto! Acesse a aba '\
+                                 "'Perfil' para preenche-lo!"
+  end
+
   scenario "candidate still don't have profile" do
     candidate = create(:candidate, email: 'candidate@email.com')
 

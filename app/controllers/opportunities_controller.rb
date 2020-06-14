@@ -30,12 +30,6 @@ class OpportunitiesController < ApplicationController
     end
   end
 
-  def registered?
-    return unless candidate_signed_in?
-
-    @registered = Subscription.find_by(candidate_id: current_candidate.id)
-  end
-
   def close
     @opportunity = Opportunity.find(params[:id])
     @opportunity.closed!
@@ -54,6 +48,12 @@ class OpportunitiesController < ApplicationController
   end
 
   private
+
+  def registered?
+    return unless candidate_signed_in?
+
+    @registered = Subscription.find_by(candidate_id: current_candidate.id)
+  end
 
   def opportunity_params
     params.require(:opportunity).permit(:title, :work_description,

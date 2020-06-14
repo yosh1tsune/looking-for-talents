@@ -3,10 +3,12 @@
 <hr class="my-4">
 
 <dl>
+    <dt>Candidato:</dt>
+    <dd><%= link_to @proposal.candidate.profile.name, profile_path(@proposal.candidate.profile) %></dd>
     <dt><%= I18n.t('start_date') %>:</dt>
     <dd><%= I18n.l(@proposal.start_date) %></dd>
     <dt><%= I18n.t('salary') %>:</dt>
-    <dd><%= @proposal.salary %></dd>
+    <dd><%= number_to_currency(@proposal.salary, locale: :'pt-BR') %></dd>
     <dt><%= I18n.t('role') %>:</dt>
     <dd><%= @proposal.role %></dd>
     <dt><%= I18n.t('benefits') %>:</dt>
