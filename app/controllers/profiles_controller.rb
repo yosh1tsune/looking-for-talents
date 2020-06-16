@@ -25,6 +25,7 @@ class ProfilesController < ApplicationController
 
   def new
     @profile = Profile.new
+    @profile.addresses.build
   end
 
   def edit
@@ -59,7 +60,7 @@ class ProfilesController < ApplicationController
                                     :professional_resume, :scholarity,
                                     :candidate_id, :avatar,
                                     addresses_attributes:
-                                      %i[street neighborhood state city country
-                                         zipcode])
+                                      %i[id street neighborhood state city
+                                         country zipcode])
   end
 end

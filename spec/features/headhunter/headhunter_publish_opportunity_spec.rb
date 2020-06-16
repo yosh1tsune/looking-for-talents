@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'headhunter publish opportunity' do
-  scenario 'successfully' do
+  scenario 'successfully', js: true do
     headhunter = create(:headhunter, email: 'headhunter@email.com')
     company = create(:company, name: 'RR System')
     create(:servicing_headhunter, headhunter: headhunter, company: company)
@@ -23,7 +23,7 @@ feature 'headhunter publish opportunity' do
     click_on 'Enviar'
 
     expect(page).to have_content('Desenvolvedor Júnior Ruby on Rails')
-    expect(page).to have_content("#{I18n.t('submit_end_date')}: "\
+    expect(page).to have_content("#{I18n.t('submit_end_date')}:\n"\
                                  "#{7.days.from_now.strftime('%d/%m/%Y')}")
     expect(page).to have_content('Vaga publicada com sucesso!')
   end

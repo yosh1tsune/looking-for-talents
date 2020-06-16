@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'headhunter rates candidates' do
-  scenario 'successfully approve' do
+  scenario 'successfully approve', js: true do
     candidate = create(:candidate, email: 'candidate@email.com')
     headhunter = create(:headhunter, email: 'headhunter@email.com')
     create(:profile, name: 'Bruno Silva', candidate: candidate)
@@ -22,12 +22,12 @@ feature 'headhunter rates candidates' do
     click_on 'Avaliar'
 
     expect(page).to have_content('Inscrição atualizada com sucesso')
-    expect(page).to have_content("#{I18n.t('status')}: #{I18n.t('approved')}")
-    expect(page).to have_content("#{I18n.t('feedback')}: "\
+    expect(page).to have_content("#{I18n.t('status')}:\n#{I18n.t('approved')}")
+    expect(page).to have_content("#{I18n.t('feedback')}:\n"\
                                  "#{subscription.feedback}")
   end
 
-  scenario 'successfully refuse' do
+  scenario 'successfully refuse', js: true do
     candidate = create(:candidate, email: 'candidate@email.com')
     headhunter = create(:headhunter, email: 'headhunter@email.com')
     create(:profile, name: 'Bruno Silva', candidate: candidate)
@@ -49,12 +49,12 @@ feature 'headhunter rates candidates' do
     click_on 'Avaliar'
 
     expect(page).to have_content('Inscrição atualizada com sucesso')
-    expect(page).to have_content("#{I18n.t('status')}: #{I18n.t('refused')}")
-    expect(page).to have_content("#{I18n.t('feedback')}: "\
+    expect(page).to have_content("#{I18n.t('status')}:\n#{I18n.t('refused')}")
+    expect(page).to have_content("#{I18n.t('feedback')}:\n"\
                                  "#{subscription.feedback}")
   end
 
-  scenario "or fail if don't choose a status or submit a blank feedback" do
+  scenario 'and must fill all fields', js: true do
     candidate = create(:candidate, email: 'candidate@email.com')
     headhunter = create(:headhunter, email: 'headhunter@email.com')
     create(:profile, name: 'Bruno Silva', candidate: candidate)

@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 feature 'candidate updates profile' do
-  scenario 'receive a hint at home page to create his profile' do
+  scenario 'receive a hint at home page to create his profile', js: true do
     candidate = create(:candidate, email: 'candidate@email.com')
 
     login_as(candidate, scope: :candidate)
     visit root_path
 
     expect(page).to have_content 'Seu perfil está incompleto! Acesse a aba '\
-                                 "'Perfil' para preenche-lo!"
+                                 'Perfil para preenche-lo!'
   end
 
   scenario "candidate still don't have profile" do
@@ -22,7 +22,7 @@ feature 'candidate updates profile' do
     expect(current_path).to eq(new_profile_path)
   end
 
-  scenario 'and create if not' do
+  scenario 'and create if not', js: true do
     candidate = create(:candidate, email: 'candidate@email.com')
 
     login_as(candidate)
@@ -45,13 +45,14 @@ feature 'candidate updates profile' do
 
     expect(page).to have_content('Perfil atualizado com sucesso')
     expect(page).to have_content('Bruno Silva')
-    expect(page).to have_content("#{I18n.t('birth_date')}: 22/04/1996")
-    expect(page).to have_content("#{I18n.t('document')}: 996.490.558-00")
-    expect(page).to have_content("#{I18n.t('scholarity')}: Superior Incompleto")
-    expect(page).to have_content("#{I18n.t('professional_resume')}: "\
+    expect(page).to have_content("#{I18n.t('birth_date')}:\n22/04/1996")
+    expect(page).to have_content("#{I18n.t('document')}:\n996.490.558-00")
+    expect(page).to have_content("#{I18n.t('scholarity')}:\nSuperior "\
+                                 'Incompleto')
+    expect(page).to have_content("#{I18n.t('professional_resume')}:\n"\
                                  'Desenvolvimento web com Dart2')
     expect(page).to have_css("img[src*='user.jpg']")
-    expect(page).to have_content('Endereço: Avenida Paulista, 1000')
+    expect(page).to have_content('Endereço: Avenida Paulista,1000')
     expect(page).to have_content('Cidade: São Paulo')
   end
 
@@ -77,16 +78,16 @@ feature 'candidate updates profile' do
                                                                       'branco')
   end
 
-  scenario 'or edit if already have' do
-    candidate = create(:candidate, email: 'candidate@email.com')
-    create(:profile, name: 'Bruno Silva',
-                     birth_date: '22/04/1996',
-                     document: '996.490.558-00',
-                     scholarity: 'Superior Incompleto',
-                     professional_resume: 'Desenvolvimento web com Dart 2',
-                     candidate: candidate)
+  scenario 'or edit if already have', js: true do
+    profile = create(:profile, name: 'Bruno Silva',
+                               birth_date: '22/04/1996',
+                               document: '996.490.558-00',
+                               scholarity: 'Superior Incompleto',
+                               professional_resume: 'Desenvolvimento web com '\
+                                                    'Dart 2')
+    create(:address, addressable: profile)
 
-    login_as(candidate, scope: :candidate)
+    login_as(profile.candidate, scope: :candidate)
     visit root_path
     click_on 'Perfil'
     click_on 'Editar perfil'
@@ -102,12 +103,14 @@ feature 'candidate updates profile' do
 
     expect(page).to have_content('Perfil atualizado com sucesso')
     expect(page).to have_content('Bruno Silva')
-    expect(page).to have_content("#{I18n.t('birth_date')}: 22/04/1996")
-    expect(page).to have_content("#{I18n.t('document')}: 996.490.558-00")
-    expect(page).to have_content("#{I18n.t('scholarity')}: Superior Incompleto")
-    expect(page).to have_content("#{I18n.t('professional_resume')}: "\
+    expect(page).to have_content("#{I18n.t('birth_date')}:\n22/04/1996")
+    expect(page).to have_content("#{I18n.t('document')}:\n996.490.558-00")
+    expect(page).to have_content("#{I18n.t('scholarity')}:\nSuperior "\
+                                 'Incompleto')
+    expect(page).to have_content("#{I18n.t('professional_resume')}:\n"\
                                  'Desenvolvimento web com Dart 2, Rails, TDD')
-    expect(page).to have_content("#{I18n.t('address')}: Avenida Paulista, 1000")
+    expect(page).to have_content("#{I18n.t('address')}:\nAvenida Paulista, "\
+                                 '1000')
   end
 
   scenario 'and must fill all fields' do

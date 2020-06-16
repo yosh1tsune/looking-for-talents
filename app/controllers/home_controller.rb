@@ -6,17 +6,12 @@ class HomeController < ApplicationController
   private
 
   def candidate_have_profile?
-    if candidate_signed_in?
-      profile = Profile.find_by(candidate: current_candidate)
-      if profile.blank?
-        if flash[:notice].blank?
-          flash[:notice] = "Seu perfil está incompleto! Acesse a aba 'Perfil' "\
-                          'para preenche-lo!'
-        else
-          flash[:notice] << "Seu perfil está incompleto! Acesse a aba 'Perfil' "\
-                          'para preenche-lo!'          
-        end
-      end
-    end
+    return unless candidate_signed_in?
+
+    profile = Profile.find_by(candidate: current_candidate)
+    return if profile.present?
+
+    flash[:info] = 'Seu perfil está incompleto! Acesse a aba Perfil '\
+                      'para preenche-lo!'
   end
 end

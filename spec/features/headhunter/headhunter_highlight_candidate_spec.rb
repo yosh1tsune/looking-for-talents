@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'headhunter highlight candidate' do
-  scenario 'successfully' do
+  scenario 'successfully', js: true do
     candidate = create(:candidate, email: 'candidate@email.com')
     headhunter = create(:headhunter, email: 'headhunter@email.com')
     create(:profile, name: 'Bruno Silva', candidate: candidate)
@@ -27,7 +27,7 @@ feature 'headhunter highlight candidate' do
     expect(page).to have_button 'Remover destaque'
   end
 
-  scenario 'and remove hightlights successfully' do
+  scenario 'and remove hightlights successfully', js: true do
     candidate = create(:candidate, email: 'candidate@email.com')
     headhunter = create(:headhunter, email: 'headhunter@email.com')
     create(:profile, name: 'Bruno Silva', candidate: candidate)

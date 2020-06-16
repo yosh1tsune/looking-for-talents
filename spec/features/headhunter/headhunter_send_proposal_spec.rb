@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'headhunter send proposal' do
-  scenario 'successfully approve' do
+  scenario 'successfully approve', js: true do
     candidate = create(:candidate, email: 'candidate@email.com')
     headhunter = create(:headhunter, email: 'headhunter@email.com')
     create(:profile, name: 'Bruno Silva', candidate: candidate)
@@ -30,10 +30,10 @@ feature 'headhunter send proposal' do
 
     expect(page).to have_content('Proposta enviada!')
     expect(page).to have_content("Proposta para a vaga: #{opportunity.title}")
-    expect(page).to have_content("#{I18n.t('start_date')}: 01/02/2030")
+    expect(page).to have_content("#{I18n.t('start_date')}:\n01/02/2030")
   end
 
-  scenario 'and must fill all fields' do
+  scenario 'and must fill all fields', js: true do
     candidate = create(:candidate, email: 'candidate@email.com')
     headhunter = create(:headhunter, email: 'headhunter@email.com')
     create(:profile, name: 'Bruno Silva', candidate: candidate)

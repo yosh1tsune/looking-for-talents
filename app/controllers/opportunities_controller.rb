@@ -52,7 +52,8 @@ class OpportunitiesController < ApplicationController
   def registered?
     return unless candidate_signed_in?
 
-    @registered = Subscription.find_by(candidate_id: current_candidate.id)
+    @registered = Subscription.find_by(opportunity_id: params[:id],
+                                       candidate_id: current_candidate.id)
   end
 
   def opportunity_params

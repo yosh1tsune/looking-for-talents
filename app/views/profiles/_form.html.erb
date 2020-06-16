@@ -33,7 +33,7 @@
           <%= form.label :avatar %>
           <%= form.file_field :avatar, class: 'form-control'  %>
       </div>
-      <%= form.fields_for :addresses, Address.new do |address_form| %>
+      <%= form.fields_for :addresses do |address_form| %>
         <div class="form-group">
           <%= address_form.label :street %>
           <%= address_form.text_field :street, class: 'form-control' %>

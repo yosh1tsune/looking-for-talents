@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'user sign up' do
-  scenario 'successfully as headhunter' do
+  scenario 'successfully as headhunter', js: true do
     visit root_path
     click_on 'Login Headhunters'
     click_on 'Inscrever-se'
@@ -24,14 +24,14 @@ feature 'user sign up' do
     click_on 'Inscrever-se'
 
     click_on 'Inscrever-se'
-    
+
     expect(page).to have_content 'Nome não pode ficar em branco'
     expect(page).to have_content 'Sobrenome não pode ficar em branco'
     expect(page).to have_content 'E-mail não pode ficar em branco'
     expect(page).to have_content 'Senha não pode ficar em branco'
   end
 
-  scenario 'successfully as candidate' do
+  scenario 'successfully as candidate', js: true do
     visit root_path
     click_on 'Login Candidatos'
     click_on 'Inscrever-se'

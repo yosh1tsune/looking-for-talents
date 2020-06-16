@@ -23,13 +23,13 @@ feature 'headhunter verify sent proposals' do
     proposal = create(:proposal, role: 'Analista de suporte',
                                  headhunter: headhunter,
                                  subscription: subscription)
-                                 
+
     another_headhunter = create(:headhunter, email: 'another_head@email.com')
     another_profile = create(:profile)
     another_subs = create(:subscription, candidate: another_profile.candidate)
     another_proposal = create(:proposal, role: 'Desenvolvedor Junior',
-                                headhunter: another_headhunter,
-                                subscription: another_subs)
+                                         headhunter: another_headhunter,
+                                         subscription: another_subs)
 
     login_as(headhunter, scope: :headhunter)
     visit root_path

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Headhunter liks headhunters to his company' do
-  scenario 'successfully links himself' do
+  scenario 'successfully links himself', js: true do
     headhunter = create(:headhunter, name: 'Bruno', surname: 'Silva',
                                      email: 'headhunter@email.com')
     company = create(:company, name: 'RR System', headhunter: headhunter)
@@ -18,7 +18,7 @@ feature 'Headhunter liks headhunters to his company' do
     expect(page).to have_button('Remover headhunter')
   end
 
-  scenario 'successfully links another headhunter' do
+  scenario 'successfully links another headhunter', js: true do
     owner = create(:headhunter, email: 'owner@email.com')
     headhunter = create(:headhunter, name: 'Bruno', surname: 'Silva',
                                      email: 'headhunter@email.com')
@@ -36,7 +36,7 @@ feature 'Headhunter liks headhunters to his company' do
     expect(page).to have_button('Remover headhunter')
   end
 
-  scenario 'and must send a valid headhunter' do
+  scenario 'and must send a valid headhunter', js: true do
     owner = create(:headhunter, email: 'owner@email.com')
     company = create(:company, name: 'RR System', headhunter: owner)
 

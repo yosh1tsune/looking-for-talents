@@ -6,6 +6,5 @@ FactoryBot.define do
     document { '441.723.698-47' }
     scholarity { 'Superior Incompleto' }
     professional_resume { 'Estágio em Desenvolvimento Web' }
-    address { 'Alameda Santos, 1239' }
   end
 end

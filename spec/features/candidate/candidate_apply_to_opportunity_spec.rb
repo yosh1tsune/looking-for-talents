@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'candidate apply to opportunity' do
-  scenario 'successfully' do
+  scenario 'successfully', js: true do
     profile = create(:profile, name: 'Bruno Silva')
     opportunity = create(:opportunity, title: 'Desenvolvedor Rails')
 

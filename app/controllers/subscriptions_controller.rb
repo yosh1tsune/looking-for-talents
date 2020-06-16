@@ -56,10 +56,11 @@ class SubscriptionsController < ApplicationController
 
   def candidate_have_profile?
     profile = Profile.find_by(candidate: current_candidate)
-    if profile.blank?
-      flash[:alert] = 'Preencha o perfil de canidato antes de se registrar a uma vaga'
-      redirect_to new_profile_path
-    end
+    return if profile.present?
+
+    flash[:alert] = 'Preencha o perfil de canidato antes de se registrar a '\
+                    'uma vaga'
+    redirect_to new_profile_path
   end
 
   def subscription_params

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Headhunter register company' do
-  scenario 'succesfully' do
+  scenario 'succesfully', js: true do
     headhunter = create(:headhunter, email: 'headhunter@email.com')
 
     login_as(headhunter, scope: :headhunter)

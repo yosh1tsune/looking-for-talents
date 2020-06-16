@@ -16,8 +16,26 @@ import 'bootstrap/js/dist/tab'
 import 'bootstrap/js/dist/toast'
 import 'bootstrap/js/dist/tooltip'
 import 'bootstrap/js/dist/util'
-
 import '../stylesheets/application'
+
+import toastr from 'toastr';
+
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "progressBar": true,
+  "positionClass": "toast-top-left",
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+};
+
+global.toastr = toastr;
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

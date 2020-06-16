@@ -3,7 +3,7 @@
 <hr class="my-4">
 
 <% if candidate_signed_in? %>
-<h3><%= link_to 'Editar perfil', edit_profile_path(@profile) %>
+<h3><%= link_to 'Editar perfil', edit_profile_path(@profile) %></h3>
 <% end %>
 
 <% if @profile.avatar.attached? %>
