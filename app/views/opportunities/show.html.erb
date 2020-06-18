@@ -3,8 +3,16 @@
 <hr class="my-4">
 
 <dl>
-    <dt><%= t('company') %>:</dt>
-    <dd><%= @opportunity.company %></dd>
+    <dt><%= t('name') %>:</dt>
+    <dd><%= @opportunity.company.name %></dd>
+    <dt><%= t('document') %>:</dt>
+    <dd><%= @opportunity.company.document %></dd>
+    <dt><%= t('description') %>:</dt>
+    <dd><%= @opportunity.company.description %></dd>
+    <dt><%= t('email') %>:</dt>
+    <dd><%= @opportunity.company.email %></dd>
+    <dt><%= t('phone') %>:</dt>
+    <dd><%= @opportunity.company.phone %></dd>
     <dt><%= t('work_description') %>:</dt>
     <dd><%= @opportunity.work_description %></dd>
     <dt><%= t('required_abilities') %>:</dt>

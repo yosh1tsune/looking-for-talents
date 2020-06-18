@@ -6,11 +6,10 @@ module ApplicationHelper
       type = 'success' if type == 'notice'
       type = 'error'   if type == 'alert'
       type = 'info'    if type == 'info'
-      text = "toastr.#{type}('#{message}');"
-      flash_messages << text.html_safe if message
+      text = "toastr.#{type}(`#{message}`);"
+      flash_messages << text if message
     end
 
-    '<script>$(document).ready(function() '\
-    "{ #{flash_messages} });</script>".html_safe
+    content_tag(:script, "$(document).ready(function() { #{flash_messages} });")
   end
 end

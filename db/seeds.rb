@@ -43,14 +43,15 @@ candidate_a = Candidate.create(email: 'first_candidate@email.com',
                                password: 'cand1234')
 
 profile_a = Profile.create(name: 'Bruno Silva', birth_date: '22/04/1996',
-               document: '467.642.068-48', scholarity: 'Superior Incompleto',
-               professional_resume: 'Estágio em Desenvolvimento Web e '\
-                                    'Suporte ao Usuário',
-               candidate: candidate_a)
+                           document: '467.642.068-48',
+                           scholarity: 'Superior Incompleto',
+                           professional_resume: 'Estágio em Desenvolvimento '\
+                                                'Web e Suporte ao Usuário',
+                           candidate: candidate_a)
               
 Address.create(street: 'Avenida Edgar Facó, 100', neighborhood: 'Pirituba',
-              city: 'São Paulo', state: 'SP', country: 'Brasil',
-              zipcode: '00000-000', addressable: profile_a)
+               city: 'São Paulo', state: 'SP', country: 'Brasil',
+               zipcode: '00000-000', addressable: profile_a)
 
 Candidate.create(email: 'second_candidate@email.com', password: 'cand5678')
 

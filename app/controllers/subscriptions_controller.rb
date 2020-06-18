@@ -16,25 +16,21 @@ class SubscriptionsController < ApplicationController
 
   def create
     @opportunity = Opportunity.find(params[:opportunity_id])
-    if @opportunity.open?
-      subscription = @opportunity
-                     .subscriptions
-                     .create!(candidate: current_candidate,
-                              registration_resume:
+    return unless @opportunity.open?
+
+    subscription = @opportunity.subscriptions
+                               .create!(candidate: current_candidate,
+                                        registration_resume:
                                 params[:subscription][:registration_resume])
-      flash[:notice] = 'Inscrição realizada com sucesso!'
-      SubscriptionMailer.confirm_subscription(subscription.id)
-    else
-      flash[:notice] = 'As inscrições para essa vaga foram encerradas!'
-    end
+    flash[:notice] = 'Inscrição realizada com sucesso!'
+    SubscriptionMailer.confirm_subscription(subscription.id)
     redirect_to @opportunity
   end
 
   def update
     @subscription = Subscription.find(params[:id])
-    @subscription.feedback = subscription_params[:feedback]
-    @subscription.status = subscription_params[:status]
-    if @subscription.in_progress? || @subscription.feedback.blank?
+    if subscription_params[:status] == 'in_progress' ||
+       subscription_params[:feedback].blank?
       flash[:alert] = 'Altere o status da inscrição e preencha o feedback'
       render :show
     else

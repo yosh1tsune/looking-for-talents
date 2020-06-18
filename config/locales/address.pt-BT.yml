@@ -1,4 +1,10 @@
 pt-BR:
+  street: 'Endereço'
+  neighborhood: 'Bairro'        
+  city: 'Cidade'
+  state: 'Estado'
+  country: 'País'
+  zipcode: 'CEP'
   activerecord:
     attributes:
       address:

@@ -20,17 +20,17 @@
     <dt><%= I18n.t('scholarity') %>:</dt>
     <dd><%= @profile.scholarity %></dd>
     <% @profile.addresses.each do |address| %>
-      <dt><%= 'Endereço' %>:</dt>
+      <dt><%= t('address') %>:</dt>
       <dd><%= address.street %></dd>
-      <dt><%= 'Bairro' %>:</dt>
+      <dt><%= t('neighborhood') %>:</dt>
       <dd><%= address.neighborhood %></dd>
-      <dt><%= 'CEP' %>:</dt>
+      <dt><%= t('zipcode') %>:</dt>
       <dd><%= address.zipcode %></dd>
-      <dt><%= 'Cidade' %>:</dt>
+      <dt><%= t('city') %>:</dt>
       <dd><%= address.city %></dd>
-      <dt><%= 'Estado' %>:</dt>
+      <dt><%= t('state') %>:</dt>
       <dd><%= address.state %></dd>
-      <dt><%= 'País' %>:</dt>
+      <dt><%= t('country') %>:</dt>
       <dd><%= address.country %></dd>
     <% end %>
 </dl>

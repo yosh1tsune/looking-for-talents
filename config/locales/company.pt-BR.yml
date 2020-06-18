@@ -1,4 +1,9 @@
 pt-BR:
+  name: 'Nome'
+  document: 'CNPJ'
+  description: 'Descrição'
+  phone: 'Telefone'  
+  email: 'Email'
   activerecord:
     attributes:
       company:
@@ -6,5 +11,6 @@ pt-BR:
         document: 'CNPJ'
         description: 'Descrição'
         phone: 'Telefone'  
+        email: 'Email'
     model:
       company: 'Empresa'

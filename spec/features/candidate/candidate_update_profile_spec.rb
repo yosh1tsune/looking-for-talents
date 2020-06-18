@@ -30,7 +30,7 @@ feature 'candidate updates profile' do
     click_on 'Perfil'
 
     fill_in I18n.t('name'), with: 'Bruno Silva'
-    fill_in I18n.t('birth_date'), with: '22/04/1996'
+    fill_in I18n.t('birth_date'), with: Date.new(1996, 4, 22)
     fill_in I18n.t('document'), with: '996.490.558-00'
     fill_in I18n.t('scholarity'), with: 'Superior Incompleto'
     fill_in I18n.t('professional_resume'), with: 'Desenvolvimento web com Dart2'
@@ -52,8 +52,8 @@ feature 'candidate updates profile' do
     expect(page).to have_content("#{I18n.t('professional_resume')}:\n"\
                                  'Desenvolvimento web com Dart2')
     expect(page).to have_css("img[src*='user.jpg']")
-    expect(page).to have_content('Endereço: Avenida Paulista,1000')
-    expect(page).to have_content('Cidade: São Paulo')
+    expect(page).to have_content("Endereço:\nAvenida Paulista, 1000")
+    expect(page).to have_content("Cidade:\nSão Paulo")
   end
 
   scenario 'and must fill all fields' do
@@ -80,9 +80,6 @@ feature 'candidate updates profile' do
 
   scenario 'or edit if already have', js: true do
     profile = create(:profile, name: 'Bruno Silva',
-                               birth_date: '22/04/1996',
-                               document: '996.490.558-00',
-                               scholarity: 'Superior Incompleto',
                                professional_resume: 'Desenvolvimento web com '\
                                                     'Dart 2')
     create(:address, addressable: profile)
@@ -103,10 +100,6 @@ feature 'candidate updates profile' do
 
     expect(page).to have_content('Perfil atualizado com sucesso')
     expect(page).to have_content('Bruno Silva')
-    expect(page).to have_content("#{I18n.t('birth_date')}:\n22/04/1996")
-    expect(page).to have_content("#{I18n.t('document')}:\n996.490.558-00")
-    expect(page).to have_content("#{I18n.t('scholarity')}:\nSuperior "\
-                                 'Incompleto')
     expect(page).to have_content("#{I18n.t('professional_resume')}:\n"\
                                  'Desenvolvimento web com Dart 2, Rails, TDD')
     expect(page).to have_content("#{I18n.t('address')}:\nAvenida Paulista, "\
