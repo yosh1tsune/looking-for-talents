@@ -1,27 +1,57 @@
-# README
+# Looking for Talents
 
-Plataforma de divulgação de vagas
+O intuito deste projeto é criar uma plataforma de divulgação de vagas, onde empresas possam buscar profissionais para integrar suas equipes e interagir com estes durante o processo de candidatura e contratação
 
-Representantes de empresas podem divulgar vagas, avaliar perfis de candidatos, e agendar entrevistas
+## Pré-Requisitos
 
-Para iniciar o projeto, acesse o diretório através de um aplicativo terminal e execute os comandos 'bundle install' e 'bin/setup' nessa ordem.
+`Ruby 2.5`
 
-## Headhunter
+`Postgres`
 
-- Um headhunter inicia a utilização do sistema criando uma conta, informando email e senha.
+Sistema operacional recomendado: `Linux`
 
-- Com a conta criada, os headhunters podem divulgar vagas de emprego em suas empresas, verificar e avaliar os candidatos que se inscreverem nestas, e visualizar perfis e enviar comentários a candidatos mesmo que estes não estejam inscritos em suas vagas.
+## Iniciando o Projeto
 
-- Headhunter podem visualizar apenas suas vagas e todos os perfis de candidatos cadastrados na plataforma.
+Clone o projeto:
+
+`https://github.com/yosh1tsune/looking-for-talents.git`
+
+Acesse a pasta raiz:
+
+`cd looking-for-talents`
+
+Rode o seguinte comando para instalar as gems necessárias e iniciar o banco de dados:
+
+`bin/setup`
+
+Este projeto conta com dados pré-editados, para popular o banco com eles rode o seguinte comando:
+
+`rails db:seed`
+
+Finalmente, para observar a aplicação em funcionamento, rode o comando:
+
+`rails server`
+
+Por padrão, a aplicação ficará hospedada na porta `localhost:3000`
+
+## Funcionalidades
+
+### Headhunter
+
+- Um headhunter inicia a utilização do sistema criando uma conta, informando email, senha, nome e sobrenome.
+
+- Para publicar uma vaga os headhunters precisam estar vinculados a uma empresa. Os perfis de empresas são criados pelos próprios headhunters e o vinculo de um headhunter pode ser feito apenas pelo 'dono' da empresa.
 
 - Candidatos inscritos em vagas podem ter seus perfis destacados e receber propostas de emprego baseados na inscrição.
 
-## Candidatos
+- Headhunters podem visualizar apenas vagas e propostas próprias; os perfis de todos os candidatos candidatos cadastrados na plataforma estarão visíveis.
+
+### Candidatos
 
 - Um candidato inicia a utilização do sistema da mesma forma, criando uma conta informando email e senha.
 
-- Após cadastrados, candidatos podem completar seu perfil com dados pessoais e profissionais, afim de tornar-sem mais "atraentes" para os headhunters.
+- Após cadastrados, candidatos precisam completar seu perfil com dados pessoais e profissionais, só assim podem se candidatar a vagas.
 
-- Candidatos podem visualizar todas as vagas cadastradas na plataforma, e apenas os seus perfis pessoais.
+- Candidatos podem visualizar todas as vagas cadastradas na plataforma, e apenas os seus próprios perfis.
 
-- Após inscritos em alguma vaga, os candidatos receberão avaliação e feedback dos headhunters além de eventuais propostas constando todos os termos envolvidos numa posspivel contratação, podendo aceitar ou recusar as mesmas.
+- Após inscritos em alguma vaga, os candidatos receberão avaliação e feedback dos headhunters além de eventuais propostas constando todos os termos envolvidos numa possível contratação, podendo aceitar ou recusar as mesmas.
