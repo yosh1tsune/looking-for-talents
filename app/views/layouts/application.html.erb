@@ -4,7 +4,8 @@
     <title>Looking For Talents - Vagas de Emprego</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= favicon_link_tag asset_path('favicon.ico') %>
+    <%= favicon_link_tag asset_path('apple-icon.png'), rel: 'apple-touch-icon', type: 'image/png' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -18,7 +19,7 @@
       <%= render 'shared/navbars/headhunter'%>
     <% end %>
     <%= toastr_flash %>
-    <div class="container-fluid">
+    <div class="p-5">
       <%= yield %>
     </div>
   </body>

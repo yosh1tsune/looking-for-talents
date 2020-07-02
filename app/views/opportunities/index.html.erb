@@ -1,36 +1,38 @@
-<div class="row">
-  <div class="col-md-6">
-    <h1>Painel de Vagas</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Painel de Vagas</h1>
+    </div>
+
+    <div class="col-md-6 justify-content-right">
+      <%= form_with url: search_opportunities_path, method: :get do |f| %>
+        <div class="form-inline" style="float: right">
+          <%= f.text_field :q, placeholder: 'Insira o termo da pesquisa', class: 'form-control mr-sm-2'  %>
+          <%= f.submit 'Pesquisar', class: 'btn btn-outline-danger'%>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div class="col-md-6 justify-content-right">
-    <%= form_with url: search_opportunities_path, method: :get do |f| %>
-      <div class="form-inline" style="float: right">
-        <%= f.text_field :q, placeholder: 'Insira o termo da pesquisa', class: 'form-control mr-sm-2'  %>
-        <%= f.submit 'Pesquisar', class: 'btn btn-outline-danger'%>
-      </div>
-    <% end %>
-  </div>
-</div>
+  <hr class="my-4">
 
-<hr class="my-4">
-
-<% if headhunter_signed_in? %>
-  <%= link_to 'Publicar vaga', new_opportunity_path %>
-<% end %>
-
-<div class="row justify-content-md-center">
-  <% if @opportunities.blank? %>
-      <h3>Ainda não há vagas cadastradas</h1>
-  <% else %>
-    <% @opportunities.each do |op| %>
-      <div class="card col-md-3 m-5" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title"><%= link_to op.title, opportunity_path(op) %></h5>
-            <h6 class="card-subtitle mb-2 text-muted"><%= t('grade') %>: <%= op.grade %></h6>
-            <p class="card-text"><%= op.work_description %></p>
-          </div>
-      </div>
-    <% end %>
+  <% if headhunter_signed_in? %>
+    <%= link_to 'Publicar vaga', new_opportunity_path %>
   <% end %>
+
+  <div class="row justify-content-md-center">
+    <% if @opportunities.blank? %>
+        <h3>Ainda não há vagas cadastradas</h1>
+    <% else %>
+      <% @opportunities.each do |op| %>
+        <div class="card col-md-3 m-5" style="width: 18rem;">
+          <div class="card-body">
+              <h5 class="card-title"><%= link_to op.title, opportunity_path(op) %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= t('grade') %>: <%= op.grade %></h6>
+              <p class="card-text"><%= op.work_description %></p>
+            </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

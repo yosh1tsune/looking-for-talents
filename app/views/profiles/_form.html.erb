@@ -1,64 +1,72 @@
-<div class='col-md-4'>
-  <% if @profile.errors.any? %>
-    <p>Você deve corrigir os seguintes erros: </p>
-    <ul>
-    <% @profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-    <% end %>
-    </ul><br><br>
+<% if @profile.errors.any? %>
+  <p>Você deve corrigir os seguintes erros: </p>
+  <ul>
+  <% @profile.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
   <% end %>
+  </ul><br><br>
+<% end %>
 
-  <%= form_with model: @profile, local: true do |form| %>
-      <div class='form'>
-          <%= form.label :name %>
-          <%= form.text_field :name, class: 'form-control' %>
+<%= form_with model: @profile, local: true, class: 'row' do |form| %>
+  <div class="col-md-6 pt-3 mb-2">
+    <h4>Dados Pessoais</h4>
+    <hr>
+    <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= form.label :birth_date %>
+        <%= form.date_field :birth_date, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= form.label :document %>
+        <%= form.text_field :document, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= form.label :scholarity %>
+        <%= form.text_field :scholarity, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= form.label :professional_resume, 'Resumo profissional'%>
+        <%= form.text_area :professional_resume, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= form.label :avatar %>
+        <%= form.file_field :avatar, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="col-md-6 pt-3 mb-2">
+    <h4>Endereço</h4>
+    <hr>
+    <%= form.fields_for :addresses do |address_form| %>
+      <div class="form-group">
+        <%= address_form.label :street %>
+        <%= address_form.text_field :street, class: 'form-control' %>
       </div>
-      <div class='form'>
-          <%= form.label :birth_date %>
-          <%= form.date_field :birth_date, class: 'form-control'  %>
+      <div class="form-group">
+        <%= address_form.label :neighborhood %>
+        <%= address_form.text_field :neighborhood, class: 'form-control' %>
       </div>
-      <div class='form'>
-          <%= form.label :document %>
-          <%= form.text_field :document, class: 'form-control'  %>
+      <div class="form-group">
+        <%= address_form.label :city %>
+        <%= address_form.text_field :city, class: 'form-control' %>
       </div>
-      <div class='form'>
-          <%= form.label :scholarity %>
-          <%= form.text_field :scholarity, class: 'form-control'  %>
+      <div class="form-group">
+        <%= address_form.label :state %>
+        <%= address_form.text_field :state, class: 'form-control' %>
       </div>
-      <div class='form'>
-          <%= form.label :professional_resume, 'Resumo profissional'%>
-          <%= form.text_area :professional_resume, class: 'form-control'  %>
+      <div class="form-group">
+        <%= address_form.label :country %>
+        <%= address_form.text_field :country, class: 'form-control' %>
       </div>
-      <div class='form'>
-          <%= form.label :avatar %>
-          <%= form.file_field :avatar, class: 'form-control'  %>
+      <div class="form-group">
+        <%= address_form.label :zipcode %>
+        <%= address_form.text_field :zipcode, class: 'form-control' %>
       </div>
-      <%= form.fields_for :addresses do |address_form| %>
-        <div class="form-group">
-          <%= address_form.label :street %>
-          <%= address_form.text_field :street, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= address_form.label :neighborhood %>
-          <%= address_form.text_field :neighborhood, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= address_form.label :city %>
-          <%= address_form.text_field :city, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= address_form.label :state %>
-          <%= address_form.text_field :state, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= address_form.label :country %>
-          <%= address_form.text_field :country, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= address_form.label :zipcode %>
-          <%= address_form.text_field :zipcode, class: 'form-control' %>
-        </div>
-      <% end %>
-      <%= form.submit 'Enviar', class: 'btn btn-primary'  %>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+  <div class="col-md-6 p-3">
+    <%= form.submit 'Enviar', class: 'btn btn-primary' %>
+  </div>
+<% end %>
