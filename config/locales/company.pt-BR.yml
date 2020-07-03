@@ -1,9 +1,11 @@
 pt-BR:
-  name: 'Nome'
-  document: 'CNPJ'
-  description: 'Descrição'
-  phone: 'Telefone'  
-  email: 'Email'
+  companies:
+    show:
+      name: 'Nome'
+      document: 'CNPJ'
+      description: 'Descrição'
+      phone: 'Telefone'  
+      email: 'Email'
   activerecord:
     attributes:
       company:

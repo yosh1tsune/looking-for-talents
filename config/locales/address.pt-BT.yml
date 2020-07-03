@@ -1,5 +1,5 @@
 pt-BR:
-  street: 'Endereço'
+  street: 'Logradouro'
   neighborhood: 'Bairro'        
   city: 'Cidade'
   state: 'Estado'
@@ -8,7 +8,7 @@ pt-BR:
   activerecord:
     attributes:
       address:
-        street: 'Endereço'
+        street: 'Logradouro'
         neighborhood: 'Bairro'        
         city: 'Cidade'
         state: 'Estado'

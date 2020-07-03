@@ -13,11 +13,21 @@ feature 'Headhunter register company' do
     fill_in 'Descrição', with: 'Soluções para desenvolvimento de apps em Ruby'
     fill_in 'Telefone', with: '(11) 99999-9999'
     fill_in 'Email', with: 'recrutamento@rrsystem.com.br'
+    fill_in 'Logradouro', with: 'Avenida Paulista, 1000'
+    fill_in 'Bairro', with: 'Bela Vista'
+    fill_in 'Cidade', with: 'São Paulo'
+    fill_in 'Estado', with: 'SP'
+    fill_in 'País', with: 'Brasil'
+    fill_in 'CEP', with: '00000-000'
     click_on 'Enviar'
 
     expect(page).to have_content('Empresa cadastrada com sucesso!')
     expect(page).to have_content('RR System')
-    expect(page).to have_content('CNPJ: 66.864.712/0001-67')
+    expect(page).to have_content("#{I18n.t('companies.show.document')}:"\
+                                 "\n66.864.712/0001-67")
+    expect(page).to have_content("#{I18n.t('street')}:\nAvenida Paulista, "\
+                                 '1000')
+    expect(page).to have_content("#{I18n.t('zipcode')}:\n00000-000")
   end
 
   scenario 'and must fill all fields' do

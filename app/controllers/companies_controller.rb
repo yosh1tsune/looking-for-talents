@@ -11,6 +11,7 @@ class CompaniesController < ApplicationController
 
   def new
     @company = Company.new
+    @company.addresses.build
   end
 
   def create
@@ -40,6 +41,9 @@ class CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit(:name, :document, :description, :phone,
-                                    :email)
+                                    :email, 
+                                    addresses_attributes:
+                                      %i[id street neighborhood state city
+                                        country zipcode])
   end
 end

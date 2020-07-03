@@ -29,12 +29,13 @@ feature 'candidate updates profile' do
     visit root_path
     click_on 'Perfil'
 
-    fill_in I18n.t('name'), with: 'Bruno Silva'
-    fill_in I18n.t('birth_date'), with: Date.new(1996, 4, 22)
-    fill_in I18n.t('document'), with: '996.490.558-00'
-    fill_in I18n.t('scholarity'), with: 'Superior Incompleto'
-    fill_in I18n.t('professional_resume'), with: 'Desenvolvimento web com Dart2'
-    fill_in 'Endereço', with: 'Avenida Paulista, 1000'
+    fill_in I18n.t('profiles.show.name'), with: 'Bruno Silva'
+    fill_in I18n.t('profiles.show.birth_date'), with: Date.new(1996, 4, 22)
+    fill_in I18n.t('profiles.show.document'), with: '996.490.558-00'
+    fill_in I18n.t('profiles.show.scholarity'), with: 'Superior Incompleto'
+    fill_in I18n.t('profiles.show.professional_resume'), 
+                                          with: 'Desenvolvimento web com Dart2'
+    fill_in 'Logradouro', with: 'Avenida Paulista, 1000'
     fill_in 'Bairro', with: 'Bela Vista'
     fill_in 'Cidade', with: 'São Paulo'
     fill_in 'Estado', with: 'SP'
@@ -45,15 +46,18 @@ feature 'candidate updates profile' do
 
     expect(page).to have_content('Perfil atualizado com sucesso')
     expect(page).to have_content('Bruno Silva')
-    expect(page).to have_content("#{I18n.t('birth_date')}:\n22/04/1996")
-    expect(page).to have_content("#{I18n.t('document')}:\n996.490.558-00")
-    expect(page).to have_content("#{I18n.t('scholarity')}:\nSuperior "\
-                                 'Incompleto')
-    expect(page).to have_content("#{I18n.t('professional_resume')}:\n"\
+    expect(page).to have_content("#{I18n.t('profiles.show.birth_date')}:"\
+                                 "\n22/04/1996")
+    expect(page).to have_content("#{I18n.t('profiles.show.document')}:"\
+                                 "\n996.490.558-00")
+    expect(page).to have_content("#{I18n.t('profiles.show.scholarity')}:"\
+                                 "\nSuperior Incompleto")
+    expect(page)
+          .to have_content("#{I18n.t('profiles.show.professional_resume')}:\n"\
                                  'Desenvolvimento web com Dart2')
     expect(page).to have_css("img[src*='user.jpg']")
-    expect(page).to have_content("Endereço:\nAvenida Paulista, 1000")
-    expect(page).to have_content("Cidade:\nSão Paulo")
+    expect(page).to have_content("#{I18n.t('street')}:\nAvenida Paulista, 1000")
+    expect(page).to have_content("#{I18n.t('city')}:\nSão Paulo")
   end
 
   scenario 'and must fill all fields' do
@@ -63,19 +67,19 @@ feature 'candidate updates profile' do
     visit root_path
     click_on 'Perfil'
 
-    fill_in I18n.t('name'), with: 'Bruno Silva'
-    fill_in I18n.t('birth_date'), with: ''
-    fill_in I18n.t('document'), with: '996.490.558-00'
-    fill_in I18n.t('scholarity'), with: ''
-    fill_in I18n.t('professional_resume'), with: 'Desenvolvimento web com Dart2'
-    fill_in I18n.t('address'), with: 'Alameda Santos, 1293'
+    fill_in I18n.t('profiles.show.name'), with: 'Bruno Silva'
+    fill_in I18n.t('profiles.show.birth_date'), with: ''
+    fill_in I18n.t('profiles.show.document'), with: '996.490.558-00'
+    fill_in I18n.t('profiles.show.scholarity'), with: ''
+    fill_in I18n.t('profiles.show.professional_resume'), 
+                                          with: 'Desenvolvimento web com Dart2'
     attach_file 'Avatar', Rails.root.join('spec/support/user.jpg')
     click_on 'Enviar'
 
-    expect(page).to have_content("#{I18n.t('birth_date')} não pode ficar em "\
-                                                                      'branco')
-    expect(page).to have_content("#{I18n.t('scholarity')} não pode ficar em "\
-                                                                      'branco')
+    expect(page).to have_content("#{I18n.t('profiles.show.birth_date')} "\
+                                 'não pode ficar em branco')
+    expect(page).to have_content("#{I18n.t('profiles.show.scholarity')} "\
+                                 'não pode ficar em branco')
   end
 
   scenario 'or edit if already have', js: true do
@@ -88,9 +92,9 @@ feature 'candidate updates profile' do
     visit root_path
     click_on 'Perfil'
     click_on 'Editar perfil'
-    fill_in I18n.t('professional_resume'), with: 'Desenvolvimento web com '\
-                                                 'Dart 2, Rails, TDD'
-    fill_in 'Endereço', with: 'Avenida Paulista, 1000'
+    fill_in I18n.t('profiles.show.professional_resume'), with: 
+                                    'Desenvolvimento web com Dart 2, Rails, TDD'
+    fill_in 'Logradouro', with: 'Avenida Paulista, 1000'
     fill_in 'Bairro', with: 'Bela Vista'
     fill_in 'Cidade', with: 'São Paulo'
     fill_in 'Estado', with: 'SP'
@@ -100,9 +104,10 @@ feature 'candidate updates profile' do
 
     expect(page).to have_content('Perfil atualizado com sucesso')
     expect(page).to have_content('Bruno Silva')
-    expect(page).to have_content("#{I18n.t('professional_resume')}:\n"\
+    expect(page)
+      .to have_content("#{I18n.t('profiles.show.professional_resume')}:\n"\
                                  'Desenvolvimento web com Dart 2, Rails, TDD')
-    expect(page).to have_content("#{I18n.t('address')}:\nAvenida Paulista, "\
+    expect(page).to have_content("#{I18n.t('street')}:\nAvenida Paulista, "\
                                  '1000')
   end
 
@@ -114,10 +119,11 @@ feature 'candidate updates profile' do
     visit root_path
     click_on 'Perfil'
     click_on 'Editar perfil'
-    fill_in I18n.t('name'), with: ''
+    fill_in I18n.t('profiles.show.name'), with: ''
     click_on 'Enviar'
 
     expect(current_path).to eq profile_path(profile)
-    expect(page).to have_content("#{I18n.t('name')} não pode ficar em branco")
+    expect(page).to have_content("#{I18n.t('profiles.show.name')} "\
+                                 'não pode ficar em branco')
   end
 end

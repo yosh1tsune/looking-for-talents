@@ -11,16 +11,16 @@
 <% end %>
 
 <dl>
-    <dt><%= I18n.t('birth_date') %>:</dt>
-    <dd><%= I18n.l(@profile.birth_date) %></dd>
-    <dt><%= I18n.t('document') %>:</dt>
+    <dt><%= t('.birth_date') %>:</dt>
+    <dd><%= l(@profile.birth_date) %></dd>
+    <dt><%= t('.document') %>:</dt>
     <dd><%= @profile.document %></dd>
-    <dt><%= I18n.t('professional_resume') %>:</dt>
+    <dt><%= t('.professional_resume') %>:</dt>
     <dd><%= @profile.professional_resume %></dd>
-    <dt><%= I18n.t('scholarity') %>:</dt>
+    <dt><%= t('.scholarity') %>:</dt>
     <dd><%= @profile.scholarity %></dd>
     <% @profile.addresses.each do |address| %>
-      <dt><%= t('address') %>:</dt>
+      <dt><%= t('street') %>:</dt>
       <dd><%= address.street %></dd>
       <dt><%= t('neighborhood') %>:</dt>
       <dd><%= address.neighborhood %></dd>

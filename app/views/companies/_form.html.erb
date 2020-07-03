@@ -7,30 +7,62 @@
   </ul><br><br>
 <% end %>
 
-<div class="d-flex justify-content-center mt-4">
-  <div class="col-md-4 card p-5">
-    <%= form_with model: @company, local: true do |form| %>
-        <div class='form-group'>
-            <%= form.label :name %>
-            <%= form.text_field :name, class: 'form-control' %>
-        </div>
-        <div class='form-group'>
-            <%= form.label :document %>
-            <%= form.text_field :document, class: 'form-control' %>
-        </div>
-        <div class='form-group'>
-            <%= form.label :description %>
-            <%= form.text_area :description, class: 'form-control' %>
-        </div>
-        <div class='form-group'>
-            <%= form.label :phone %>
-            <%= form.text_field :phone, class: 'form-control' %>
-        </div>
-        <div class='form-group'>
-            <%= form.label :email %>
-            <%= form.text_field :email, class: 'form-control' %>
-        </div>
-        <%= form.submit 'Enviar', class: 'btn btn-primary' %>
+<%= form_with model: @company, local: true, class: 'row'  do |form| %>
+  <div class="col-md-6 pt-3 mb-2">
+    <h4>Dados Cadastrais</h4>
+    <hr>
+    <div class='form-group'>
+        <%= form.label :name %>
+        <%= form.text_field :name, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+        <%= form.label :document %>
+        <%= form.text_field :document, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+        <%= form.label :description %>
+        <%= form.text_area :description, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+        <%= form.label :phone %>
+        <%= form.text_field :phone, class: 'form-control' %>
+    </div>
+    <div class='form-group'>
+        <%= form.label :email %>
+        <%= form.text_field :email, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="col-md-6 pt-3 mb-2">
+    <h4>Endereço</h4>
+    <hr>
+    <%= form.fields_for :addresses do |address_form| %>
+      <div class="form-group">
+        <%= address_form.label :street %>
+        <%= address_form.text_field :street, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= address_form.label :neighborhood %>
+        <%= address_form.text_field :neighborhood, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= address_form.label :city %>
+        <%= address_form.text_field :city, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= address_form.label :state %>
+        <%= address_form.text_field :state, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= address_form.label :country %>
+        <%= address_form.text_field :country, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= address_form.label :zipcode %>
+        <%= address_form.text_field :zipcode, class: 'form-control' %>
+      </div>
     <% end %>
   </div>
-</div>
+  <div class="col-md-6 pt-3">
+    <%= form.submit 'Enviar', class: 'btn btn-primary' %>
+  </div>
+<% end %>
