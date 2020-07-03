@@ -1,10 +1,12 @@
 # Looking for Talents
 
-O intuito deste projeto é criar uma plataforma de divulgação de vagas, onde empresas possam buscar profissionais para integrar suas equipes e interagir com estes durante o processo de candidatura e contratação
+O intuito deste projeto é criar uma plataforma de divulgação de vagas, onde empresas possam buscar profissionais para integrar suas equipes e interagir com estes durante o processo de candidatura e contratação.
+
+O projeto está em desenvolvimento constante, e hospedado no Heroku (https://looking-for-talents.herokuapp.com/).
 
 ## Pré-Requisitos
 
-`Ruby 2.5`
+`Ruby 2.6.3`
 
 `Postgres`
 
