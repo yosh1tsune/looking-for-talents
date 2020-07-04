@@ -6,9 +6,11 @@ O projeto está em desenvolvimento constante, e hospedado no Heroku (https://loo
 
 ## Pré-Requisitos
 
-`Ruby 2.6.3`
+`Ruby >= 2.6.3`
 
-`Postgres`
+`node >= 13.12.0`
+
+`Postgres >= 9.2`
 
 Sistema operacional recomendado: `Linux`
 
@@ -16,17 +18,21 @@ Sistema operacional recomendado: `Linux`
 
 Clone o projeto:
 
-`https://github.com/yosh1tsune/looking-for-talents.git`
+`git clone https://github.com/yosh1tsune/looking-for-talents.git`
 
 Acesse a pasta raiz:
 
 `cd looking-for-talents`
 
-Rode o seguinte comando para instalar as gems necessárias e iniciar o banco de dados:
+Instale as dependências do node:
+
+`yarn install`
+
+Instalar as gems necessárias e iniciar o banco de dados:
 
 `bin/setup`
 
-Este projeto conta com dados pré-editados, para popular o banco com eles rode o seguinte comando:
+(Opcional) Este projeto conta com dados pré-editados, para popular o banco com eles rode o seguinte comando:
 
 `rails db:seed`
 
@@ -34,7 +40,7 @@ Finalmente, para observar a aplicação em funcionamento, rode o comando:
 
 `rails server`
 
-Por padrão, a aplicação ficará hospedada na porta `localhost:3000`
+Por padrão, a aplicação rodará em http://localhost:3000
 
 ## Funcionalidades
 

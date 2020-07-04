@@ -6,6 +6,7 @@ pt-BR:
       professional_resume: 'Resumo profissional'
       scholarity: 'Escolaridade'
       document: 'CPF'
+      avatar: 'Foto'
   activerecord:
     attributes:
       profile:
@@ -14,5 +15,6 @@ pt-BR:
         professional_resume: 'Resumo profissional'
         scholarity: 'Escolaridade'
         document: 'CPF'
+        avatar: 'Foto'
     model:
       profile: 'Perfil'

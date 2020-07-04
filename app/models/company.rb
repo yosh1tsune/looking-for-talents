@@ -1,5 +1,7 @@
 class Company < ApplicationRecord
-  validates :name, :description, :document, :phone, :email, presence: true
+  has_one_attached :logo
+  validates :name, :description, :document, :phone, :email, :logo,
+            presence: true
   belongs_to :headhunter
   has_many :addresses, as: :addressable, dependent: :destroy
   accepts_nested_attributes_for :addresses

@@ -6,6 +6,7 @@ pt-BR:
       description: 'Descrição'
       phone: 'Telefone'  
       email: 'Email'
+      logo: 'Logotipo'
   activerecord:
     attributes:
       company:
@@ -14,5 +15,6 @@ pt-BR:
         description: 'Descrição'
         phone: 'Telefone'  
         email: 'Email'
+        logo: 'Logotipo'
     model:
       company: 'Empresa'

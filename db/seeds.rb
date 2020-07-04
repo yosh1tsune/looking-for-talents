@@ -6,12 +6,14 @@ headhunter_b = Headhunter.create(email: 'second_headhunter@email.com',
                                  password: 'head5678',
                                  name: 'Rocky', surname: 'Balboa')
 
-company_a = Company.create(name: 'RR Systems', document: '46.318.224/0001-47',
-                           description: 'Soluções em aplicações web baseadas '\
-                                        'em Ruby on Rails',
-                                        email: 'rrsystem@lookingfortalents.com',
-                                        phone: '(11) 0000-0000', headhunter: headhunter_a)
-
+company_a = Company.new(name: 'RR Systems', document: '46.318.224/0001-47',
+                        description: 'Soluções em aplicações web baseadas '\
+                                    'em Ruby on Rails',
+                        email: 'rrsystem@lookingfortalents.com',
+                        phone: '(11) 0000-0000', headhunter: headhunter_a)
+company_a.logo.attach(io: File.open(Rails.root.join('spec/support/company.png')),
+                      filename: 'company.png')
+company_a.save!
 Address.create(street: 'Avenida Paulista, 9000', neighborhood: 'Bela Vista',
                city: 'São Paulo', state: 'SP', country: 'Brasil',
                zipcode: '00000-000', addressable: company_a)
@@ -20,6 +22,9 @@ company_b = Company.create(name: 'FinDevs', document: '31.516.545/0001-89',
                            description: 'Aplicações financeiras',
                            email: 'findevs@lookingfortalents.com',
                            phone: '(11) 0000-0000', headhunter: headhunter_b)
+company_b.logo.attach(io: File.open(Rails.root.join('spec/support/company.png')),
+                      filename: 'company.png')
+company_b.save!
 Address.create(street: 'Avenida Rebouças, 5000', neighborhood: 'Pinheiros',
                city: 'São Paulo', state: 'SP', country: 'Brasil',
                zipcode: '00000-000', addressable: company_b)
@@ -28,7 +33,9 @@ company_c = Company.create(name: 'SF Devs', document: '92.015.880/0001-98',
                            description: 'Desenvolvimento de softwares Java',
                            email: 'sfdevs@lookingfortalents.com',
                            phone: '(11) 0000-0000', headhunter: headhunter_b)
-
+company_c.logo.attach(io: File.open(Rails.root.join('spec/support/company.png')),
+filename: 'company.png')
+company_c.save!
 Address.create(street: 'Avenida Tiradentes, 1100', neighborhood: 'Bom Retiro',
               city: 'São Paulo', state: 'SP', country: 'Brasil',
               zipcode: '00000-000', addressable: company_c)
@@ -42,12 +49,15 @@ ServicingHeadhunter.create(company: company_c, headhunter: headhunter_b)
 candidate_a = Candidate.create(email: 'first_candidate@email.com',
                                password: 'cand1234')
 
-profile_a = Profile.create(name: 'Bruno Silva', birth_date: '22/04/1996',
+profile_a = Profile.new(name: 'Bruno Silva', birth_date: '22/04/1996',
                            document: '467.642.068-48',
                            scholarity: 'Superior Incompleto',
                            professional_resume: 'Estágio em Desenvolvimento '\
                                                 'Web e Suporte ao Usuário',
                            candidate: candidate_a)
+profile_a.avatar.attach(io: File.open(Rails.root.join('spec/support/user.jpg')),
+                        filename: 'user.jpg')
+profile_a.save!
               
 Address.create(street: 'Avenida Edgar Facó, 100', neighborhood: 'Pirituba',
                city: 'São Paulo', state: 'SP', country: 'Brasil',

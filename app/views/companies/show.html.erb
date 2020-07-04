@@ -1,5 +1,9 @@
 <h1><%= @company.name %></h1>
 
+<% if @company.logo.attached? %>
+  <%= image_tag(@company.logo, size: "200x200") %>
+<% end %>
+
 <p><% @company.description %></p>
 
 <dl>

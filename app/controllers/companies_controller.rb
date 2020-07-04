@@ -41,9 +41,9 @@ class CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit(:name, :document, :description, :phone,
-                                    :email, 
+                                    :email, :logo,
                                     addresses_attributes:
                                       %i[id street neighborhood state city
-                                        country zipcode])
+                                         country zipcode])
   end
 end

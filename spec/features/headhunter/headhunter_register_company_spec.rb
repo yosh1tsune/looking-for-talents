@@ -19,10 +19,12 @@ feature 'Headhunter register company' do
     fill_in 'Estado', with: 'SP'
     fill_in 'País', with: 'Brasil'
     fill_in 'CEP', with: '00000-000'
+    attach_file 'Logotipo', Rails.root.join('spec/support/company.png')
     click_on 'Enviar'
 
     expect(page).to have_content('Empresa cadastrada com sucesso!')
     expect(page).to have_content('RR System')
+    expect(page).to have_css("img[src*='company.png']")
     expect(page).to have_content("#{I18n.t('companies.show.document')}:"\
                                  "\n66.864.712/0001-67")
     expect(page).to have_content("#{I18n.t('street')}:\nAvenida Paulista, "\
