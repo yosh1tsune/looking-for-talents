@@ -1,16 +1,17 @@
 pt-BR:
-  start_date: 'Data de início'
-  salary: 'Salário'
-  role: 'Cargo'
-  benefits: 'Benefícios'
-  expectations: 'Expectativas'
-  bonuses: 'Bônus'
-  status: 'Status'
-  in_progress: 'Em andamento'
-  accepted: 'Aceita'
-  refused: 'Recusada'
-  opportunity_id: ID da Oportunidade
-  subscription_id: ID da Inscrição
+  proposals:
+    start_date: 'Data de início'
+    salary: 'Salário'
+    role: 'Cargo'
+    benefits: 'Benefícios'
+    expectations: 'Expectativas'
+    bonuses: 'Bônus'
+    status: 'Status'
+    in_progress: 'Em andamento'
+    accepted: 'Aceita'
+    refused: 'Recusada'
+    opportunity_id: ID da Oportunidade
+    subscription_id: ID da Inscrição
   activerecord:
     attributes:
       proposal:

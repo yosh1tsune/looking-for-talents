@@ -98,14 +98,11 @@ feature 'headhunter see candidates' do
     click_on another_profile.name
 
     expect(page).to have_content(another_profile.name)
-    expect(page).to have_content("#{I18n.t('profiles.show.birth_date')}: "\
+    expect(page).to have_content('Data de nascimento: '\
                                  "#{I18n.l(another_profile.birth_date)}")
-    expect(page).to have_content("#{I18n.t('profiles.show.document')}: "\
-                                 "#{another_profile.document}")
-    expect(page).to have_content("#{I18n.t('profiles.show.scholarity')}: "\
-                                 "#{another_profile.scholarity}")
-    expect(page)
-      .to have_content("#{I18n.t('profiles.show.professional_resume')}: "\
+    expect(page).to have_content("CPF: #{another_profile.document}")
+    expect(page).to have_content("Escolaridade: #{another_profile.scholarity}")
+    expect(page).to have_content('Resumo profissional: '\
                                  "#{another_profile.professional_resume}")
   end
 end

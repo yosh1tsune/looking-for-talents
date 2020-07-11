@@ -19,12 +19,12 @@ feature 'candidate visualize opportunities' do
     click_on 'Vagas'
 
     expect(page).to have_content(opportunity.title)
-    expect(page).to have_content("#{I18n.t('grade')}: #{opportunity.grade}")
+    expect(page).to have_content("Nível: #{opportunity.grade}")
     expect(page).to have_content(another_opportunity.title)
-    expect(page).to have_content("#{I18n.t('grade')}: "\
+    expect(page).to have_content('Nível: '\
                                  "#{another_opportunity.grade}")
     expect(page).to have_content(third_opportunity.title)
-    expect(page).to have_content("#{I18n.t('grade')}: "\
+    expect(page).to have_content('Nível: '\
                                  "#{third_opportunity.grade}")
   end
 
@@ -42,8 +42,8 @@ feature 'candidate visualize opportunities' do
     click_on 'Desenvolvedor Júnior Ruby on Rails'
 
     expect(page).to have_content(opportunity.title)
-    expect(page).to have_content("#{I18n.t('work_description')}: "\
+    expect(page).to have_content('Descrição da vaga: '\
                                  "#{opportunity.work_description}")
-    expect(page).to have_button(I18n.t('register'))
+    expect(page).to have_button('Inscreva-se')
   end
 end

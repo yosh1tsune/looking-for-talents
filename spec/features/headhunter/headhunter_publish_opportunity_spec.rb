@@ -11,19 +11,18 @@ feature 'headhunter publish opportunity' do
     click_on 'Vagas'
     click_on 'Publicar vaga'
 
-    fill_in I18n.t('title'), with: 'Desenvolvedor Júnior Ruby on Rails'
-    select 'RR System', from: I18n.t('company_id')
-    fill_in I18n.t('work_description'), with: 'Desenvolvimento web com '\
-                                              'Ruby on Rails'
-    fill_in I18n.t('required_abilities'), with: 'Ruby, Rails, TDD, JavaScript,'\
+    fill_in 'Título', with: 'Desenvolvedor Júnior Ruby on Rails'
+    select 'RR System', from: 'Empresa'
+    fill_in 'Descrição da vaga', with: 'Desenvolvimento web com  Ruby on Rails'
+    fill_in 'Habilidades necessárias', with: 'Ruby, Rails, TDD, JavaScript,'\
                                                 ' HTML, CSS'
-    fill_in I18n.t('salary'), with: 'À combinar'
-    fill_in I18n.t('submit_end_date'), with: 7.days.from_now
-    fill_in I18n.t('grade'), with: 'Junior'
+    fill_in 'Salário', with: 'À combinar'
+    fill_in 'Data de encerramento das inscrições', with: 7.days.from_now
+    fill_in 'Nível', with: 'Junior'
     click_on 'Enviar'
 
     expect(page).to have_content('Desenvolvedor Júnior Ruby on Rails')
-    expect(page).to have_content("#{I18n.t('submit_end_date')}:\n"\
+    expect(page).to have_content("Data de encerramento das inscrições:\n"\
                                  "#{7.days.from_now.strftime('%d/%m/%Y')}")
     expect(page).to have_content('Vaga publicada com sucesso!')
   end
@@ -35,7 +34,7 @@ feature 'headhunter publish opportunity' do
     visit opportunities_path
     click_on 'Publicar vaga'
 
-    fill_in I18n.t('title'), with: ''
+    fill_in 'Título', with: ''
     click_on 'Enviar'
 
     expect(page).to have_content('Título não pode ficar em branco')

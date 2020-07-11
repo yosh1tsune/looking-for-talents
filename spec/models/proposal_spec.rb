@@ -15,7 +15,7 @@ describe Proposal do
 
       proposal.valid?
 
-      expect(proposal.errors.full_messages).to eq(["#{I18n.t('start_date')} "\
+      expect(proposal.errors.full_messages).to eq(['Data de início '\
         'deve ser ao menos daqui a 14 dias. O candidato precisa se preparar!'])
     end
 
@@ -24,7 +24,7 @@ describe Proposal do
 
       proposal.valid?
 
-      expect(proposal.errors.full_messages).to eq(["#{I18n.t('start_date')} "\
+      expect(proposal.errors.full_messages).to eq(['Data de início '\
                                                    'não pode ficar em branco'])
     end
   end

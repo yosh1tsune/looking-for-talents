@@ -10,9 +10,9 @@
     <dd><%= @subscription.opportunity.title %></dd>
     <dt>Candidato:</dt>
     <dd><%= @subscription.profile.name %></dd>
-    <dt><%= I18n.t('status')%>:</dt>
-    <dd><%= I18n.t(@subscription.status) %></dd>
-    <dt><%= I18n.t('feedback')%>:</dt>
+    <dt><%= t('subscriptions.status')%>:</dt>
+    <dd><%= I18n.t(@subscription.status, scope: [:activerecord, :attributes, :subscription]) %></dd>
+    <dt><%= t('subscriptions.feedback')%>:</dt>
     <dd><%= @subscription.feedback %></dd>
 </dl>
 

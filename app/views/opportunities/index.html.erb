@@ -29,9 +29,9 @@
           <%= image_tag op.company.logo, class: 'card-img-top' %>
           <div class="card-body">
               <h5 class="card-title"><%= link_to op.title, opportunity_path(op) %></h5>
-              <h6 class="card-subtitle mb-2"><strong><%= t('grade') %></strong>: <%= op.grade %></h6>
-              <p class="card-text"><strong><%= t('work_description') %>:</strong> <%= op.work_description %></p>
-              <p class="card-text"><strong><%= t('required_abilities') %>:</strong> <%= op.required_abilities %></p>
+              <h6 class="card-subtitle mb-2"><strong><%= t('opportunities.grade') %></strong>: <%= op.grade %></h6>
+              <p class="card-text"><strong><%= t('opportunities.work_description') %>:</strong> <%= op.work_description %></p>
+              <p class="card-text"><strong><%= t('opportunities.required_abilities') %>:</strong> <%= op.required_abilities %></p>
             </div>
         </div>
       <% end %>

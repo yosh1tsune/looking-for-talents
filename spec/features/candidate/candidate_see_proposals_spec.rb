@@ -14,7 +14,8 @@ feature 'candidate see proposals' do
                                          candidate: candidate,
                                          status: :approved)
 
-    proposal = create(:proposal, subscription: subscription,
+    proposal = create(:proposal, role: 'Desenvolvedor Ruby on Rails',
+                                 subscription: subscription,
                                  opportunity: opportunity)
 
     login_as(candidate, scope: :candidate)
@@ -22,7 +23,7 @@ feature 'candidate see proposals' do
     click_on 'Minhas propostas'
 
     expect(page).to have_content("Vaga: #{proposal.opportunity.title}")
-    expect(page).to have_content("#{I18n.t('role')}: #{proposal.role}")
+    expect(page).to have_content("Cargo: #{proposal.role}")
   end
 
   scenario 'and choose one' do
@@ -59,10 +60,9 @@ feature 'candidate see proposals' do
 
     expect(page).to have_content('Proposta para a vaga: '\
                                  "#{proposal.opportunity.title}")
-    expect(page).to have_content("#{I18n.t('start_date')}: "\
+    expect(page).to have_content('Data de início: '\
                                  "#{I18n.l(proposal.start_date)}")
-    expect(page).to have_content("#{I18n.t('status')}: "\
-                                 "#{I18n.t('in_progress')}")
+    expect(page).to have_content('Status: Em andamento')
     expect(page).to have_link('Aceitar proposta')
     expect(page).to have_link('Recusar proposta')
   end
@@ -102,9 +102,9 @@ feature 'candidate see proposals' do
 
     expect(page).to have_content('Proposta para a vaga: '\
                                  "#{proposal.opportunity.title}")
-    expect(page).to have_content("#{I18n.t('start_date')}: "\
+    expect(page).to have_content('Data de início: '\
                                  "#{I18n.l(proposal.start_date)}")
-    expect(page).to have_content("#{I18n.t('status')}: #{I18n.t('refused')}")
+    expect(page).to have_content('Status: Recusada')
     expect(page).not_to have_link('Aceitar proposta')
     expect(page).not_to have_link('Recusar proposta')
   end
@@ -144,9 +144,9 @@ feature 'candidate see proposals' do
 
     expect(page).to have_content('Proposta para a vaga: '\
                                  "#{proposal.opportunity.title}")
-    expect(page).to have_content("#{I18n.t('start_date')}: "\
+    expect(page).to have_content('Data de início: '\
                                  "#{I18n.l(proposal.start_date)}")
-    expect(page).to have_content("#{I18n.t('status')}: #{I18n.t('accepted')}")
+    expect(page).to have_content('Status: Aceita')
     expect(page).not_to have_link('Aceitar proposta')
     expect(page).not_to have_link('Recusar proposta')
   end
@@ -186,10 +186,10 @@ feature 'candidate see proposals' do
     visit proposals_path
 
     expect(page).to have_content("Vaga: #{proposal.opportunity.title}")
-    expect(page).to have_content("#{I18n.t('role')}: #{proposal.role}")
-    expect(page).to have_content("#{I18n.t('status')}: Aceita")
+    expect(page).to have_content("Cargo: #{proposal.role}")
+    expect(page).to have_content('Status: Aceita')
     expect(page).to have_content("Vaga: #{another_proposal.opportunity.title}")
-    expect(page).to have_content("#{I18n.t('role')}: #{another_proposal.role}")
-    expect(page).to have_content("#{I18n.t('status')}: Recusada")
+    expect(page).to have_content("Cargo: #{another_proposal.role}")
+    expect(page).to have_content('Status: Recusada')
   end
 end

@@ -1,12 +1,11 @@
 pt-BR:
   companies:
-    show:
-      name: 'Nome'
-      document: 'CNPJ'
-      description: 'Descrição'
-      phone: 'Telefone'  
-      email: 'Email'
-      logo: 'Logotipo'
+    name: 'Nome'
+    document: 'CNPJ'
+    description: 'Descrição'
+    phone: 'Telefone'  
+    email: 'Email'
+    logo: 'Logotipo'
   activerecord:
     attributes:
       company:

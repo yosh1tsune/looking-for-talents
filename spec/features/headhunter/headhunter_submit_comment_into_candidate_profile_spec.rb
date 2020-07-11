@@ -10,7 +10,7 @@ feature 'headhunter submit comment into candidate profile' do
     visit root_path
     click_on 'Perfis'
     click_on profile.name
-    fill_in I18n.t('comment'), with: 'Gostei do seu resumo profissional'
+    fill_in 'Comentário', with: 'Gostei do seu resumo profissional'
     click_on 'Comentar'
 
     expect(page).to have_content('Comentário enviado!')
@@ -18,7 +18,7 @@ feature 'headhunter submit comment into candidate profile' do
     expect(page).to have_content('Gostei do seu resumo profissional')
   end
 
-  scenario 'and must send a not blank comment', js: true do
+  scenario "and can't send a blank comment", js: true do
     candidate = create(:candidate, email: 'candidate@email.com')
     headhunter = create(:headhunter, email: 'headhunter@email.com')
     profile = create(:profile, name: 'Bruno Silva', candidate: candidate)

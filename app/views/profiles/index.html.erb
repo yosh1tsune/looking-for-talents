@@ -7,9 +7,9 @@
 <% else %>
     <% @profiles.each do |p| %>
         <dl>
-            <dt><%= I18n.t('profiles.name') %></dt>
+            <dt><%= t('profiles.name') %></dt>
             <dd><%= link_to p.name, profile_path(p) %></dd>
-            <dt><%= I18n.t('profiles.professional_resume') %></dt>
+            <dt><%= t('profiles.professional_resume') %></dt>
             <dd><%= p.professional_resume %></dd>
         </dl>
     <% end %>

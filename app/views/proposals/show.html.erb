@@ -5,20 +5,20 @@
 <dl>
     <dt>Candidato:</dt>
     <dd><%= link_to @proposal.candidate.profile.name, profile_path(@proposal.candidate.profile) %></dd>
-    <dt><%= I18n.t('start_date') %>:</dt>
+    <dt><%= t('proposals.start_date') %>:</dt>
     <dd><%= I18n.l(@proposal.start_date) %></dd>
-    <dt><%= I18n.t('salary') %>:</dt>
+    <dt><%= t('proposals.salary') %>:</dt>
     <dd><%= number_to_currency(@proposal.salary, locale: :'pt-BR') %></dd>
-    <dt><%= I18n.t('role') %>:</dt>
+    <dt><%= t('proposals.role') %>:</dt>
     <dd><%= @proposal.role %></dd>
-    <dt><%= I18n.t('benefits') %>:</dt>
+    <dt><%= t('proposals.benefits') %>:</dt>
     <dd><%= @proposal.benefits %></dd>
-    <dt><%= I18n.t('expectations') %>:</dt>
+    <dt><%= t('proposals.expectations') %>:</dt>
     <dd><%= @proposal.expectations %></dd>
-    <dt><%= I18n.t('bonuses') %>:</dt>
+    <dt><%= t('proposals.bonuses') %>:</dt>
     <dd><%= @proposal.bonuses %></dd>
-    <dt><%= I18n.t('status') %>:</dt>
-    <dd><%= I18n.t(@proposal.status) %></dd>
+    <dt><%= t('proposals.status') %>:</dt>
+    <dd><%= I18n.t(@proposal.status, scope: [:activerecord, :attributes, :proposal]) %></dd>
 </dl>
 
 <% if candidate_signed_in? %>

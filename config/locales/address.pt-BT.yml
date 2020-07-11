@@ -1,10 +1,11 @@
 pt-BR:
-  street: 'Logradouro'
-  neighborhood: 'Bairro'        
-  city: 'Cidade'
-  state: 'Estado'
-  country: 'País'
-  zipcode: 'CEP'
+  addresses:
+    street: 'Logradouro'
+    neighborhood: 'Bairro'        
+    city: 'Cidade'
+    state: 'Estado'
+    country: 'País'
+    zipcode: 'CEP'
   activerecord:
     attributes:
       address:

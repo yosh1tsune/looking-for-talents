@@ -3,25 +3,21 @@
 <hr class="my-4">
 
 <dl>
-    <dt><%= t('name') %>:</dt>
-    <dd><%= @opportunity.company.name %></dd>
-    <dt><%= t('document') %>:</dt>
-    <dd><%= @opportunity.company.document %></dd>
-    <dt><%= t('description') %>:</dt>
-    <dd><%= @opportunity.company.description %></dd>
-    <dt><%= t('email') %>:</dt>
+    <dt><%= t('companies.name') %>:</dt>
+    <dd><%= link_to @opportunity.company.name, company_path(@opportunity.company) %></dd>
+    <dt><%= t('companies.document') %>:</dt>
     <dd><%= @opportunity.company.email %></dd>
-    <dt><%= t('phone') %>:</dt>
+    <dt><%= t('companies.phone') %>:</dt>
     <dd><%= @opportunity.company.phone %></dd>
-    <dt><%= t('work_description') %>:</dt>
+    <dt><%= t('opportunities.work_description') %>:</dt>
     <dd><%= @opportunity.work_description %></dd>
-    <dt><%= t('required_abilities') %>:</dt>
+    <dt><%= t('opportunities.required_abilities') %>:</dt>
     <dd><%= @opportunity.required_abilities %></dd>
-    <dt><%= t('salary') %>:</dt>
+    <dt><%= t('opportunities.salary') %>:</dt>
     <dd><%= number_to_currency(@opportunity.salary, locale: :'pt-BR') %></dd>
-    <dt><%= t('grade') %>:</dt>
+    <dt><%= t('opportunities.grade') %>:</dt>
     <dd><%= @opportunity.grade %></dd>
-    <dt><%= t('submit_end_date') %>:</dt>
+    <dt><%= t('opportunities.submit_end_date') %>:</dt>
     <dd><%= I18n.localize @opportunity.submit_end_date %></dd>
 </dl>
 
@@ -49,11 +45,11 @@
   <% @opportunity.subscriptions.each do |r| %>
     <dl>
       <span>Inscrição: <%= link_to r.opportunity.title, subscription_path(r) %></span>
-      <dt><%= I18n.t('profiles.name') %>:</dt>
+      <dt><%= t('profiles.name') %>:</dt>
       <dd><%= link_to r.profile.name, profile_path(r.profile) %></dd>
-      <dt><%= I18n.t('registration_resume') %>:</dt>
+      <dt><%= t('subscriptions.registration_resume') %>:</dt>
       <dd><%= r.registration_resume %><dd>
-      <dt><%= I18n.t('status') %>:</dt>
+      <dt><%= t('subscriptions.status') %>:</dt>
       <dd><%= r.status %><dd>
     </dl>
   <% end %>

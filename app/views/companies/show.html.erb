@@ -7,24 +7,24 @@
 <p><% @company.description %></p>
 
 <dl>
-  <dt><%= t('.document') %>:</dt>
+  <dt><%= t('companies.document') %>:</dt>
   <dd><%= @company.document %></dd>
-  <dt><%= t('.email') %>:</dt>
+  <dt><%= t('companies.email') %>:</dt>
   <dd><%= @company.email %></dd>
-  <dt><%= t('.phone') %>:</dt>
+  <dt><%= t('companies.phone') %>:</dt>
   <dd><%= @company.phone %></dd>
   <% @company.addresses.each do |address| %>
-    <dt><%= t('street') %>:</dt>
+    <dt><%= t('addresses.street') %>:</dt>
     <dd><%= address.street %></dd>
-    <dt><%= t('neighborhood') %>:</dt>
+    <dt><%= t('addresses.neighborhood') %>:</dt>
     <dd><%= address.neighborhood %></dd>
-    <dt><%= t('zipcode') %>:</dt>
+    <dt><%= t('addresses.zipcode') %>:</dt>
     <dd><%= address.zipcode %></dd>
-    <dt><%= t('city') %>:</dt>
+    <dt><%= t('addresses.city') %>:</dt>
     <dd><%= address.city %></dd>
-    <dt><%= t('state') %>:</dt>
+    <dt><%= t('addresses.state') %>:</dt>
     <dd><%= address.state %></dd>
-    <dt><%= t('country') %>:</dt>
+    <dt><%= t('addresses.country') %>:</dt>
     <dd><%= address.country %></dd>
   <% end %>
 </dl>

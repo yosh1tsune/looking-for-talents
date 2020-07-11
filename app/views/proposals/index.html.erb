@@ -11,10 +11,10 @@
           <dd><%= p.candidate.profile.name %></dd>
           <dt>Vaga:</dt>
           <dd><%= p.opportunity.title %></dd>
-          <dt><%= I18n.t('role') %>:</dt>
+          <dt><%= t('proposals.role') %>:</dt>
           <dd><%= link_to p.role, proposal_path(p) %></dd>
-          <dt><%= I18n.t('status') %>:</dt>
-          <dd><%= I18n.t(p.status) %></dd>
+          <dt><%= t('proposals.status') %>:</dt>
+          <dd><%= I18n.t(p.status, scope: [:activerecord, :attributes, :proposal]) %></dd>
       </dl>
   <% end %>
 <% end %>

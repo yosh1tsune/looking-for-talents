@@ -17,14 +17,13 @@ feature 'headhunter rates candidates' do
     visit opportunities_path
     click_on 'Desenvolvedor Júnior Ruby on Rails'
     click_on subscription.opportunity.title
-    fill_in I18n.t('feedback'), with: 'Sua experiência condiz com o requerido'
-    select :approved, from: I18n.t('status')
+    fill_in 'Feedback', with: 'Sua experiência condiz com o requerido'
+    select :approved, from: 'Status'
     click_on 'Avaliar'
 
     expect(page).to have_content('Inscrição atualizada com sucesso')
-    expect(page).to have_content("#{I18n.t('status')}:\n#{I18n.t('approved')}")
-    expect(page).to have_content("#{I18n.t('feedback')}:\n"\
-                                 "#{subscription.feedback}")
+    expect(page).to have_content("Status:\nAprovado")
+    expect(page).to have_content("Feedback:\n#{subscription.feedback}")
   end
 
   scenario 'successfully refuse', js: true do
@@ -43,15 +42,13 @@ feature 'headhunter rates candidates' do
     visit opportunities_path
     click_on 'Desenvolvedor Júnior Ruby on Rails'
     click_on subscription.opportunity.title
-    fill_in I18n.t('feedback'), with: 'Precisamos de alguém com '\
-                                      'experiência em Rails'
-    select :refuse, from: I18n.t('status')
+    fill_in 'Feedback', with: 'Precisamos de alguém com experiência em Rails'
+    select :refuse, from: 'Status'
     click_on 'Avaliar'
 
     expect(page).to have_content('Inscrição atualizada com sucesso')
-    expect(page).to have_content("#{I18n.t('status')}:\n#{I18n.t('refused')}")
-    expect(page).to have_content("#{I18n.t('feedback')}:\n"\
-                                 "#{subscription.feedback}")
+    expect(page).to have_content("Status:\nRecusado")
+    expect(page).to have_content("Feedback:\n#{subscription.feedback}")
   end
 
   scenario 'and must fill all fields', js: true do
@@ -70,7 +67,7 @@ feature 'headhunter rates candidates' do
     visit opportunities_path
     click_on 'Desenvolvedor Júnior Ruby on Rails'
     click_on subscription.opportunity.title
-    fill_in I18n.t('feedback'), with: ''
+    fill_in 'Feedback', with: ''
     click_on 'Avaliar'
 
     expect(page).to have_content('Altere o status da inscrição e preencha o '\

@@ -18,19 +18,19 @@ feature 'headhunter send proposal' do
     visit opportunities_path
     click_on opportunity.title
     click_on subscription.opportunity.title
-    fill_in I18n.t('start_date'), with: '01/02/2030'
-    fill_in I18n.t('salary'), with: 2800
-    fill_in I18n.t('role'), with: 'Desenvolvedor Júnior'
-    fill_in I18n.t('benefits'), with: 'Vale Transporte, Vale Refeição, '\
-                                      'Convênio Médico'
-    fill_in I18n.t('expectations'), with: 'Colaborar com as rotinas de testes '\
-                                          'do time de desenvolvimento'
-    fill_in I18n.t('bonuses'), with: 'Participação de lucros'
+    fill_in 'Data de início', with: '01/02/2030'
+    fill_in 'Salário', with: 2800
+    fill_in 'Cargo', with: 'Desenvolvedor Júnior'
+    fill_in 'Benefícios', with: 'Vale Transporte, Vale Refeição, '\
+                                'Convênio Médico'
+    fill_in 'Expectativas', with: 'Colaborar com as rotinas de testes '\
+                                  'do time de desenvolvimento'
+    fill_in 'Bônus', with: 'Participação de lucros'
     click_on 'Enviar proposta'
 
     expect(page).to have_content('Proposta enviada!')
     expect(page).to have_content("Proposta para a vaga: #{opportunity.title}")
-    expect(page).to have_content("#{I18n.t('start_date')}:\n01/02/2030")
+    expect(page).to have_content("Data de início:\n01/02/2030")
   end
 
   scenario 'and must fill all fields', js: true do
@@ -50,14 +50,14 @@ feature 'headhunter send proposal' do
     visit opportunities_path
     click_on opportunity.title
     click_on subscription.opportunity.title
-    fill_in I18n.t('start_date'), with: '01/02/2020'
-    fill_in I18n.t('salary'), with: 2800
-    fill_in I18n.t('role'), with: 'Desenvolvedor Júnior'
-    fill_in I18n.t('benefits'), with: 'Vale Transporte, Vale Refeição, '\
+    fill_in 'Data de início', with: '01/02/2020'
+    fill_in 'Salário', with: 2800
+    fill_in 'Cargo', with: 'Desenvolvedor Júnior'
+    fill_in 'Benefícios', with: 'Vale Transporte, Vale Refeição, '\
                                       'Convênio Médico'
-    fill_in I18n.t('expectations'), with: 'Colaborar com as rotinas de testes '\
+    fill_in 'Expectativas', with: 'Colaborar com as rotinas de testes '\
                                           'do time de desenvolvimento'
-    fill_in I18n.t('bonuses'), with: ''
+    fill_in 'Bônus', with: ''
     click_on 'Enviar proposta'
 
     expect(page).to have_content('Proposta não enviada, preencha todos '\

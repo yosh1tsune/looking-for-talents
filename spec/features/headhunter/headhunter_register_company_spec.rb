@@ -25,11 +25,9 @@ feature 'Headhunter register company' do
     expect(page).to have_content('Empresa cadastrada com sucesso!')
     expect(page).to have_content('RR System')
     expect(page).to have_css("img[src*='company.png']")
-    expect(page).to have_content("#{I18n.t('companies.show.document')}:"\
-                                 "\n66.864.712/0001-67")
-    expect(page).to have_content("#{I18n.t('street')}:\nAvenida Paulista, "\
-                                 '1000')
-    expect(page).to have_content("#{I18n.t('zipcode')}:\n00000-000")
+    expect(page).to have_content("CNPJ:\n66.864.712/0001-67")
+    expect(page).to have_content("Logradouro:\nAvenida Paulista, 1000")
+    expect(page).to have_content("CEP:\n00000-000")
   end
 
   scenario 'and must fill all fields' do

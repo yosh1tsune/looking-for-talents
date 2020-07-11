@@ -17,7 +17,7 @@ describe Opportunity do
       opportunity.valid?
 
       expect(opportunity.errors.full_messages).to eq(
-        ["#{I18n.t('submit_end_date')} deve ser ao menos daqui a 7 dias"]
+        ['Data de encerramento das inscrições deve ser ao menos daqui a 7 dias']
       )
     end
 
@@ -28,7 +28,7 @@ describe Opportunity do
       opportunity.valid?
 
       expect(opportunity.errors.full_messages).to eq(
-        ["#{I18n.t('submit_end_date')} não pode ficar em branco"]
+        ['Data de encerramento das inscrições não pode ficar em branco']
       )
     end
   end
