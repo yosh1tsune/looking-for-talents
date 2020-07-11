@@ -18,6 +18,8 @@ import 'bootstrap/js/dist/tooltip'
 import 'bootstrap/js/dist/util'
 import '../stylesheets/application'
 
+import "@fortawesome/fontawesome-free/js/all";
+
 import toastr from 'toastr';
 
 toastr.options = {

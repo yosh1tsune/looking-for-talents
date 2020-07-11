@@ -40,9 +40,10 @@ class OpportunitiesController < ApplicationController
   end
 
   def search
-    @opportunities = Opportunity.where('title LIKE ? OR '\
-                                       'required_abilities LIKE ?',
-                                       "%#{params[:q]}%", "%#{params[:q]}%")
+    query = params[:q].downcase
+    @opportunities = Opportunity.where('lower(title) LIKE ? OR '\
+                                       'lower(required_abilities) LIKE ?',
+                                       "%#{query}%", "%#{query}%")
 
     render :index
   end

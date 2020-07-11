@@ -1,12 +1,11 @@
 pt-BR:
   profiles:
-    show:
-      name: 'Nome'
-      birth_date: 'Data de nascimento'
-      professional_resume: 'Resumo profissional'
-      scholarity: 'Escolaridade'
-      document: 'CPF'
-      avatar: 'Foto'
+    name: 'Nome'
+    birth_date: 'Data de nascimento'
+    professional_resume: 'Resumo profissional'
+    scholarity: 'Escolaridade'
+    document: 'CPF'
+    avatar: 'Foto'
   activerecord:
     attributes:
       profile:

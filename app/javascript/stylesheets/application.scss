@@ -1,5 +1,11 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~toastr';
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/v4-shims';
 
 /* latin-ext */
 @font-face {
@@ -32,6 +38,24 @@
   color: rgb(255, 255, 255);
 }
 
+.card {
+  background-color: inherit;
+  border: 2px solid rgba(255, 255, 255, 0.125);
+}
+
+.card-img-top{
+  background-color: rgb(255, 255, 255);
+}
+
 a {
   color: rgb(244, 125, 8);
+}
+
+body {
+  background-color: rgb(21, 29, 39);
+  color: rgb(255, 255, 255);
+}
+
+hr {
+  background-color: rgb(255, 255, 255);
 }

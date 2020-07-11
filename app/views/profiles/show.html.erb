@@ -11,13 +11,13 @@
 <% end %>
 
 <dl>
-    <dt><%= t('.birth_date') %>:</dt>
+    <dt><%= t('profiles.birth_date') %>:</dt>
     <dd><%= l(@profile.birth_date) %></dd>
-    <dt><%= t('.document') %>:</dt>
+    <dt><%= t('profiles.document') %>:</dt>
     <dd><%= @profile.document %></dd>
-    <dt><%= t('.professional_resume') %>:</dt>
+    <dt><%= t('profiles.professional_resume') %>:</dt>
     <dd><%= @profile.professional_resume %></dd>
-    <dt><%= t('.scholarity') %>:</dt>
+    <dt><%= t('profiles.scholarity') %>:</dt>
     <dd><%= @profile.scholarity %></dd>
     <% @profile.addresses.each do |address| %>
       <dt><%= t('street') %>:</dt>

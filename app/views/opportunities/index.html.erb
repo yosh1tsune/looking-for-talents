@@ -1,15 +1,15 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6">
-      <h1>Painel de Vagas</h1>
+    <div class="col-md-3">
+      <h3>Painel de Vagas <i class="fas fa-file-signature"></i></h3>
     </div>
 
-    <div class="col-md-6 justify-content-right">
-      <%= form_with url: search_opportunities_path, method: :get do |f| %>
-        <div class="form-inline" style="float: right">
-          <%= f.text_field :q, placeholder: 'Insira o termo da pesquisa', class: 'form-control mr-sm-2'  %>
-          <%= f.submit 'Pesquisar', class: 'btn btn-outline-danger'%>
-        </div>
+    <div class="col-md-3 offset-md-6">
+      <%= form_with url: search_opportunities_path, method: :get, class: "form-inline" do |f| %>
+        <%= f.text_field :q, placeholder: 'Insira o termo da pesquisa', class: "form-control col-10" %>
+        <%= button_tag type: 'submit', id: 'Pesquisar', class: "btn btn-outline-danger col-2" do %>
+          <i class="fas fa-search" aria-hidden="true"></i>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -17,7 +17,7 @@
   <hr class="my-4">
 
   <% if headhunter_signed_in? %>
-    <%= link_to 'Publicar vaga', new_opportunity_path %>
+    <%= link_to 'Publicar vaga', new_opportunity_path, class: "btn bg-light" %>
   <% end %>
 
   <div class="row justify-content-md-center">
@@ -25,14 +25,17 @@
         <h3>Ainda não há vagas cadastradas</h1>
     <% else %>
       <% @opportunities.each do |op| %>
-        <div class="card col-md-3 m-5" style="width: 18rem;">
+        <div class="card col-md-2 m-5 p-0" style="width: 18rem;">
+          <%= image_tag op.company.logo, class: 'card-img-top' %>
           <div class="card-body">
               <h5 class="card-title"><%= link_to op.title, opportunity_path(op) %></h5>
-              <h6 class="card-subtitle mb-2 text-muted"><%= t('grade') %>: <%= op.grade %></h6>
-              <p class="card-text"><%= op.work_description %></p>
+              <h6 class="card-subtitle mb-2"><strong><%= t('grade') %></strong>: <%= op.grade %></h6>
+              <p class="card-text"><strong><%= t('work_description') %>:</strong> <%= op.work_description %></p>
+              <p class="card-text"><strong><%= t('required_abilities') %>:</strong> <%= op.required_abilities %></p>
             </div>
         </div>
       <% end %>
     <% end %>
   </div>
+  <%= link_to 'Back', :back, class: "btn bg-light" %>
 </div>
