@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :profiles do
+    resources :experiences, only: %i[create]
     resources :comments, only: %i[create]
   end
 

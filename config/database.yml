@@ -5,11 +5,11 @@ default: &default
 
 development:
   <<: *default
-  database: db_development_postgres
+  database: looking_for_talents_development_postgres
 
 test:
   <<: *default
-  database: db_test_postgres
+  database: looking_for_talents_test_postgres
 
 production:
   <<: *default

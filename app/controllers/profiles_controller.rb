@@ -20,7 +20,9 @@ class ProfilesController < ApplicationController
     elsif candidate_signed_in?
       @profile = Profile.find_by(candidate_id: current_candidate.id)
     end
+    @experiences = @profile.experiences
     @comment = Comment.new
+    @experience = Experience.new
   end
 
   def new

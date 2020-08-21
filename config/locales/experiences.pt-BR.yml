@@ -1,0 +1,20 @@
+pt-BR:
+  experiences:
+    company: 'Empresa'
+    role: 'Cargo'
+    start_date: 'Data de Início'
+    end_date: 'Data de Término'
+    resume: 'Resumo'
+    currently_working: 'Trabalho Atual?'
+    logo: 'Logotipo'
+  activerecord:
+    attributes:
+      experience:
+        company: 'Empresa'
+        role: 'Cargo'
+        start_date: 'Data de Início'
+        end_date: 'Data de Término'
+        resume: 'Resumo'
+        currently_working: 'Trabalho Atual?'
+    model:
+      experience: 'Experiência'

@@ -1,0 +1,14 @@
+<% @experiences.each do |exp| %>
+  <dl>
+    <dt><%= t('experiences.company') %>:</dt>
+    <dd><%= exp.company %></dd>
+    <dt><%= t('experiences.role') %>:</dt>
+    <dd><%= exp.role %></dd>
+    <dt><%= t('experiences.start_date') %>:</dt>
+    <dd><%= l(exp.start_date) %></dd>
+    <dt><%= t('experiences.end_date') %>:</dt>
+    <dd><%= l(exp.end_date) %></dd>
+    <dt><%= t('experiences.resume') %>:</dt>
+    <dd><%= exp.resume %></dd>
+  </dl>
+<% end %>

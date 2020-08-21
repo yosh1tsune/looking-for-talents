@@ -35,6 +35,16 @@
     <% end %>
 </dl>
 
+<h3>Experiências</h3>
+
+<% if @experiences.blank? %>
+  <span>Nenhuma experiência cadastrada</span>
+<% else %>
+  <%= render partial: @experiences %>
+<% end %>
+
+<%= render partial: 'experiences/form' %>
+
 <hr class="my-4">
 
 <h3>Comentários<h3>

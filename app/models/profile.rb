@@ -5,5 +5,6 @@ class Profile < ApplicationRecord
   belongs_to :candidate
   has_many :comments, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
+  has_many :experiences
   accepts_nested_attributes_for :addresses
 end
