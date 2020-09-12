@@ -1,0 +1,8 @@
+<% if @experience.errors.blank? %>
+  $('#exampleModalCenter').modal('hide');
+  toastr.success("<%= escape_javascript(flash[:notice]) %>");
+  $("#experiences").append("<%= escape_javascript(render @experience) %>");
+<% else %>
+  toastr.error("<%= escape_javascript(flash[:alert]) %>");
+  $("#errors").append("<%= escape_javascript(render 'errors', locals: @experience.errors) %>");
+<% end %>

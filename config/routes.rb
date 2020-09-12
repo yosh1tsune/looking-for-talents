@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create]
   end
 
+  resources :experiences, only: %i[edit destroy]
+
   namespace :api do
     namespace :v1 do
       resources :opportunities, only: %i[index show create update destroy]

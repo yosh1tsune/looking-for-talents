@@ -4,11 +4,19 @@ class ExperiencesController < ApplicationController
     @experience = @profile.experiences.new(experience_params)
     respond_to do |format|
       if @experience.save
-        format.html { redirect_to @profile, notice: 'Experiência salva com '\
-                                                    'sucesso!' }
-        format.js
+        format.html { redirect_to @profile }
+        format.js { flash[:notice] = 'Experiência salva com sucesso!' }
+        format.json do
+          render json: @experience, status: :created,
+                 location: @experience
+        end
       else
-        format.html { render 'profiles/show', alert: 'Corrija os erros!' }
+        format.html { render 'profiles/show' }
+        format.js { flash[:alert] = 'Corrija os erros!' }
+        format.json do
+          render json: @experience.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end

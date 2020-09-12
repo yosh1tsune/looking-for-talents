@@ -1,0 +1,8 @@
+<% if @experience.errors.any? %>
+  <p>Você deve corrigir os seguintes erros: </p>
+  <ul>
+  <% @experience.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+  <% end %>
+  </ul><br><br>
+<% end %>

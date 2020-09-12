@@ -7,7 +7,7 @@ class Experience < ApplicationRecord
     self.end_date = nil if currently_working == true
     return unless end_date.blank? && currently_working == false
 
-    errors.add(:end_date, "Preencha a data de término do contrato ou informe "\
+    errors.add(:end_date, 'Preencha a data de término do contrato ou informe '\
                           'que ainda neste emprego.')
   end
 end

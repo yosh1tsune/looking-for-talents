@@ -1,7 +1,7 @@
 <h1>
     Inscrição: <%= @subscription.id %>
-    <% if @subscription.highlighted == true %>
-        <%# <img src="assets/images/highlighted.png" title="Highlight"> %>
+    <% if @subscription.highlighted %>
+      <%= image_tag 'highlighted.png', size: "16x16"  %>
     <% end %>
 </h1>
 
@@ -34,7 +34,7 @@
       </ul><br><br>
     <% end %>
     <h3>Avaliar candidato<h3>
-    <%= form_with model: @subscription, url: subscription_path, method: :put do |form| %>
+    <%= form_for @subscription do |form| %>
         <p>
             <%= form.label :status %>
             <%= form.collection_select(:status, Subscription.statuses.map{ |s| [s.first]}, :first, :first ) %>

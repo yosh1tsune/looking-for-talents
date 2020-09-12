@@ -33,7 +33,7 @@
 
 <h4>Headhunters vinculados</h4>
 
-<%= form_with url: link_headhunters_company_path do |f| %>
+<%= form_with url: link_headhunters_company_path, local: true do |f| %>
   <div class="form-group">
     <%= f.label :email, 'Email' %>
     <%= f.email_field :email, class: 'form-control' %>
@@ -44,7 +44,7 @@
 <% end %>
 
 <% if @company.headhunters.blank? %>
-
+  <span>Não há headhunters vinculados</span>
 <% else %>
   <% @company.headhunters.each do |h| %>
     <p><%= h.details %>
