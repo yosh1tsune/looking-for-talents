@@ -4,7 +4,7 @@ feature 'visitor visit home index' do
   scenario 'successfully' do
     visit root_path
 
-    expect(page).to have_content('Bem vindo!')
+    expect(page).to have_content('DE DEVS PARA DEVS')
   end
 
   scenario 'and visualize the latest three opportunities' do
