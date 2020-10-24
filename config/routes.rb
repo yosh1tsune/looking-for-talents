@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :subscriptions, only: %i[create]
   end
 
-  resources :subscriptions, except: %i[create] do
+  resources :subscriptions, only: %i[index show update] do
     post 'highlight', on: :member
     resources :proposals, only: %i[new create]
   end

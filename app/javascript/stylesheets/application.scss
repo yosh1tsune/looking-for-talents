@@ -40,11 +40,13 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 .card {
   background-color: inherit;
-  border: 2px solid rgba(255, 255, 255, 0.125);
+  border: none;
+  margin-bottom: 25px;
 }
 
-.card-img-top{
-  background-color: rgb(255, 255, 255);
+.card-border{
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 a {
@@ -62,4 +64,16 @@ hr {
 
 .modal-content {
   color: black;
+}
+
+.jumbotron {
+  background-image: linear-gradient(-225deg, rgba(0,78,146,0.65) 0%, rgba(0,12,64,0.65) 20%), url("/assets/gettyimages-874016084-2048x2048.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.main-text {
+  font-weight: bold;
+  text-shadow: 5px 2px 20px black;
 }

@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
   before_action :candidate_have_profile?, only: %i[index]
 
-  def index; end
+  def index
+    @opportunities = Opportunity.limit(3)
+  end
 
   private
 
