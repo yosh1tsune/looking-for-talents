@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
   <%= link_to 'Looking for Talents', root_path, class: 'navbar-brand' %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -19,7 +19,7 @@
         <%= link_to 'Perfil', profiles_path, class: 'nav-link' %>
       </li>
       <li class="nav-item">
-        <%= button_to 'Sair', destroy_candidate_session_path, method: :delete, class: 'btn btn-danger' %>
+        <%= link_to 'Sair', destroy_candidate_session_path, method: :delete, class: 'nav-link nav-link-logout' %>
       </li>
     </ul>
   </div>
