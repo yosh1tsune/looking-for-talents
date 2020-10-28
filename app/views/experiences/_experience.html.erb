@@ -14,8 +14,5 @@
       <dt><%= t('experiences.resume') %>:</dt>
       <dd><%= experience.resume %></dd>
     </dl>
-
-    <%= link_to 'Editar Experiência', edit_experience_path(experience.id), method: :put %>
-    <%= link_to 'Excluir Experiência', experience_path(experience.id), method: :delete %>
   <% end %>
 <% end %>

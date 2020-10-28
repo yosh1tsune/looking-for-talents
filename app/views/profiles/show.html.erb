@@ -1,78 +1,88 @@
-<h1><%= @profile.name %></h1>
+<div class="container p-3">
+  <h1><%= @profile.name %></h1>
 
-<hr class="my-4">
+  <hr class="my-4">
 
-<% if candidate_signed_in? %>
-<h3><%= link_to 'Editar perfil', edit_profile_path(@profile) %></h3>
-<% end %>
+  <% if candidate_signed_in? %>
+    <%= link_to 'Editar perfil', edit_profile_path(@profile), class: 'btn btn-primary' %>
+  <% end %>
 
-<% if @profile.avatar.attached? %>
-  <%= image_tag(@profile.avatar, size: "200x200") %>
-<% end %>
+  <% if @profile.avatar.attached? %>
+    <%= image_tag(@profile.avatar, size: "200x200", class: 'mx-auto d-flex') %>
+  <% end %>
 
-<dl>
-    <dt><%= t('profiles.birth_date') %>:</dt>
-    <dd><%= l(@profile.birth_date) %></dd>
-    <dt><%= t('profiles.document') %>:</dt>
-    <dd><%= @profile.document %></dd>
-    <dt><%= t('profiles.professional_resume') %>:</dt>
-    <dd><%= @profile.professional_resume %></dd>
-    <dt><%= t('profiles.scholarity') %>:</dt>
-    <dd><%= @profile.scholarity %></dd>
-    <% @profile.addresses.each do |address| %>
-      <dt><%= t('addresses.street') %>:</dt>
-      <dd><%= address.street %></dd>
-      <dt><%= t('addresses.neighborhood') %>:</dt>
-      <dd><%= address.neighborhood %></dd>
-      <dt><%= t('addresses.zipcode') %>:</dt>
-      <dd><%= address.zipcode %></dd>
-      <dt><%= t('addresses.city') %>:</dt>
-      <dd><%= address.city %></dd>
-      <dt><%= t('addresses.state') %>:</dt>
-      <dd><%= address.state %></dd>
-      <dt><%= t('addresses.country') %>:</dt>
-      <dd><%= address.country %></dd>
-    <% end %>
-</dl>
+  <dl>
+      <dt><%= t('profiles.birth_date') %>:</dt>
+      <dd><%= l(@profile.birth_date) %></dd>
+      <dt><%= t('profiles.document') %>:</dt>
+      <dd><%= @profile.document %></dd>
+      <dt><%= t('profiles.professional_resume') %>:</dt>
+      <dd><%= @profile.professional_resume %></dd>
+      <dt><%= t('profiles.scholarity') %>:</dt>
+      <dd><%= @profile.scholarity %></dd>
+      <% @profile.addresses.each do |address| %>
+        <dt><%= t('addresses.street') %>:</dt>
+        <dd><%= address.street %></dd>
+        <dt><%= t('addresses.neighborhood') %>:</dt>
+        <dd><%= address.neighborhood %></dd>
+        <dt><%= t('addresses.zipcode') %>:</dt>
+        <dd><%= address.zipcode %></dd>
+        <dt><%= t('addresses.city') %>:</dt>
+        <dd><%= address.city %></dd>
+        <dt><%= t('addresses.state') %>:</dt>
+        <dd><%= address.state %></dd>
+        <dt><%= t('addresses.country') %>:</dt>
+        <dd><%= address.country %></dd>
+      <% end %>
+  </dl>
 
-<h3>Experiências</h3>
+  <p class="h3">Experiências</p>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Adicionar Experiência
-</button>
+  <hr class="my-4">
 
-<div id="experiences">
-  <%= render @profile.experiences %>
+  <div class="my-4">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+      Adicionar Experiência
+    </button>
+  </div>
+
+  <div id="experiences">
+    <%= render @profile.experiences %>
+  </div>
+
+  <hr class="my-4">
+
+  <p class="h3">Comentários<p>
+
+  <hr class="my-4">
+
+  <% if @profile.comments.blank? %>
+      <p>Sem comentários nesse perfil</p>
+  <% elsif %>
+      <% @profile.comments.each do |c| %>
+          <dl>
+              <dt>Autor:</dt>
+              <dd><%= c.headhunter.email %></dd>
+              <dt>Comentário:</dt>
+              <dd><%= c.comment %></dd>
+          <dl
+      <% end %>>
+  <% end %>
+
+  <hr class="my-4">
+
+  <% if headhunter_signed_in? %>
+    <div class="col-md-4 p-0">
+      <%= form_for ([@profile, @comment]) do |form| %>
+          <div class="form-group">
+            <%= form.text_area :comment, placeholder: :comment, class: 'form-control' %>
+          </div>
+          <%= form.submit 'Comentar', class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%# EXPERIENCES FORM MODAL %>
+
+  <%= render partial: 'experiences/form' %>
 </div>
-
-<hr class="my-4">
-
-<h3>Comentários<h3>
-
-<hr class="my-4">
-
-<% if @profile.comments.blank? %>
-    <span>Sem comentários nesse perfil</span>
-<% elsif %>
-    <% @profile.comments.each do |c| %>
-        <dl>
-            <dt>Autor:</dt>
-            <dd><%= c.headhunter.email %></dd>
-            <dt>Comentário:</dt>
-            <dd><%= c.comment %></dd>
-        <dl
-    <% end %>>
-<% end %>
-
-<hr class="my-4">
-
-<% if headhunter_signed_in? %>
-    <%= form_for ([@profile, @comment]) do |form| %>
-        <%= form.text_field :comment, placeholder: :comment %>
-        <%= form.submit 'Comentar', class: 'btn btn-success' %>
-    <% end %>
-<% end %>
-
-<%# EXPERIENCES FORM MODAL %>
-
-<%= render partial: 'experiences/form' %>
