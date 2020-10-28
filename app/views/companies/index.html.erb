@@ -1,11 +1,28 @@
-<h1>Empresas</h1>
+<div class="container pt-3">
 
-<%= link_to 'Cadastrar empresa', new_company_path %>
+  <h1>Empresas</h1>
 
-<% if @companies.blank? %>
-  <h3>Ainda não há empresas cadastradas</h1>
-<% else %>
-  <% @companies.each do |c| %>
-    <%= link_to c.name, company_path(c) %>
-  <% end %>
-<% end %>
+  <hr class="my-4">
+
+  <div class="my-4">
+    <%= link_to 'Cadastrar empresa', new_company_path, class: 'btn bg-light' %>
+  </div>
+  
+  <div class="row justify-content-md-center">
+    <% if @companies.blank? %>
+      <p class="h3">Ainda não há empresas cadastradas</p>
+    <% else %>
+      <% @companies.each do |company| %>
+        <div class="card col-sm-4" style="width: 18rem;">
+          <%= image_tag company.logo, class: "card-img-top card-border" %>
+          <div class="card-body card-border">
+              <h5 class="card-title"><%= link_to company.name, company_path(company) %></h5>
+              <h6 class="card-subtitle mb-2"><strong><%= t('company.document') %></strong>: <%= company.document %></h6>
+              <p class="card-text"><strong><%= t('company.phone') %>:</strong> <%= company.phone %></p>
+              <p class="card-text"><strong><%= t('company.email') %>:</strong> <%= company.email %></p>
+            </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,53 +1,64 @@
-<h1><%= @company.name %></h1>
+<div class="container p-3">
 
-<% if @company.logo.attached? %>
-  <%= image_tag(@company.logo, size: "200x200") %>
-<% end %>
+  <h1><%= @company.name %></h1>
 
-<p><% @company.description %></p>
+  <hr class="my-4">
 
-<dl>
-  <dt><%= t('companies.document') %>:</dt>
-  <dd><%= @company.document %></dd>
-  <dt><%= t('companies.email') %>:</dt>
-  <dd><%= @company.email %></dd>
-  <dt><%= t('companies.phone') %>:</dt>
-  <dd><%= @company.phone %></dd>
-  <% @company.addresses.each do |address| %>
-    <dt><%= t('addresses.street') %>:</dt>
-    <dd><%= address.street %></dd>
-    <dt><%= t('addresses.neighborhood') %>:</dt>
-    <dd><%= address.neighborhood %></dd>
-    <dt><%= t('addresses.zipcode') %>:</dt>
-    <dd><%= address.zipcode %></dd>
-    <dt><%= t('addresses.city') %>:</dt>
-    <dd><%= address.city %></dd>
-    <dt><%= t('addresses.state') %>:</dt>
-    <dd><%= address.state %></dd>
-    <dt><%= t('addresses.country') %>:</dt>
-    <dd><%= address.country %></dd>
+  <% if @company.logo.attached? %>
+    <%= image_tag(@company.logo, size: "200x200", class: 'mx-auto d-flex') %>
   <% end %>
-</dl>
 
-<hr class="my-4">
+  <p><% @company.description %></p>
 
-<h4>Headhunters vinculados</h4>
+  <dl>
+    <dt><%= t('companies.document') %>:</dt>
+    <dd><%= @company.document %></dd>
+    <dt><%= t('companies.email') %>:</dt>
+    <dd><%= @company.email %></dd>
+    <dt><%= t('companies.phone') %>:</dt>
+    <dd><%= @company.phone %></dd>
+    <% @company.addresses.each do |address| %>
+      <dt><%= t('addresses.street') %>:</dt>
+      <dd><%= address.street %></dd>
+      <dt><%= t('addresses.neighborhood') %>:</dt>
+      <dd><%= address.neighborhood %></dd>
+      <dt><%= t('addresses.zipcode') %>:</dt>
+      <dd><%= address.zipcode %></dd>
+      <dt><%= t('addresses.city') %>:</dt>
+      <dd><%= address.city %></dd>
+      <dt><%= t('addresses.state') %>:</dt>
+      <dd><%= address.state %></dd>
+      <dt><%= t('addresses.country') %>:</dt>
+      <dd><%= address.country %></dd>
+    <% end %>
+  </dl>
 
-<%= form_with url: link_headhunters_company_path, local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :email, 'Email' %>
-    <%= f.email_field :email, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.submit 'Vincular', class: 'btn btn-success' %>
-  </div>
-<% end %>
+  <hr class="my-4">
 
-<% if @company.headhunters.blank? %>
-  <span>Não há headhunters vinculados</span>
-<% else %>
-  <% @company.headhunters.each do |h| %>
-    <p><%= h.details %>
-    <%= button_to 'Remover headhunter' %>
+  <p class="h4">Vincular headhunters</p>
+
+  <%= form_with url: link_headhunters_company_path, local: true do |f| %>
+    <div class="col-md-3 p-0">
+      <div class="form-group">
+        <%= f.label :email, 'Email' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit 'Vincular', class: 'btn btn-success' %>
+      </div>
+    </div>
   <% end %>
-<% end %>
+
+  <p class="h4">Headhunters vinculados</p>
+
+  <hr>
+
+  <% if @company.headhunters.blank? %>
+    <span>Não há headhunters vinculados</span>
+  <% else %>
+    <% @company.headhunters.each do |headhunter| %>
+      <p><%= headhunter.details %>
+      <%= button_to 'Remover headhunter', {}, class: 'btn btn-danger' %>
+    <% end %>
+  <% end %>
+</div>
