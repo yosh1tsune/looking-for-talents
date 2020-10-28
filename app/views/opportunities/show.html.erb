@@ -1,56 +1,68 @@
-<h1><%= @opportunity.title %></h1>
-
-<hr class="my-4">
-
-<dl>
-    <dt><%= t('companies.name') %>:</dt>
-    <dd><%= link_to @opportunity.company.name, company_path(@opportunity.company) %></dd>
-    <dt><%= t('companies.document') %>:</dt>
-    <dd><%= @opportunity.company.email %></dd>
-    <dt><%= t('companies.phone') %>:</dt>
-    <dd><%= @opportunity.company.phone %></dd>
-    <dt><%= t('opportunities.work_description') %>:</dt>
-    <dd><%= @opportunity.work_description %></dd>
-    <dt><%= t('opportunities.required_abilities') %>:</dt>
-    <dd><%= @opportunity.required_abilities %></dd>
-    <dt><%= t('opportunities.salary') %>:</dt>
-    <dd><%= number_to_currency(@opportunity.salary, locale: :'pt-BR') %></dd>
-    <dt><%= t('opportunities.grade') %>:</dt>
-    <dd><%= @opportunity.grade %></dd>
-    <dt><%= t('opportunities.submit_end_date') %>:</dt>
-    <dd><%= I18n.localize @opportunity.submit_end_date %></dd>
-</dl>
-
-<% if candidate_signed_in? %>
-    <% if @registered == nil %>
-        <%= form_for ([@opportunity, @subscription]) do |form| %>
-            <%= form.label :registration_resume, 'Resumo da inscrição' %>
-            <%= form.text_area :registration_resume %>
-            <%= form.submit 'Inscreva-se' %>
-        <% end %>
-    <% else %>
-        <h3>Você já está inscrito nesta vaga. Aguarde instruções do recrutador.</h3>
-    <% end %>
-<% end %>
-
-<% if headhunter_signed_in? %>
-  <% if @opportunity.open? %>
-    <%= link_to 'Encerrar inscrições', close_opportunity_path(@opportunity), method: :post, class: 'btn btn-danger' %>
-  <% end %>
+<div class="container pt-3">
+  <h1><%= @opportunity.title %></h1>
 
   <hr class="my-4">
 
-  <h2>Candidatos Inscritos</h2><br>
+  <%= image_tag(@opportunity.company.logo, size: "200x200", class: 'mx-auto d-block') %>
 
-  <% @opportunity.subscriptions.each do |r| %>
-    <dl>
-      <span>Inscrição: <%= link_to r.opportunity.title, subscription_path(r) %></span>
-      <dt><%= t('profiles.name') %>:</dt>
-      <dd><%= link_to r.profile.name, profile_path(r.profile) %></dd>
-      <dt><%= t('subscriptions.registration_resume') %>:</dt>
-      <dd><%= r.registration_resume %><dd>
-      <dt><%= t('subscriptions.status') %>:</dt>
-      <dd><%= r.status %><dd>
-    </dl>
+  <dl>
+      <dt><%= t('companies.name') %>:</dt>
+      <dd><%= @opportunity.company.name %></dd>
+      <dt><%= t('companies.document') %>:</dt>
+      <dd><%= @opportunity.company.document %></dd>
+      <dt><%= t('companies.email') %>:</dt>
+      <dd><%= @opportunity.company.email %></dd>
+      <dt><%= t('companies.phone') %>:</dt>
+      <dd><%= @opportunity.company.phone %></dd>
+      <dt><%= t('opportunities.work_description') %>:</dt>
+      <dd><%= @opportunity.work_description %></dd>
+      <dt><%= t('opportunities.required_abilities') %>:</dt>
+      <dd><%= @opportunity.required_abilities %></dd>
+      <dt><%= t('opportunities.salary') %>:</dt>
+      <dd><%= number_to_currency(@opportunity.salary, locale: :'pt-BR') %></dd>
+      <dt><%= t('opportunities.grade') %>:</dt>
+      <dd><%= @opportunity.grade %></dd>
+      <dt><%= t('opportunities.submit_end_date') %>:</dt>
+      <dd><%= I18n.localize @opportunity.submit_end_date %></dd>
+  </dl>
+
+  <hr class="my-4">
+
+  <% if candidate_signed_in? %>
+      <% if @registered == nil %>
+          <%= form_for ([@opportunity, @subscription]) do |form| %>
+            <div class="col-md-4">
+              <div class="form-group">
+                <%= form.label :registration_resume %>
+                <%= form.text_area :registration_resume, class: 'form-control' %>
+              </div>
+              <%= form.submit 'Inscreva-se', class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+      <% else %>
+          <h3>Você já está inscrito nesta vaga. Aguarde instruções do recrutador.</h3>
+      <% end %>
   <% end %>
-<% end %>
+
+  <% if headhunter_signed_in? %>
+    <% if @opportunity.open? %>
+      <%= link_to 'Encerrar inscrições', close_opportunity_path(@opportunity), method: :post, class: 'btn btn-danger' %>
+    <% end %>
+
+    <hr class="my-4">
+
+    <h2>Candidatos Inscritos</h2><br>
+
+    <% @opportunity.subscriptions.each do |r| %>
+      <dl>
+        <span>Inscrição: <%= link_to r.opportunity.title, subscription_path(r) %></span>
+        <dt><%= t('profiles.name') %>:</dt>
+        <dd><%= link_to r.profile.name, profile_path(r.profile) %></dd>
+        <dt><%= t('subscriptions.registration_resume') %>:</dt>
+        <dd><%= r.registration_resume %><dd>
+        <dt><%= t('subscriptions.status') %>:</dt>
+        <dd><%= I18n.t(r.status, scope: [:activerecord, :attributes, :subscription]) %></dd>
+      </dl>
+    <% end %>
+  <% end %>
+</div>

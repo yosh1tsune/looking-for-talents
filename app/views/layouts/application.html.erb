@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Looking For Talents - Vagas de Emprego</title>
+    <title>Looking For Talents - Oportunidades para Desenvolvedores</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,7 +11,7 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body style="padding-top: 60px">
     <% if !headhunter_signed_in? && !candidate_signed_in? %>
       <%= render 'shared/navbars/visitor'%>
     <% elsif candidate_signed_in? %>
@@ -20,8 +20,6 @@
       <%= render 'shared/navbars/headhunter'%>
     <% end %>
     <%= toastr_flash %>
-    <div class="p-3">
-      <%= yield %>
-    </div>
+    <%= yield %>
   </body>
 </html>
