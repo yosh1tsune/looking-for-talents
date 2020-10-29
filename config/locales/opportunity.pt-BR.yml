@@ -7,6 +7,8 @@ pt-BR:
     salary: 'Salário'
     grade: 'Nível'
     submit_end_date: 'Data de encerramento das inscrições'
+    open: 'Aberta'
+    closed: 'Encerrada'
   activerecord:
     attributes:
       opportunity:
@@ -17,5 +19,7 @@ pt-BR:
         salary: 'Salário'
         grade: 'Nível'
         submit_end_date: 'Data de encerramento das inscrições'
+        open: 'Aberta'
+        closed: 'Encerrada'
     model:
       opportunity: 'Oportunidade'

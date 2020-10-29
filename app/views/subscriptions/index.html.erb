@@ -1,17 +1,21 @@
-<h1>Minhas inscrições</h1>
+<div class="container p-3">
+  <h1>Minhas inscrições</h1>
 
-<% if @subscriptions.blank? %>
-    <h3>Você ainda não se inscreveu em nenhuma vaga</h3>
-<% elsif %>
-    <% @subscriptions.each do |r| %>
-        <h3><%= r.opportunity.title %></h3>
-        <dl>
-            <dt><%= t('subscriptions.status') %>:</dt>
-            <dd><%= I18n.t(r.status, scope: [:activerecord, :attributes, :subscription]) %></dd>
-            <% if r.status != :in_progress %>
-                <dt><%= t('subscriptions.feedback') %>:</dt>
-                <dd><%= r.feedback %></dd>
-            <% end %>
-        <dl>
-    <% end %>
-<% end %>
+  <hr class="my-4">
+
+  <% if @subscriptions.blank? %>
+      <h3>Você ainda não se inscreveu em nenhuma vaga</h3>
+  <% elsif %>
+      <% @subscriptions.each do |r| %>
+          <p class="h3"><%= link_to r.opportunity.title, subscription_path(r) %></p>
+          <dl>
+              <dt><%= t('subscriptions.status') %>:</dt>
+              <dd><%= I18n.t(r.status, scope: [:activerecord, :attributes, :subscription]) %></dd>
+              <% if r.status != :in_progress %>
+                  <dt><%= t('subscriptions.feedback') %>:</dt>
+                  <dd><%= r.feedback %></dd>
+              <% end %>
+          <dl>
+      <% end %>
+  <% end %>
+</div>

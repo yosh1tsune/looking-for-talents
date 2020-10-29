@@ -22,25 +22,32 @@
       <dd><%= number_to_currency(@opportunity.salary, locale: :'pt-BR') %></dd>
       <dt><%= t('opportunities.grade') %>:</dt>
       <dd><%= @opportunity.grade %></dd>
-      <dt><%= t('opportunities.submit_end_date') %>:</dt>
-      <dd><%= I18n.localize @opportunity.submit_end_date %></dd>
+      <% if @opportunity.open?%>
+        <dt><%= t('opportunities.submit_end_date') %>:</dt>
+        <dd><%= I18n.localize @opportunity.submit_end_date %></dd>
+      <% else %>
+        <dt><%= t('opportunities.status') %>:</dt>
+        <dd><%= t(@opportunity.status, scope: [:opportunities]) %></dd>
+      <% end %>
   </dl>
 
-  <hr class="my-4">
 
   <% if candidate_signed_in? %>
-      <% if @registered == nil %>
-          <%= form_for ([@opportunity, @subscription]) do |form| %>
-            <div class="col-md-4">
-              <div class="form-group">
-                <%= form.label :registration_resume %>
-                <%= form.text_area :registration_resume, class: 'form-control' %>
-              </div>
-              <%= form.submit 'Inscreva-se', class: 'btn btn-primary' %>
+    <hr class="my-4">
+      <% if @registered %>
+        <p class="h4">Você já está inscrito nesta vaga. Aguarde instruções do recrutador.</p>
+      <% elsif @opportunity.closed? %>
+        <p class="h4">As inscrições para esta vaga foram encerradas</p>
+      <% else%>
+        <%= form_for ([@opportunity, @subscription]) do |form| %>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= form.label :registration_resume %>
+              <%= form.text_area :registration_resume, class: 'form-control' %>
             </div>
-          <% end %>
-      <% else %>
-          <h3>Você já está inscrito nesta vaga. Aguarde instruções do recrutador.</h3>
+            <%= form.submit 'Inscreva-se', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
       <% end %>
   <% end %>
 
@@ -53,16 +60,20 @@
 
     <h2>Candidatos Inscritos</h2><br>
 
-    <% @opportunity.subscriptions.each do |r| %>
-      <dl>
-        <span>Inscrição: <%= link_to r.opportunity.title, subscription_path(r) %></span>
-        <dt><%= t('profiles.name') %>:</dt>
-        <dd><%= link_to r.profile.name, profile_path(r.profile) %></dd>
-        <dt><%= t('subscriptions.registration_resume') %>:</dt>
-        <dd><%= r.registration_resume %><dd>
-        <dt><%= t('subscriptions.status') %>:</dt>
-        <dd><%= I18n.t(r.status, scope: [:activerecord, :attributes, :subscription]) %></dd>
-      </dl>
+    <% if @opportunity.subscriptions.empty? %>
+      <p class="h4">Ainda não há candidatos inscritos.</p>
+    <% else %>
+      <% @opportunity.subscriptions.each do |r| %>
+        <dl>
+          <span>Inscrição: <%= link_to r.opportunity.title, subscription_path(r) %></span>
+          <dt><%= t('profiles.name') %>:</dt>
+          <dd><%= link_to r.profile.name, profile_path(r.profile) %></dd>
+          <dt><%= t('subscriptions.registration_resume') %>:</dt>
+          <dd><%= r.registration_resume %><dd>
+          <dt><%= t('subscriptions.status') %>:</dt>
+          <dd><%= I18n.t(r.status, scope: [:activerecord, :attributes, :subscription]) %></dd>
+        </dl>
+      <% end %>
     <% end %>
   <% end %>
 </div>

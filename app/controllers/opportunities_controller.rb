@@ -3,11 +3,11 @@ class OpportunitiesController < ApplicationController
   before_action :registered?, only: %i[show]
 
   def index
-    if headhunter_signed_in?
-      @opportunities = current_headhunter.opportunities
-    else
-      @opportunities = Opportunity.all
-    end
+    @opportunities = if headhunter_signed_in?
+                       current_headhunter.opportunities
+                     else
+                       Opportunity.all
+                     end
   end
 
   def show
@@ -39,19 +39,14 @@ class OpportunitiesController < ApplicationController
   end
 
   def search
-    query = params[:q].downcase
+    query = 'lower(title) LIKE ? OR lower(required_abilities) LIKE ?',
+            "%#{params[:q].downcase}%", "%#{params[:q].downcase}%"
+            
     if headhunter_signed_in?
-      @opportunities = current_headhunter
-                       .opportunities
-                       .where('lower(title) LIKE ? OR '\
-                             'lower(required_abilities) LIKE ?',
-                             "%#{query}%", "%#{query}%")
+      @opportunities = current_headhunter.opportunities.where(query)
     else
-      @opportunities = Opportunity.where('lower(title) LIKE ? OR '\
-                                        'lower(required_abilities) LIKE ?',
-                                        "%#{query}%", "%#{query}%")
+      @opportunities = Opportunity.where(query)
     end
-
     render :index
   end
 

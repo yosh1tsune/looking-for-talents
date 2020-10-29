@@ -16,8 +16,7 @@ feature 'headhunter closes opportunity' do
     expect(page).to have_content(opportunity.work_description)
     expect(page).to have_content('Descrição da vaga: '\
                                  "#{opportunity.work_description}")
-    expect(page).to have_content('Data de encerramento das inscrições: '\
-                                 "#{I18n.l(opportunity.submit_end_date)}")
+    expect(page).to have_content('Status: Encerrada')
     expect(page).not_to have_link('Encerrar inscrições')
   end
 

@@ -1,96 +1,114 @@
-<h1>
-    Inscrição: <%= @subscription.id %>
-    <% if @subscription.highlighted %>
-      <%= image_tag 'highlighted.png', size: "16x16"  %>
+<div class="container p-3">
+  <div class="row m-0">
+    <h1 class="m-0">
+      Código da Inscrição: <%= @subscription.id %>
+      <% if @subscription.highlighted %>
+        <%= image_tag 'highlighted.png', size: "20x20", class: "mb-2", alt: "Inscrição destacada", title: "Inscrição destacada" %>
+      <% end %>
+    </h1>
+  </div>
+
+  <hr class="my-4">
+
+  <dl>
+      <dt>Vaga:</dt>
+      <dd><%= link_to @subscription.opportunity.title, opportunity_path(@subscription.opportunity) %></dd>
+      <dt>Candidato:</dt>
+      <dd><%= link_to @subscription.profile.name, profile_path(@subscription.profile) %></dd>
+      <dt><%= t('subscriptions.status')%>:</dt>
+      <dd><%= I18n.t(@subscription.status, scope: [:activerecord, :attributes, :subscription]) %></dd>
+      <dt><%= t('subscriptions.feedback')%>:</dt>
+      <dd><%= @subscription.feedback %></dd>
+  </dl>
+
+  <% if headhunter_signed_in? %>
+      <% if !@subscription.highlighted %>
+          <%= button_to 'Destacar perfil', highlight_subscription_path(@subscription), method: :post, class: 'btn btn-success' %>
+      <% else %>
+          <%= button_to 'Remover destaque', highlight_subscription_path(@subscription), method: :post, class: 'btn btn-danger' %>
+      <% end %>
+
+    <% if @subscription.in_progress? %>
+        <% if @subscription.errors.any? %>
+          <p>Você deve corrigir os seguintes erros: </p>
+          <ul>
+          <% @subscription.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+          <% end %>
+          </ul><br><br>
+        <% end %>
+
+        <hr class="my-4">
+
+        <p class="h3">Avaliar candidato</p>
+        <%= form_for @subscription do |form| %>
+            <div class="form-group">
+                <%= form.label :status %>
+                <%= form.collection_select(:status, Subscription.statuses.map{ |s| [s.first]}, :first, :first, class: 'form-control')%>
+            </div>
+            <div class="form-group">
+                <%= form.label :feedback %>
+                <%= form.text_area :feedback, class: "form-control" %>
+            </div>
+            <%= form.submit 'Avaliar', class: 'btn btn-primary' %>
+        <% end %>
     <% end %>
-</h1>
+  <% end %>
 
-<dl>
-    <dt>Vaga:</dt>
-    <dd><%= @subscription.opportunity.title %></dd>
-    <dt>Candidato:</dt>
-    <dd><%= @subscription.profile.name %></dd>
-    <dt><%= t('subscriptions.status')%>:</dt>
-    <dd><%= I18n.t(@subscription.status, scope: [:activerecord, :attributes, :subscription]) %></dd>
-    <dt><%= t('subscriptions.feedback')%>:</dt>
-    <dd><%= @subscription.feedback %></dd>
-</dl>
+  <hr class="my-4">
 
-<% if headhunter_signed_in? %>
-    <% if !@subscription.highlighted %>
-        <%= button_to 'Destacar perfil', highlight_subscription_path(@subscription), method: :post, class: 'btn btn-success' %>
-    <% else %>
-        <%= button_to 'Remover destaque', highlight_subscription_path(@subscription), method: :post, class: 'btn btn-danger' %>
-    <% end %>
-<% end %>
-
-<% if @subscription.in_progress? %>
-    <% if @subscription.errors.any? %>
+  <% if @subscription.proposal %>
+    <p class="h4">Proposta recebida: </p>
+    <dl>
+      <dt>Código da Proposta: </dt>
+      <dd><%= link_to @subscription.proposal.id, proposal_path(@subscription.proposal) %></dd>
+      <dt>Salário: </dt>
+      <dd><%= number_to_currency(@subscription.proposal.salary, locale: :'pt-BR') %></dd>
+      <dt>Benefícios: </dt>
+      <dd><%= @subscription.proposal.benefits %></dd>
+    </dl>
+  <% elsif @subscription.approved? %>
+    <p class="mt-4">Enviar proposta ao candidato</p>
+    
+    <% if @proposal.errors.any? %>
       <p>Você deve corrigir os seguintes erros: </p>
       <ul>
-      <% @subscription.errors.full_messages.each do |message| %>
+      <% @proposal.errors.full_messages.each do |message| %>
           <li><%= message %></li>
       <% end %>
       </ul><br><br>
     <% end %>
-    <h3>Avaliar candidato<h3>
-    <%= form_for @subscription do |form| %>
-        <p>
-            <%= form.label :status %>
-            <%= form.collection_select(:status, Subscription.statuses.map{ |s| [s.first]}, :first, :first ) %>
-        </p>
-        <p>
-            <%= form.label :feedback %>
-            <%= form.text_area :feedback %>
-        </p>
-            <%= form.submit 'Avaliar' %>
-    <% end %>
-<% end %>
+    
+    <hr class="my-4">
 
-<% if @subscription.proposal %>
-  
-<% elsif @subscription.approved? %>
-
-  <h3 class="mt-4">Enviar proposta ao candidato</h3>
-  
-  <% if @proposal.errors.any? %>
-    <p>Você deve corrigir os seguintes erros: </p>
-    <ul>
-    <% @proposal.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-    <% end %>
-    </ul><br><br>
+    <div class='col-md-4 mt-3 mb-3'>
+      <%= form_for ([@subscription, @proposal]) do |form| %>  
+        <div class='form-group'>
+            <%= form.label :start_date %>
+            <%= form.text_field :start_date, class: 'form-control'  %>
+        </div>
+        <div class='form-group'>
+            <%= form.label :salary %>
+            <%= form.number_field :salary, class: 'form-control'  %>
+        </div>
+        <div class='form-group'>
+            <%= form.label :role %>
+            <%= form.text_field :role, class: 'form-control'  %>
+        </div>
+        <div class='form-group'>
+            <%= form.label :benefits %>
+            <%= form.text_field :benefits, class: 'form-control'  %>
+        </div>
+        <div class='form-group'>
+            <%= form.label :expectations %>
+            <%= form.text_field :expectations, class: 'form-control'  %>
+        </div>
+        <div class='form-group'>
+            <%= form.label :bonuses %>
+            <%= form.text_field :bonuses, class: 'form-control'  %>
+        </div>
+        <%= form.submit 'Enviar proposta', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
   <% end %>
-  
-  <hr class="my-4">
-
-  <div class='col-md-4 mt-3 mb-3'>
-    <%= form_for ([@subscription, @proposal]) do |form| %>  
-      <div class='form-group'>
-          <%= form.label :start_date %>
-          <%= form.text_field :start_date, class: 'form-control'  %>
-      </div>
-      <div class='form-group'>
-          <%= form.label :salary %>
-          <%= form.number_field :salary, class: 'form-control'  %>
-      </div>
-      <div class='form-group'>
-          <%= form.label :role %>
-          <%= form.text_field :role, class: 'form-control'  %>
-      </div>
-      <div class='form-group'>
-          <%= form.label :benefits %>
-          <%= form.text_field :benefits, class: 'form-control'  %>
-      </div>
-      <div class='form-group'>
-          <%= form.label :expectations %>
-          <%= form.text_field :expectations, class: 'form-control'  %>
-      </div>
-      <div class='form-group'>
-          <%= form.label :bonuses %>
-          <%= form.text_field :bonuses, class: 'form-control'  %>
-      </div>
-      <%= form.submit 'Enviar proposta', class: 'btn btn-primary' %>
-    <% end %>
-  </div>
-<% end %>
+</div>
