@@ -1,20 +1,23 @@
-<h1>Minhas propostas</h1><br>
+<div class="container p-3">
+  <h1>Minhas Propostas</h1>
 
-<hr>
+  <hr class="my-4">
 
-<% if @proposals.blank? %>
-    <h2>Nenhuma proposta enviada<h2>
-<% else %>
-  <% @proposals.each do |p| %>
-      <dl>
-          <dt>Candidato:</dt>
-          <dd><%= p.candidate.profile.name %></dd>
-          <dt>Vaga:</dt>
-          <dd><%= p.opportunity.title %></dd>
-          <dt><%= t('proposals.role') %>:</dt>
-          <dd><%= link_to p.role, proposal_path(p) %></dd>
-          <dt><%= t('proposals.status') %>:</dt>
-          <dd><%= I18n.t(p.status, scope: [:activerecord, :attributes, :proposal]) %></dd>
-      </dl>
-  <% end %>
-<% end %>
+  <div class="row justify-content-md-center">
+    <% if @proposals.blank? %>
+        <h2>Nenhuma proposta enviada<h2>
+    <% else %>
+      <% @proposals.each do |proposal| %>
+          <div class="card col-sm-4" style="width: 18rem;">
+            <%= image_tag proposal.company.logo, class: "card-img-top card-border" %>
+            <div class="card-body card-border">
+                <h5 class="card-title"><%= proposal.candidate.profile.name %></h5>
+                <h6 class="card-subtitle mb-2"><strong><%= t('proposals.role') %>:</strong> <%= link_to proposal.role, proposal_path(proposal) %></h6>
+                <p class="card-text"><strong>Vaga: </strong><%=  proposal.opportunity.title %></p>
+                <p class="card-text"><strong><%= t('proposals.status') %>:</strong> <%= I18n.t(proposal.status, scope: [:activerecord, :attributes, :proposal]) %></p>
+              </div>
+          </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

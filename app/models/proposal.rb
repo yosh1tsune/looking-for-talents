@@ -6,6 +6,7 @@ class Proposal < ApplicationRecord
   belongs_to :opportunity
   has_one :headhunter, through: :opportunity
   has_one :candidate, through: :subscription
+  has_one :company, through: :opportunity
 
   enum status: { in_progress: 0, accepted: 1, refused: 2 }
 

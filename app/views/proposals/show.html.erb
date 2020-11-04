@@ -1,30 +1,32 @@
-<h1>Proposta para a vaga: <%= link_to @proposal.opportunity.title, opportunity_path(@proposal.opportunity) %></h1>
+<div class="container p-3">
+  <h1>Proposta para a vaga: <%= link_to @proposal.opportunity.title, opportunity_path(@proposal.opportunity) %></h1>
 
-<hr class="my-4">
+  <hr class="my-4">
 
-<dl>
-    <dt>Candidato:</dt>
-    <dd><%= link_to @proposal.candidate.profile.name, profile_path(@proposal.candidate.profile) %></dd>
-    <dt><%= t('proposals.start_date') %>:</dt>
-    <dd><%= I18n.l(@proposal.start_date) %></dd>
-    <dt><%= t('proposals.salary') %>:</dt>
-    <dd><%= number_to_currency(@proposal.salary, locale: :'pt-BR') %></dd>
-    <dt><%= t('proposals.role') %>:</dt>
-    <dd><%= @proposal.role %></dd>
-    <dt><%= t('proposals.benefits') %>:</dt>
-    <dd><%= @proposal.benefits %></dd>
-    <dt><%= t('proposals.expectations') %>:</dt>
-    <dd><%= @proposal.expectations %></dd>
-    <dt><%= t('proposals.bonuses') %>:</dt>
-    <dd><%= @proposal.bonuses %></dd>
-    <dt><%= t('proposals.status') %>:</dt>
-    <dd><%= I18n.t(@proposal.status, scope: [:activerecord, :attributes, :proposal]) %></dd>
-</dl>
+  <dl>
+      <dt>Candidato:</dt>
+      <dd><%= link_to @proposal.candidate.profile.name, profile_path(@proposal.candidate.profile) %></dd>
+      <dt><%= t('proposals.start_date') %>:</dt>
+      <dd><%= I18n.l(@proposal.start_date) %></dd>
+      <dt><%= t('proposals.salary') %>:</dt>
+      <dd><%= number_to_currency(@proposal.salary, locale: :'pt-BR') %></dd>
+      <dt><%= t('proposals.role') %>:</dt>
+      <dd><%= @proposal.role %></dd>
+      <dt><%= t('proposals.benefits') %>:</dt>
+      <dd><%= @proposal.benefits %></dd>
+      <dt><%= t('proposals.expectations') %>:</dt>
+      <dd><%= @proposal.expectations %></dd>
+      <dt><%= t('proposals.bonuses') %>:</dt>
+      <dd><%= @proposal.bonuses %></dd>
+      <dt><%= t('proposals.status') %>:</dt>
+      <dd><%= I18n.t(@proposal.status, scope: [:activerecord, :attributes, :proposal]) %></dd>
+  </dl>
 
-<% if candidate_signed_in? %>
-    <% if @proposal.in_progress? %>
-        <%= link_to 'Aceitar proposta', accept_proposal_path(@proposal), method: :post, class: 'btn btn-success' %>
+  <% if candidate_signed_in? %>
+      <% if @proposal.in_progress? %>
+          <%= link_to 'Aceitar proposta', accept_proposal_path(@proposal), method: :post, class: 'btn btn-success' %>
 
-        <%= link_to 'Recusar proposta', refuse_proposal_path(@proposal), method: :post, class: 'btn btn-danger' %>
-    <% end %>
-<% end %>
+          <%= link_to 'Recusar proposta', refuse_proposal_path(@proposal), method: :post, class: 'btn btn-danger' %>
+      <% end %>
+  <% end %>
+</div>
