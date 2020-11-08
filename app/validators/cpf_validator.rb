@@ -31,8 +31,7 @@ class CpfValidator < ActiveModel::EachValidator
   SIZE_VALIDATION = /^[0-9]{11}$/.freeze
 
   def cpf_valid?(cpf)
-    aux = cpf
-    aux.gsub!(/[^\d]/, '')
+    aux = cpf.gsub(/[^\d]/, '')
     return unless aux =~ SIZE_VALIDATION
     return if DENY_LIST.include?(aux)
 
