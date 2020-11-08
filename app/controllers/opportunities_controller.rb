@@ -41,12 +41,12 @@ class OpportunitiesController < ApplicationController
   def search
     query = 'lower(title) LIKE ? OR lower(required_abilities) LIKE ?',
             "%#{params[:q].downcase}%", "%#{params[:q].downcase}%"
-            
-    if headhunter_signed_in?
-      @opportunities = current_headhunter.opportunities.where(query)
-    else
-      @opportunities = Opportunity.where(query)
-    end
+
+    @opportunities = if headhunter_signed_in?
+                       current_headhunter.opportunities.where(query)
+                     else
+                       Opportunity.where(query)
+                     end
     render :index
   end
 
