@@ -31,15 +31,15 @@ feature 'candidate updates profile' do
 
     fill_in 'Nome', with: 'Bruno Silva'
     fill_in 'Data de nascimento', with: Date.new(1996, 4, 22)
-    fill_in 'CPF', with: '996.490.558-00'
+    fill_in 'CPF', with: '99649055800'
     fill_in 'Escolaridade', with: 'Superior Incompleto'
-    fill_in 'Resumo profissional', with: 'Desenvolvimento web com Dart2'
+    fill_in 'Resumo profissional', with: 'Desenvolvimento web com Dart 2'
     fill_in 'Logradouro', with: 'Avenida Paulista, 1000'
     fill_in 'Bairro', with: 'Bela Vista'
     fill_in 'Cidade', with: 'São Paulo'
     fill_in 'Estado', with: 'SP'
     fill_in 'País', with: 'Brasil'
-    fill_in 'CEP', with: '00000-000'
+    fill_in 'CEP', with: '00000000'
     attach_file 'Foto', Rails.root.join('spec/support/user.jpg')
     click_on 'Enviar'
 
@@ -49,7 +49,7 @@ feature 'candidate updates profile' do
     expect(page).to have_content("CPF:\n996.490.558-00")
     expect(page).to have_content("Escolaridade:\nSuperior Incompleto")
     expect(page).to have_content("Resumo profissional:\n"\
-                                 'Desenvolvimento web com Dart2')
+                                 'Desenvolvimento web com Dart 2')
     expect(page).to have_css("img[src*='user.jpg']")
     expect(page).to have_content("Logradouro:\nAvenida Paulista, 1000")
     expect(page).to have_content("Cidade:\nSão Paulo")
