@@ -15,6 +15,18 @@
         $(".cep").inputmask("99999-999");
         $(".phone").inputmask("(99) 99999-9999");
         $(".cnpj").inputmask("99.999.999/9999-99");
+        $(".currency").inputmask('decimal', {
+                "alias": "numeric",
+                "groupSeparator": ".",
+                "autoGroup": true,
+                "digits": 2,
+                "radixPoint": ",",
+                "digitsOptional": false,
+                "allowMinus": false,
+                "prefix": "R$ ",
+                "placeholder": "0",
+                "rightAlign": false
+        });
       });
     </script>
   </head>
