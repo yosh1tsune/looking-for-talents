@@ -9,7 +9,7 @@ feature 'Headhunter register company' do
     click_on 'Empresas'
     click_on 'Cadastrar empresa'
     fill_in 'Nome', with: 'RR System'
-    fill_in 'CNPJ', with: '66.864.712/0001-67'
+    fill_in 'CNPJ', with: '66864712000167'
     fill_in 'Descrição', with: 'Soluções para desenvolvimento de apps em Ruby'
     fill_in 'Telefone', with: '(11) 99999-9999'
     fill_in 'Email', with: 'recrutamento@rrsystem.com.br'
@@ -18,7 +18,7 @@ feature 'Headhunter register company' do
     fill_in 'Cidade', with: 'São Paulo'
     fill_in 'Estado', with: 'SP'
     fill_in 'País', with: 'Brasil'
-    fill_in 'CEP', with: '00000-000'
+    fill_in 'CEP', with: '00000000'
     attach_file 'Logotipo', Rails.root.join('spec/support/company.png')
     click_on 'Enviar'
 
