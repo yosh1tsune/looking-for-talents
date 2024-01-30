@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  web:
+  app:
     build: .
     command: bundle exec rails s -b 0.0.0.0
     volumes:
@@ -10,6 +10,8 @@ services:
       - 3000:3000
     depends_on:
       - postgres
+    env_file:
+      - .env
 
   postgres:
     image: postgres:latest
@@ -17,8 +19,10 @@ services:
     volumes:
       - /data/db
     environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${DB_HOST}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - 5432:5432
+    env_file:
+      - .env
