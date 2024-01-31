@@ -3,18 +3,10 @@ module Api
     class OpportunitiesController < Api::V1::ApiController
       def index
         @opportunities = Opportunity.all
-
-        if @opportunities.blank?
-          render json: 'No records found', status: :not_found
-        else
-          render json: @opportunities
-        end
       end
 
       def show
         @opportunity = Opportunity.find(params[:id])
-
-        render json: @opportunity
       end
 
       def create

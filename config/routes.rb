@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get '/ping' => lambda { |env| [200, {}, ['pong']] }
+
       resources :opportunities, only: %i[index show create update destroy]
       resources :profiles, only: %i[index show create update destroy]
     end
