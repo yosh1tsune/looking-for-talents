@@ -8,6 +8,7 @@ gem 'bootsnap', '1.18.1', require: false
 gem 'devise',  '4.9.3'
 gem 'jbuilder', '2.11.5'
 gem 'jquery-rails', '4.6.0'
+gem 'jwt', '2.7.1'
 gem 'pg', '1.5.3'
 gem 'puma', '6.4.2'
 gem 'rails', '7.1.3'
