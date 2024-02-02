@@ -32,12 +32,19 @@ Rails.application.routes.draw do
 
   resources :experiences, only: %i[edit destroy]
 
-  namespace :api do
-    namespace :v1 do
-      get '/ping' => lambda { |env| [200, {}, ['pong']] }
+  defaults format: :json do
+    namespace :api do
+      namespace :v1 do
+        namespace :authentication do
+          post '/headhunter', controller: 'sessions', action: 'create'
+          post '/candidate', controller: 'sessions', action: 'create'
+        end
 
-      resources :opportunities, only: %i[index show create update destroy]
-      resources :profiles, only: %i[index show create update destroy]
+        get '/ping' => lambda { |env| [200, {}, ['pong']] }
+
+        resources :opportunities, only: %i[index show create update destroy]
+        resources :profiles, only: %i[index show create update destroy]
+      end
     end
   end
 end
