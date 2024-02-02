@@ -9,3 +9,5 @@ json.opportunities @opportunities.map do |opportunity|
   json.status               I18n.t(opportunity.status, scope: [:opportunities])
   json.company              opportunity.company.name
 end
+
+json.partial! 'api/v1/shared/pagination', collection: @opportunities
