@@ -1,8 +1,10 @@
 module Api
   module V1
     class OpportunitiesController < Api::V1::ApiController
+      # before_action :authenticate_user!, only: %i[create update destroy]
+
       def index
-        @opportunities = Opportunity.all
+        @opportunities = Opportunity.all.page(params[:page]).per(params[:per_page])
       end
 
       def show

@@ -5,19 +5,20 @@ describe 'Opportunities Management' do
     it 'succesfully' do
       opportunities = create(:opportunity, title: 'Desenvolvedor Rails')
 
-      get api_v1_opportunities_path(opportunities)
+      get api_v1_opportunities_path
 
       json = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to have_http_status(:ok)
-      expect(json[0][:title]).to eq 'Desenvolvedor Rails'
+      expect(json[:opportunities][0][:title]).to eq 'Desenvolvedor Rails'
     end
 
     it 'or find nothing' do
       get api_v1_opportunities_path
 
-      expect(response).to have_http_status(:not_found)
-      expect(response.body).to eq 'No records found'
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json[:opportunities]).to eq []
     end
   end
 
@@ -31,7 +32,7 @@ describe 'Opportunities Management' do
     end
 
     it "or didn't find a record with the parameter id" do
-      get api_v1_opportunity_path(id: 999)
+      get api_v1_opportunity_path(id: 0)
 
       expect(response).to have_http_status(:not_found)
     end
