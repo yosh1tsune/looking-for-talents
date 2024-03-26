@@ -5,6 +5,7 @@ ruby '3.2.2'
 
 gem 'aws-sdk-s3', '1.143.0', require: false
 gem 'bootsnap', '1.18.1', require: false
+gem 'bunny', '2.22'
 gem 'devise',  '4.9.3'
 gem 'jbuilder', '2.11.5'
 gem 'kaminari', '1.2.2'
