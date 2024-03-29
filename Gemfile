@@ -7,16 +7,16 @@ gem 'aws-sdk-s3', '1.143.0', require: false
 gem 'bootsnap', '1.18.1', require: false
 gem 'bunny', '2.22'
 gem 'devise',  '4.9.3'
+gem 'importmap-rails', '~> 2.0'
 gem 'jbuilder', '2.11.5'
-gem 'kaminari', '1.2.2'
 gem 'jquery-rails', '4.6.0'
 gem 'jwt', '2.7.1'
+gem 'kaminari', '1.2.2'
 gem 'pg', '1.5.3'
 gem 'puma', '6.4.2'
 gem 'rails', '7.1.3'
 gem 'sass-rails', '6.0.0'
 gem 'turbolinks', '5.2.1'
-gem 'webpacker', '5.4.4'
 
 group :development, :test do
   gem 'byebug', '11.1.3'

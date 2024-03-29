@@ -2,35 +2,20 @@
 <html>
   <head>
     <title>Looking For Talents - Oportunidades para Desenvolvedores</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag asset_path('favicon.ico') %>
     <%= favicon_link_tag asset_path('apple-icon.png'), rel: 'apple-touch-icon', type: 'image/png' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.9/jquery.inputmask.bundle.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'packs/index.js' %>
     <script>
-      $(document).ready(function(){
-        $(".cpf").inputmask("999.999.999-99");
-        $(".cep").inputmask("99999-999");
-        $(".phone").inputmask({
-          "mask": ["(99) 9999-9999", "(99) 9 9999-9999", ],
-          "keepStatic": true
-        });
-        $(".cnpj").inputmask("99.999.999/9999-99");
-        $(".currency").inputmask('decimal', {
-          "alias": "numeric",
-          "groupSeparator": ".",
-          "autoGroup": true,
-          "digits": 2,
-          "radixPoint": ",",
-          "digitsOptional": false,
-          "allowMinus": false,
-          "prefix": "R$ ",
-          "placeholder": "0",
-          "rightAlign": false
-        });
-      });
+
     </script>
   </head>
 

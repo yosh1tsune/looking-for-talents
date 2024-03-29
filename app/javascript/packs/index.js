@@ -3,19 +3,27 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import Rails from "@rails/ujs"
-Rails.start()
-
-import JQuery from 'jquery';
-window.$ = window.JQuery = JQuery;
-
-import 'bootstrap'
-import '../stylesheets/application'
-import 'inputmask/dist/jquery.inputmask'
-
-import "@fortawesome/fontawesome-free/js/all";
-
-import toastr from 'toastr';
+$(function(){
+  $(".cpf").inputmask("999.999.999-99");
+  $(".cep").inputmask("99999-999");
+  $(".phone").inputmask({
+    "mask": ["(99) 9999-9999", "(99) 9 9999-9999", ],
+    "keepStatic": true
+  });
+  $(".cnpj").inputmask("99.999.999/9999-99");
+  $(".currency").inputmask('decimal', {
+    "alias": "numeric",
+    "groupSeparator": ".",
+    "autoGroup": true,
+    "digits": 2,
+    "radixPoint": ",",
+    "digitsOptional": false,
+    "allowMinus": false,
+    "prefix": "R$ ",
+    "placeholder": "0",
+    "rightAlign": false
+  });
+});
 
 toastr.options = {
   "closeButton": true,
@@ -31,8 +39,6 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 };
-
-global.toastr = toastr;
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
