@@ -1,7 +1,7 @@
 class Headhunter < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
   validates :name, :surname, presence: true
   has_many :opportunities, dependent: :destroy
