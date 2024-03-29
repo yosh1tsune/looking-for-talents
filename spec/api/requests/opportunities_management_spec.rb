@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Opportunities Management' do
   context 'index' do
     it 'succesfully' do
-      opportunities = create(:opportunity, title: 'Desenvolvedor Rails')
+      create(:opportunity, title: 'Desenvolvedor Rails')
 
       get api_v1_opportunities_path
 

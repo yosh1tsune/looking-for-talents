@@ -23,16 +23,18 @@ AllCops:
     - 'spec/spec_helper.rb'
 
 Style/Documentation:
- Enabled: false
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
- Enabled: false
+  Enabled: false
 
 Metrics/BlockLength:
- ExcludedMethods: ['describe', 'context', 'feature', 'scenario', 'let']
+  ExcludedMethods: ['describe', 'context', 'feature', 'scenario', 'let']
+  Exclude:
+  - 'config/routes.rb'
 
 Layout/LineLength:
-  Max: 80
+  Max: 120
 
 Style/AsciiComments:
   Enabled: false

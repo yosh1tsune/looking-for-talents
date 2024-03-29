@@ -4,6 +4,6 @@ FactoryBot.define do
     surname { 'Silva' }
     email { Faker::Internet.email }
     password { 'head1234' }
-    confirmed_at { Time.now }
+    confirmed_at { Time.zone.now }
   end
 end

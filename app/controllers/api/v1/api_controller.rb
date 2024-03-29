@@ -11,13 +11,17 @@ module Api
       end
 
       def database_error
-        render json: { message: 'Database Error' }, status: :internal_server_error
+        render json: { message: 'Database Error' },
+               status: :internal_server_error
       end
 
       def authenticate_user!
         procces_token
 
-        render json: { message: 'User Not Logged In' }, status: :unauthorized unless @current_user.present?
+        return if @current_user.present?
+
+        render json: { message: 'User Not Logged In' },
+               status: :unauthorized
       end
 
       def procces_token
@@ -25,7 +29,7 @@ module Api
 
         @jwt_payload = jwt_decode(request.headers['Authorization'])
         @current_user = @jwt_payload['class'].constantize.find(@jwt_payload['id'])
-      rescue => e
+      rescue StandardError
         render json: { message: 'a' }, status: :unauthorized
       end
 
@@ -37,7 +41,7 @@ module Api
         JWT.encode(payload, SECRET_KEY)
       end
 
-      def jwt_decode(token, key = SECRET_KEY, verify = true, options: {})
+      def jwt_decode(token, key: SECRET_KEY, verify: true, options: {})
         JWT.decode(token, key, verify, options)[0]
       end
     end

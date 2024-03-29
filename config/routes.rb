@@ -40,7 +40,7 @@ Rails.application.routes.draw do
           post '/candidate/sign_in', controller: 'sessions', action: 'create'
         end
 
-        get '/ping' => lambda { |env| [200, {}, ['pong']] }
+        get '/ping' => ->(_env) { [200, {}, ['pong']] }
 
         resources :candidates, only: %i[create]
         resources :opportunities, only: %i[index show create update destroy]
