@@ -36,12 +36,13 @@ Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
         namespace :authentication do
-          post '/headhunter', controller: 'sessions', action: 'create'
-          post '/candidate', controller: 'sessions', action: 'create'
+          post '/headhunter/sign_in', controller: 'sessions', action: 'create'
+          post '/candidate/sign_in', controller: 'sessions', action: 'create'
         end
 
         get '/ping' => lambda { |env| [200, {}, ['pong']] }
 
+        resources :candidates, only: %i[create]
         resources :opportunities, only: %i[index show create update destroy]
         resources :profiles, only: %i[index show create update destroy]
       end

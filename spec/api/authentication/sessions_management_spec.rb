@@ -6,7 +6,7 @@ describe 'Sessions Management' do
       it 'sucessfully' do
         create(:headhunter, email: 'head@email.com', password: 'Head123')
 
-        post api_v1_authentication_headhunter_path({
+        post api_v1_authentication_headhunter_sign_in_path({
           email: 'head@email.com', password: 'Head123', class: 'headhunter'
         })
 
@@ -18,7 +18,7 @@ describe 'Sessions Management' do
 
       context 'fail' do
         it 'if no user match the provided email' do
-          post api_v1_authentication_headhunter_path({
+          post api_v1_authentication_headhunter_sign_in_path({
             email: 'head@email.com', password: 'Head123', class: 'headhunter'
           })
 
@@ -31,7 +31,7 @@ describe 'Sessions Management' do
         it 'if provided password is incorrect' do
           create(:headhunter, email: 'head@email.com', password: 'Head123')
 
-          post api_v1_authentication_headhunter_path({
+          post api_v1_authentication_headhunter_sign_in_path({
             email: 'head@email.com', password: '123Head', class: 'headhunter'
           })
 
@@ -47,7 +47,7 @@ describe 'Sessions Management' do
       it 'sucessfully' do
         create(:candidate, email: 'cand@email.com', password: 'Cand123')
 
-        post api_v1_authentication_headhunter_path({
+        post api_v1_authentication_candidate_sign_in_path({
           email: 'cand@email.com', password: 'Cand123', class: 'candidate'
         })
 
@@ -59,7 +59,7 @@ describe 'Sessions Management' do
 
       context 'fail' do
         it 'if no user match the provided email' do
-          post api_v1_authentication_headhunter_path({
+          post api_v1_authentication_candidate_sign_in_path({
             email: 'cand@email.com', password: 'Cand123', class: 'candidate'
           })
 
@@ -72,7 +72,7 @@ describe 'Sessions Management' do
         it 'if provided password is incorrect' do
           create(:candidate, email: 'cand@email.com', password: 'Cand123')
 
-          post api_v1_authentication_headhunter_path({
+          post api_v1_authentication_candidate_sign_in_path({
             email: 'cand@email.com', password: '123Cand', class: 'candidate'
           })
 
