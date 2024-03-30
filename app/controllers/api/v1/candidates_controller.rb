@@ -5,19 +5,25 @@ module Api
       def create
         @candidate = Candidate.create!(candidate_params)
 
-        PublisherService.publish(queue_name: 'confirmation.mailer',
-                                 payload: confirmation_email_payload)
+        publish_confirmation_mailer
 
         render status: :created
       end
 
       private
 
+      def publish_confirmation_mailer
+        PublisherService.publish(
+          topic: 'mailers',
+          routing_key: 'confirmation.mailer',
+          payload: confirmation_email_payload
+        )
+      end
+
       def confirmation_email_payload
         {
           email: @candidate.email,
-          confirmation_url: confirmation_url(@candidate,
-                                             confirmation_token: @candidate.confirmation_token)
+          confirmation_url: confirmation_url(@candidate, confirmation_token: @candidate.confirmation_token)
         }.to_json
       end
 
