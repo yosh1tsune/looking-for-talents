@@ -14,8 +14,8 @@ feature 'user sign up' do
     click_on 'Inscrever-se'
 
     expect(current_path).to eq(root_path)
-    expect(page).to have_content('Bem vindo! Você realizou seu registro '\
-                                 'com sucesso.')
+    expect(page).to have_content('Uma mensagem com um link de confirmação foi enviada para o seu e-mail. ' \
+      'Por favor, acesse o link para ativar sua conta.')
   end
 
   scenario 'and must fill all fields' do
@@ -42,8 +42,8 @@ feature 'user sign up' do
     click_on 'Inscrever-se'
 
     expect(current_path).to eq(root_path)
-    expect(page).to have_content('Bem vindo! Você realizou seu registro '\
-                                 'com sucesso.')
+    expect(page).to have_content('Uma mensagem com um link de confirmação foi enviada para o seu e-mail. ' \
+      'Por favor, acesse o link para ativar sua conta.')
   end
 
   scenario 'and must fill all fields' do
