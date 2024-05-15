@@ -14,9 +14,7 @@ module Api
 
       def publish_confirmation_mailer
         PublisherService.publish(
-          topic: 'mailers',
-          routing_key: 'confirmation.mailer',
-          payload: confirmation_email_payload
+          topic: 'mailers', routing_key: 'accounts.confirmation', payload: confirmation_email_payload
         )
       end
 

@@ -13,7 +13,8 @@ services:
       - rabbitmq
     env_file:
       - .env
-
+    networks:
+        - looking_for_talents
   postgres:
     image: postgres:latest
     container_name: looking_for_talents_postgres
@@ -27,6 +28,8 @@ services:
       - 5432:5432
     env_file:
       - .env
+    networks:
+        - looking_for_talents
 
   rabbitmq:
     image: rabbitmq:3.13.0-management-alpine
@@ -34,3 +37,9 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+    networks:
+        - looking_for_talents
+
+networks:
+  looking_for_talents:
+    external: true
