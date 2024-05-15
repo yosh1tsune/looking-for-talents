@@ -33,6 +33,15 @@ jobs:
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
         with:
           bundler-cache: true
+
+      - name: Yarn package cache
+        uses: actions/cache@v2
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-yarn-v1-${{ hashFiles('./yarn.lock') }}
+
+      - name: Install Yarn packages
+        run: yarn install --pure-lockfile
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
@@ -51,4 +60,4 @@ jobs:
           bundler-cache: true
       # Add or replace any other lints here
       - name: Run rubocop
-        run: bundle exec rubocop --parallel
+        run: bundle exec rubocop
