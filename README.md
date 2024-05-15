@@ -27,7 +27,7 @@ Go to directory:
 cd looking-for-talents
 ```
 
-#### With Docker
+### With Docker
 
 To generate project images, install yarn and ruby dependencies, and setup de app database, run:
 
@@ -47,23 +47,31 @@ And to initiate the server, run:
 docker-compose up
 ```
 
-#### With local Ruby
+### With local Ruby
 
 Install node dependencies:
 
-`yarn install`
+```
+yarn install
+```
 
 Install ruby gems and setup database:
 
-`bin/setup`
+```
+bin/setup
+```
 
 (Optional) This project have pre-built development data, to fill the database with then, run:
 
-`rails db:seed`
+```
+rails db:seed
+```
 
 Finally, to see the app running, run:
 
-`rails server`
+```
+rails server
+```
 
 By default, server will run in http://localhost:3000
 
