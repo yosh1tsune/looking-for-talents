@@ -15,6 +15,7 @@ services:
       - .env
     networks:
         - looking_for_talents
+
   postgres:
     image: postgres:latest
     container_name: looking_for_talents_postgres

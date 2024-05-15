@@ -18,3 +18,5 @@ RUN gem update --system
 RUN yarn install --check-files
 
 RUN bundle install
+
+RUN rails db:prepare

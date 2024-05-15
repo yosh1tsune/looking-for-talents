@@ -1,65 +1,90 @@
 # Looking for Talents
 
-O intuito deste projeto é criar uma plataforma de divulgação de vagas, onde empresas possam buscar profissionais para integrar suas equipes e interagir com estes durante o processo de candidatura e contratação.
+The goal of this project is to build a platform for disseminating job opportunities, where companies can search for
+professionals to join their teams and interact with them during the application and hiring process.
 
-O projeto está em desenvolvimento constante, e hospedado no Heroku (https://looking-for-talents.herokuapp.com/).
+## Requirements
 
-## Pré-Requisitos
+This project have a Docker setup, but if you don't want to use it, this what you need to get it running:
 
-`Ruby >= 2.6.3`
+`Ruby >= 3.2.2`
 
 `node >= 13.12.0`
 
 `Postgres >= 9.2`
 
-Sistema operacional recomendado: `Linux`
+## Setup
 
-## Iniciando o Projeto
+Clone the repo:
 
-Clone o projeto:
+```
+git clone https://github.com/yosh1tsune/looking-for-talents.git
+```
 
-`git clone https://github.com/yosh1tsune/looking-for-talents.git`
+Go to directory:
 
-Acesse a pasta raiz:
+```
+cd looking-for-talents
+```
 
-`cd looking-for-talents`
+#### With Docker
 
-Instale as dependências do node:
+To generate project images, install yarn and ruby dependencies, and setup de app database, run:
+
+```
+docker-compose build
+```
+
+To setup and fill the database with initial development data, run:
+
+```
+docker-compose run app rails db:setup
+```
+
+And to initiate the server, run:
+
+```
+docker-compose up
+```
+
+#### With local Ruby
+
+Install node dependencies:
 
 `yarn install`
 
-Instalar as gems necessárias e iniciar o banco de dados:
+Install ruby gems and setup database:
 
 `bin/setup`
 
-(Opcional) Este projeto conta com dados pré-editados, para popular o banco com eles rode o seguinte comando:
+(Optional) This project have pre-built development data, to fill the database with then, run:
 
 `rails db:seed`
 
-Finalmente, para observar a aplicação em funcionamento, rode o comando:
+Finally, to see the app running, run:
 
 `rails server`
 
-Por padrão, a aplicação rodará em http://localhost:3000
+By default, server will run in http://localhost:3000
 
-## Funcionalidades
+## Functionalities
 
 ### Headhunter
 
-- Um headhunter inicia a utilização do sistema criando uma conta, informando email, senha, nome e sobrenome.
+- A headhunter initiates the flow of the application, signing up providing an email, password, name and surname.
 
-- Para publicar uma vaga os headhunters precisam estar vinculados a uma empresa. Os perfis de empresas são criados pelos próprios headhunters e o vinculo de um headhunter pode ser feito apenas pelo 'dono' da empresa.
+- To submit opportunities, headhunters must be linked with a company. Company profiles are created by headhunters, which will be their responsible. Only the responsible can link another headhunter to an existing company.
 
-- Candidatos inscritos em vagas podem ter seus perfis destacados e receber propostas de emprego baseados na inscrição.
+- Candidates can have their profiles highlighted and receive proposals based on their subscription.
 
-- Headhunters podem visualizar apenas vagas e propostas próprias; os perfis de todos os candidatos candidatos cadastrados na plataforma estarão visíveis.
+- Headhunter can visualize only their companies opportunities; profiles of all candidates in the application are visible.
 
 ### Candidatos
 
-- Um candidato inicia a utilização do sistema da mesma forma, criando uma conta informando email e senha.
+- A candidate initiate signing up providing an email, password.
 
-- Após cadastrados, candidatos precisam completar seu perfil com dados pessoais e profissionais, só assim podem se candidatar a vagas.
+- After sign up, candidates must fill in personal and professional info before being able to submit application to opportunities.
 
-- Candidatos podem visualizar todas as vagas cadastradas na plataforma, e apenas os seus próprios perfis.
+- Candidates can visualize all opportunities submitted, but only their own profiles.
 
-- Após inscritos em alguma vaga, os candidatos receberão avaliação e feedback dos headhunters além de eventuais propostas constando todos os termos envolvidos numa possível contratação, podendo aceitar ou recusar as mesmas.
+- After submit application for an opportunity, they'll receive feedback and, eventually, proposals, being able to accept or refuse it.
