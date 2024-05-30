@@ -29,7 +29,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/BlockLength:
-  ExcludedMethods: ['describe', 'context', 'feature', 'scenario', 'let']
+  AllowedMethods: ['describe', 'context', 'feature', 'scenario', 'let']
   Exclude:
   - 'config/routes.rb'
 
