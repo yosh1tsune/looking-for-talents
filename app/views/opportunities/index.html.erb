@@ -1,11 +1,11 @@
 <div class="container pt-3">
-  <div class="row">
+  <div class="row flex-row justify-content-between">
     <div class="col-md-3">
-      <h3>Painel de Vagas <i class="fas fa-file-signature"></i></h3>
+      <h3>Painel de Vagas <i class="fas fa-computer"></i></h3>
     </div>
 
-    <div class="col-md-3 offset-md-6">
-      <%= form_with url: search_opportunities_path, local: true, method: :get, class: "form-inline" do |f| %>
+    <div class="col-md-3">
+      <%= form_with url: search_opportunities_path, local: true, method: :get, class: "form-inline", html: { style: "justify-content: flex-end" } do |f| %>
         <%= f.text_field :q, placeholder: 'Insira o termo da pesquisa', class: "form-control col-10" %>
         <%= button_tag type: 'submit', id: 'Pesquisar', class: "btn btn-outline-danger col-2" do %>
           <i class="fas fa-search" aria-hidden="true"></i>
@@ -22,7 +22,7 @@
     <% end %>
   </div>
 
-  <div class="row justify-content-md-center">
+  <div class="row flex-row justify-content-center">
     <% if @opportunities.blank? %>
         <h3>Ainda não há vagas cadastradas</h1>
     <% else %>
