@@ -17,4 +17,5 @@
 //= require jquery
 //= require jquery_ujs
 
-import './packs/index'
+import 'packs'
+import "@fortawesome/fontawesome-free";

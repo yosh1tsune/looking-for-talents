@@ -29,7 +29,7 @@ cd looking-for-talents
 
 ### With Docker
 
-To generate project images, install yarn and ruby dependencies, and setup de app database, run:
+To generate project images and ruby dependencies, and setup de app database, run:
 
 ```
 docker-compose build
@@ -48,12 +48,6 @@ docker-compose up
 ```
 
 ### With local Ruby
-
-Install node dependencies:
-
-```
-yarn install
-```
 
 Install ruby gems and setup database:
 
