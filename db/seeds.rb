@@ -2,9 +2,13 @@ headhunter_a = Headhunter.create(email: 'first_headhunter@email.com',
                                  password: 'head1234',
                                  name: 'Bruno', surname: 'Silva')
 
+headhunter_a.confirm
+
 headhunter_b = Headhunter.create(email: 'second_headhunter@email.com',
                                  password: 'head5678',
                                  name: 'Rocky', surname: 'Balboa')
+
+headhunter_b.confirm
 
 company_a = Company.new(name: 'RR Systems', document: '46.318.224/0001-47',
                         description: 'Soluções em aplicações web baseadas '\
@@ -17,7 +21,7 @@ company_a.save!
 Address.create(street: 'Avenida Paulista, 9000', neighborhood: 'Bela Vista',
                city: 'São Paulo', state: 'SP', country: 'Brasil',
                zipcode: '00000-000', addressable: company_a)
-                                        
+
 company_b = Company.create(name: 'FinDevs', document: '31.516.545/0001-89',
                            description: 'Aplicações financeiras',
                            email: 'findevs@lookingfortalents.com',
@@ -28,7 +32,7 @@ company_b.save!
 Address.create(street: 'Avenida Rebouças, 5000', neighborhood: 'Pinheiros',
                city: 'São Paulo', state: 'SP', country: 'Brasil',
                zipcode: '00000-000', addressable: company_b)
-              
+
 company_c = Company.create(name: 'SF Devs', document: '92.015.880/0001-98',
                            description: 'Desenvolvimento de softwares Java',
                            email: 'sfdevs@lookingfortalents.com',
@@ -49,6 +53,8 @@ ServicingHeadhunter.create(company: company_c, headhunter: headhunter_b)
 candidate_a = Candidate.create(email: 'first_candidate@email.com',
                                password: 'cand1234')
 
+candidate_a.confirm
+
 profile_a = Profile.new(name: 'Bruno Silva', birth_date: '22/04/1996',
                            document: '467.642.068-48',
                            scholarity: 'Superior Incompleto',
@@ -58,7 +64,7 @@ profile_a = Profile.new(name: 'Bruno Silva', birth_date: '22/04/1996',
 profile_a.avatar.attach(io: File.open(Rails.root.join('spec/support/user.jpg')),
                         filename: 'user.jpg')
 profile_a.save!
-              
+
 Address.create(street: 'Avenida Edgar Facó, 100', neighborhood: 'Pirituba',
                city: 'São Paulo', state: 'SP', country: 'Brasil',
                zipcode: '00000-000', addressable: profile_a)
@@ -100,7 +106,7 @@ Opportunity.create(title: 'Analista de Suporte', grade: 'Senior',
                                      'de desenvolvimento',
                    required_abilities: 'React, Node, Adobe DW e PS, '\
                                        'metodologias ágeis',
-                   salary: 5_000, company: company_a, 
+                   salary: 5_000, company: company_a,
                    submit_end_date: '29/06/3020', headhunter: headhunter_a)
 
 Opportunity.create(title: 'Engenheiro de Software', grade: 'Pleno',
