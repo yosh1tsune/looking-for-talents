@@ -31,10 +31,6 @@ jobs:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
-      - name: Setup Firefox
-        uses: browser-actions/setup-firefox@v1
-        with:
-          firefox-version: '125.0.3'
       - name: Checkout code
         uses: actions/checkout@v4
       # Add or replace dependency steps here

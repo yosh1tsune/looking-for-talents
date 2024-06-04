@@ -36,11 +36,10 @@ end
 # If you are not using ActiveRecord, you can remove these lines.
 Capybara.register_driver :selenium do |app|
   options = Selenium::WebDriver::Firefox::Options.new
-
   [
     "--headless",
     "--window-size=1280x1280",
-    "--disable-gpu" # https://developers.google.com/web/updates/2017/04/headless-chrome
+    "--disable-gpu"
   ].each { |arg| options.add_argument(arg) }
 
   Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
