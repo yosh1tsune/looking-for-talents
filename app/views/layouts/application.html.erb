@@ -13,11 +13,13 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
     <% if flash.any? %>
-    <script type="text/javascript">
-      <% flash.each do |key, value| %>
-        <% type = key.to_s.gsub('alert', 'error').gsub('notice', 'success') %>
-          toastr.<%= type %>('<%= value %>')
-        <% end %>
+      <script type="text/javascript" defer>
+        window.addEventListener('load', function() {
+          <% flash.each do |key, value| %>
+            <% type = key.to_s.gsub('alert', 'error').gsub('notice', 'success') %>
+            toastr.<%= type %>('<%= value %>')
+          <% end %>
+        })
       </script>
     <% end %>
   </head>
