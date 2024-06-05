@@ -13,7 +13,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
     <% if flash.any? %>
-      <script type="text/javascript" defer>
+      <script type="text/javascript">
         window.addEventListener('load', function() {
           <% flash.each do |key, value| %>
             <% type = key.to_s.gsub('alert', 'error').gsub('notice', 'success') %>
