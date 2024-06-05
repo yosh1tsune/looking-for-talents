@@ -16,6 +16,7 @@ feature 'Candidate submit experiences', js: true do
     fill_in 'Data de Término', with: Date.new(2020, 4, 20)
     fill_in 'Resumo', with: 'Desenvolvimento de Aplicações Web'
     click_on 'Salvar'
+    click_on 'Fechar'
 
     expect(page).to have_content 'Experiência salva com sucesso'
     expect(page).to have_content "Empresa:\nJS Sistemas"
@@ -41,6 +42,7 @@ feature 'Candidate submit experiences', js: true do
     fill_in 'Data de Término', with: Date.new(2020, 4, 20)
     fill_in 'Resumo', with: 'Desenvolvimento de Aplicações Web'
     click_on 'Salvar'
+    click_on 'Fechar'
 
     expect(page).to have_content 'Experiência salva com sucesso'
     expect(page).to have_content "Empresa:\nRuby Apps"
