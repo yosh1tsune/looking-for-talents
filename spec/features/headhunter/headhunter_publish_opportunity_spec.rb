@@ -16,7 +16,7 @@ feature 'headhunter publish opportunity' do
     fill_in 'Descrição da vaga', with: 'Desenvolvimento web com  Ruby on Rails'
     fill_in 'Habilidades necessárias', with: 'Ruby, Rails, TDD, JavaScript,'\
                                                 ' HTML, CSS'
-    fill_in 'Salário', with: 'À combinar'
+    fill_in 'Salário', with: 4_000
     fill_in 'Data de encerramento das inscrições', with: 7.days.from_now
     fill_in 'Nível', with: 'Junior'
     click_on 'Enviar'

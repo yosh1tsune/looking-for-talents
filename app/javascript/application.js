@@ -12,9 +12,6 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
-//= require jquery
-//= require jquery_ujs
 
 import '@rails/actioncable'
 import '@rails/activestorage'
@@ -22,6 +19,7 @@ import '@rails/actiontext'
 import 'trix'
 
 import 'jquery'
+
 import '@fortawesome/fontawesome-free'
 import 'inputmask'
 import 'toastr'
