@@ -45,7 +45,7 @@ Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
 end
 Capybara.javascript_driver = :selenium
-Capybara.raise_server_errors = false
+Capybara.raise_server_errors = true
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
