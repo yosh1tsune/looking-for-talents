@@ -29,8 +29,6 @@ group :development do
   gem 'listen', '3.8.0'
   gem 'rubocop', '1.60.2', require: false
   gem 'rubocop-rails', '2.23.1', require: false
-  gem 'spring', '4.1.3'
-  gem 'spring-watcher-listen', '2.1.0'
   gem 'web-console', '4.2.1'
 end
 
