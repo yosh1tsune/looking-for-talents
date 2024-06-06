@@ -26,11 +26,9 @@ Rails.application.routes.draw do
   end
 
   resources :profiles do
-    resources :experiences, only: %i[create]
+    resources :experiences, only: %i[create destroy]
     resources :comments, only: %i[create]
   end
-
-  resources :experiences, only: %i[edit destroy]
 
   defaults format: :json do
     namespace :api do

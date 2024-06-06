@@ -1,18 +1,24 @@
 <% if experience %>
   <% if experience.errors.blank? %>
-    <dl>
-      <dt><%= t('experiences.company') %>:</dt>
-      <dd><%= experience.company %></dd>
-      <dt><%= t('experiences.role') %>:</dt>
-      <dd><%= experience.role %></dd>
-      <dt><%= t('experiences.start_date') %>:</dt>
-      <dd><%= l(experience.start_date) %></dd>
-      <% if experience.currently_working == false %>
-        <dt><%= t('experiences.end_date') %>:</dt>
-        <dd><%= l(experience.end_date) %></dd>
+    <div id=<%= "experience_#{experience.id}" %>>
+      <dl>
+        <dt><%= t('experiences.company') %>:</dt>
+        <dd><%= experience.company %></dd>
+        <dt><%= t('experiences.role') %>:</dt>
+        <dd><%= experience.role %></dd>
+        <dt><%= t('experiences.start_date') %>:</dt>
+        <dd><%= l(experience.start_date) %></dd>
+        <% if experience.currently_working == false %>
+          <dt><%= t('experiences.end_date') %>:</dt>
+          <dd><%= l(experience.end_date) %></dd>
+        <% end %>
+        <dt><%= t('experiences.resume') %>:</dt>
+        <dd><%= experience.resume %></dd>
+      </dl>
+
+      <%= link_to profile_experience_path(experience.profile.id, experience.id), method: :delete, remote: true, class: 'btn btn-danger', id: "delete_experience_#{experience.id}" do %>
+        <i class="fas fa-trash" aria-hidden="true"></i>
       <% end %>
-      <dt><%= t('experiences.resume') %>:</dt>
-      <dd><%= experience.resume %></dd>
-    </dl>
+    </div>
   <% end %>
 <% end %>

@@ -9,6 +9,17 @@ class ExperiencesController < ApplicationController
     end
   end
 
+  def destroy
+    @profile = Profile.find(params[:profile_id])
+    @experience = @profile.experiences.find(params[:id])
+    @experience.destroy
+
+    respond_to do |format|
+      format.js { flash[:notice] = 'Experiência excluída com sucesso.' }
+      format.html { redirect_to @profile }
+    end
+  end
+
   private
 
   def success_render
