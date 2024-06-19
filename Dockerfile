@@ -18,3 +18,4 @@ RUN gem update --system
 RUN bundle install
 
 # RUN rails db:prepare
+EXPOSE 80
