@@ -37,3 +37,5 @@
 .env
 
 /vendor
+
+/config/credentials/production.key
