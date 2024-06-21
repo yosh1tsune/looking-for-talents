@@ -15,4 +15,8 @@ class Headhunter < ApplicationRecord
   def details
     "#{name} #{surname} - #{email}"
   end
+
+  def send_on_create_confirmation_instructions
+    # send_devise_notification(:confirmation_instructions)
+  end
 end

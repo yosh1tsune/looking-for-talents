@@ -6,4 +6,8 @@ class Candidate < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_one :profile, dependent: :destroy
   has_many :proposals, through: :subscriptions
+
+  def send_on_create_confirmation_instructions
+    # send_devise_notification(:confirmation_instructions)
+  end
 end
