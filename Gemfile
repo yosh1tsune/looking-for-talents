@@ -7,6 +7,7 @@ gem 'aws-sdk-s3', '1.143.0', require: false
 gem 'bootsnap', '1.18.1', require: false
 gem 'bunny', '2.22'
 gem 'devise', '4.9.3'
+gem 'dotenv-rails', '3.1.2'
 gem 'importmap-rails', '~> 2.0'
 gem 'jbuilder', '2.11.5'
 gem 'jquery-rails', '4.6.0'
