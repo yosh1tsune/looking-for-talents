@@ -6,10 +6,7 @@
 # run tests and linters.
 name: "Looking for Talents CI"
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
 jobs:
   test:
     runs-on: ubuntu-latest
