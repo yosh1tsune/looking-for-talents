@@ -23,6 +23,14 @@ class OpportunityPolicy < ApplicationPolicy
     user.is_a?(Headhunter)
   end
 
+  def update?
+    record.headhunter == user
+  end
+
+  def destroy?
+    record.headhunter == user
+  end
+
   def close?
     record.headhunter == user
   end

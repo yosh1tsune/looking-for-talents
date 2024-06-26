@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 describe 'Opportunities Management' do
+  let(:headhunter) { create(:headhunter) }
+  let(:company) { create(:company) }
+  let(:token) do
+    JWT.encode(
+      {
+        id: headhunter.id,
+        class: headhunter.class,
+        exp: 7.days.from_now.to_i,
+        jti: SecureRandom.uuid
+      },
+      Rails.application.credentials.secret_key_base
+    )
+  end
+
   context 'index' do
     it 'succesfully' do
       create(:opportunity, title: 'Desenvolvedor Rails')
@@ -28,7 +42,10 @@ describe 'Opportunities Management' do
 
       get api_v1_opportunity_path(opportunity)
 
+      body = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to have_http_status(:ok)
+      expect(body[:id]).to eq opportunity.id
     end
 
     it "or didn't find a record with the parameter id" do
@@ -40,9 +57,6 @@ describe 'Opportunities Management' do
 
   context 'create' do
     it 'successfully' do
-      headhunter = create(:headhunter)
-      company = create(:company)
-
       params = { title: 'Engenheiro de Software',
                  work_description: 'Desenvolvimento de aplicações web',
                  required_abilities: 'Graduação em T.I., Modelagem de '\
@@ -51,23 +65,34 @@ describe 'Opportunities Management' do
                  submit_end_date: 14.days.from_now,
                  company_id: company.id, headhunter_id: headhunter.id }
 
-      post api_v1_opportunities_path, params: params
+      post api_v1_opportunities_path, params: params, headers: { 'Authorization': token }
+
+      body = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to have_http_status(:created)
+      expect(body[:title]).to eq 'Engenheiro de Software'
     end
 
     it 'or fail if incomplete data is submited' do
-      post api_v1_opportunities_path, params: {}
+      post api_v1_opportunities_path, params: {}, headers: { 'Authorization': token }
+
+      body = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to have_http_status(:precondition_failed)
+      expect(body[:message]).to eq [
+        'Título não pode ficar em branco',
+        'Descrição da vaga não pode ficar em branco',
+        'Habilidades necessárias não pode ficar em branco',
+        'Salário não pode ficar em branco',
+        'Nível não pode ficar em branco',
+        'Data de encerramento das inscrições não pode ficar em branco',
+        'Company é obrigatório(a)'
+      ]
     end
 
     it 'or raise error 500 if the params are good but the database fails' do
-      headhunter = create(:headhunter)
-      company = create(:company)
+      allow_any_instance_of(Opportunity).to receive(:save!).and_raise(ActiveRecord::ActiveRecordError)
 
-      allow_any_instance_of(Opportunity).to receive(:save!)
-        .and_raise(ActiveRecord::ActiveRecordError)
       params = { title: 'Engenheiro de Software',
                  company_id: company.id,
                  work_description: 'Desenvolvimento de aplicações web',
@@ -77,7 +102,7 @@ describe 'Opportunities Management' do
                  submit_end_date: 14.days.from_now,
                  headhunter_id: headhunter.id }
 
-      post api_v1_opportunities_path, params: params
+      post api_v1_opportunities_path, params: params, headers: { 'Authorization': token }
 
       expect(response).to have_http_status(:internal_server_error)
     end
@@ -85,8 +110,8 @@ describe 'Opportunities Management' do
 
   context 'update' do
     it 'sucessfully' do
-      opportunity = create(:opportunity, title: 'Desenvolvedor Rails')
-      company = create(:company, name: 'Google')
+      opportunity = create(:opportunity, headhunter: headhunter, title: 'Desenvolvedor Rails')
+      company = create(:company, headhunter: headhunter, name: 'Google')
 
       params = { title: 'Engenheiro de Software',
                  work_description: 'Análise e desenvolvimento de projetos',
@@ -95,7 +120,7 @@ describe 'Opportunities Management' do
                  submit_end_date: 14.days.from_now, company_id: company.id,
                  headhunter_id: opportunity.headhunter_id }
 
-      patch api_v1_opportunity_path(opportunity), params: params
+      patch api_v1_opportunity_path(opportunity), params: params, headers: { 'Authorization': token }
 
       opportunity.reload
 
@@ -111,7 +136,7 @@ describe 'Opportunities Management' do
     end
 
     it 'or fail if not all fields are filled' do
-      opportunity = create(:opportunity, title: 'Desenvolvedor Rails')
+      opportunity = create(:opportunity, headhunter: headhunter, title: 'Desenvolvedor Rails')
 
       params = { title: 'Engenheiro de Software',
                  work_description: nil,
@@ -121,20 +146,21 @@ describe 'Opportunities Management' do
                  submit_end_date: 14.days.from_now, company_id: nil,
                  headhunter_id: opportunity.headhunter_id }
 
-      patch api_v1_opportunity_path(opportunity), params: params
+      patch api_v1_opportunity_path(opportunity), params: params, headers: { 'Authorization': token }
 
       expect(response).to have_http_status(:precondition_failed)
     end
 
     it "or fail if trying to update that doesn't exist" do
-      patch api_v1_opportunity_path(id: 999), params: {}
+      patch api_v1_opportunity_path(id: 0), params: {}, headers: { 'Authorization': token }
 
       expect(response).to have_http_status(:not_found)
     end
 
     it 'or raise error 500 if the params are good but the database fails' do
-      opportunity = create(:opportunity, title: 'Desenvolvedor Rails')
+      allow_any_instance_of(Opportunity).to receive(:update!).and_raise(ActiveRecord::ActiveRecordError)
 
+      opportunity = create(:opportunity, headhunter: headhunter, title: 'Desenvolvedor Rails')
       params = { title: 'Engenheiro de Software',
                  company: 'RR Systems',
                  work_description: 'Desenvolvimento de aplicações web',
@@ -144,10 +170,7 @@ describe 'Opportunities Management' do
                  submit_end_date: 14.days.from_now,
                  headhunter_id: opportunity.headhunter_id }
 
-      allow_any_instance_of(Opportunity).to receive(:update!)
-        .and_raise(ActiveRecord::ActiveRecordError)
-
-      patch api_v1_opportunity_path(opportunity), params: params
+      patch api_v1_opportunity_path(opportunity), params: params, headers: { 'Authorization': token }
 
       expect(response).to have_http_status(:internal_server_error)
     end
@@ -155,17 +178,20 @@ describe 'Opportunities Management' do
 
   context 'delete' do
     it 'sucessfully' do
-      opportunity = create(:opportunity, title: 'Desenvolvedor Rails')
+      opportunity = create(:opportunity, headhunter: headhunter, title: 'Desenvolvedor Rails')
 
       expect do
-        delete api_v1_opportunity_path(opportunity)
+        delete api_v1_opportunity_path(opportunity), headers: { 'Authorization': token }
       end.to change(Opportunity, :count).from(1).to(0)
 
+      body = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to have_http_status(:ok)
+      expect(body[:message]).to eq 'Registro excluído com sucesso.'
     end
 
     it "or fail if try to delete a object that doesn't exist" do
-      delete api_v1_opportunity_path(id: 999)
+      delete api_v1_opportunity_path(id: 0), headers: { 'Authorization': token }
 
       expect(response).to have_http_status(:not_found)
     end
