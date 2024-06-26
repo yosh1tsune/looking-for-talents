@@ -1,27 +1,30 @@
-module Api
+module API
   module V1
-    class ApiController < ActionController::API
+    class APIController < ActionController::API
+      include Pundit::Authorization
+
       rescue_from ActiveRecord::ActiveRecordError, with: :database_error
       rescue_from ActiveRecord::RecordNotFound, with: :object_not_found
 
-      SECRET_KEY = Rails.application.secret_key_base
+      attr_reader :current_user
+
+      SECRET_KEY = Rails.application.credentials.secret_key_base
+
+      private
 
       def object_not_found
         render json: { message: 'Object Not Found' }, status: :not_found
       end
 
       def database_error
-        render json: { message: 'Database Error' },
-               status: :internal_server_error
+        render json: { message: 'Database Error' }, status: :internal_server_error
       end
 
       def authenticate_user!
         procces_token
+        return if current_user.present?
 
-        return if @current_user.present?
-
-        render json: { message: 'User Not Logged In' },
-               status: :unauthorized
+        render json: { message: 'User Not Logged In' }, status: :unauthorized
       end
 
       def procces_token
@@ -32,8 +35,6 @@ module Api
       rescue StandardError
         render json: { message: 'a' }, status: :unauthorized
       end
-
-      private
 
       def jwt_encode(payload, expire = 7.days.from_now)
         payload[:exp] = expire.to_i
