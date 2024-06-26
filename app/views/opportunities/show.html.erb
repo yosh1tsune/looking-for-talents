@@ -34,7 +34,7 @@
 
   <% if candidate_signed_in? %>
     <hr class="my-4">
-      <% if @registered %>
+      <% if current_candidate.subscriptions.map(&:opportunity_id).include?(@opportunity.id) %>
         <p class="h4">Você já está inscrito nesta vaga. Aguarde instruções do recrutador.</p>
       <% elsif @opportunity.closed? %>
         <p class="h4">As inscrições para esta vaga foram encerradas</p>

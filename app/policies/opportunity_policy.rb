@@ -31,12 +31,11 @@ class OpportunityPolicy < ApplicationPolicy
     record.headhunter == user
   end
 
-  class Scope
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
+  def close?
+    record.headhunter == user
+  end
 
+  class Scope < ApplicationPolicy::Scope
     def resolve
       if user.is_a?(Headhunter)
         scope.where(headhunter_id: user.id)
@@ -44,9 +43,5 @@ class OpportunityPolicy < ApplicationPolicy
         scope.all
       end
     end
-
-    private
-
-    attr_reader :user, :scope
   end
 end

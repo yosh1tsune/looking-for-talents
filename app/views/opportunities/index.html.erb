@@ -5,8 +5,8 @@
     </div>
 
     <div class="col-md-3">
-      <%= form_with url: search_opportunities_path, local: true, method: :get, class: "form-inline", html: { style: "justify-content: flex-end" } do |f| %>
-        <%= f.text_field :q, placeholder: 'Insira o termo da pesquisa', class: "form-control col-10" %>
+      <%= form_with url: search_opportunities_path, local: true, method: :get, class: "form-inline", html: { style: "justify-content: flex-end" } do |form| %>
+        <%= form.text_field :query, placeholder: 'Insira o termo da pesquisa', class: "form-control col-10" %>
         <%= button_tag type: 'submit', id: 'Pesquisar', class: "btn btn-outline-danger col-2" do %>
           <i class="fas fa-search" aria-hidden="true"></i>
         <% end %>
