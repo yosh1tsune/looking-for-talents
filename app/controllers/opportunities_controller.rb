@@ -18,24 +18,17 @@ class OpportunitiesController < ApplicationController
   end
 
   def create
-    @opportunity = current_headhunter.opportunities.new(opportunity_params)
-    authorize @opportunity
-    if @opportunity.save
-      flash[:notice] = 'Vaga publicada com sucesso!'
-
-      redirect_to @opportunity
-    else
-      render :new
-    end
+    @opportunity = Opportunities::CreatorService.new(user: current_headhunter, attributes: opportunity_params).execute
+    flash[:notice] = 'Vaga publicada com sucesso!'
+    redirect_to @opportunity
+  rescue ActiveRecord::RecordInvalid => e
+    @opportunity = e.record
+    render :new
   end
 
   def close
-    @opportunity = Opportunity.find(params[:id])
-    authorize @opportunity
-    @opportunity.closed!
-
+    @opportunity = Opportunities::CloserService.new(user: current_headhunter, opportunity_id: params[:id]).execute
     flash[:notice] = 'Inscrições encerradas com sucesso.'
-
     redirect_to @opportunity
   end
 

@@ -8,7 +8,11 @@ class OpportunityPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    if user.is_a?(Headhunter)
+      record.headhunter == user
+    else
+      true
+    end
   end
 
   def create?
@@ -17,18 +21,6 @@ class OpportunityPolicy < ApplicationPolicy
 
   def new?
     user.is_a?(Headhunter)
-  end
-
-  def update?
-    record.headhunter == user
-  end
-
-  def edit?
-    record.headhunter == user
-  end
-
-  def destroy?
-    record.headhunter == user
   end
 
   def close?
