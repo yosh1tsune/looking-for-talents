@@ -22,7 +22,7 @@ module API
 
       def authenticate_user!
         procces_token
-        return if current_user.present?
+        return if @current_user.present?
 
         render json: { message: 'User Not Logged In' }, status: :unauthorized
       end
