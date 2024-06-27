@@ -35,7 +35,7 @@ module API
         @jwt_payload = jwt_decode(request.headers['Authorization'])
         @current_user = @jwt_payload['class'].constantize.find(@jwt_payload['id'])
       rescue StandardError
-        # unauthorized
+        unauthorized
       end
 
       def jwt_encode(payload, expire = 7.days.from_now)
