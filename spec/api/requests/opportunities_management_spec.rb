@@ -104,7 +104,58 @@ describe 'Opportunities Management' do
 
       post api_v1_opportunities_path, params: params, headers: { 'Authorization': token }
 
+      body = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to have_http_status(:internal_server_error)
+      expect(body[:message]).to eq 'Database Error'
+    end
+
+    it 'or raise error 401 if user not logged in' do
+      params = { title: 'Engenheiro de Software',
+                 company_id: company.id,
+                 work_description: 'Desenvolvimento de aplicações web',
+                 required_abilities: 'Graduação em T.I., Modelagem de '\
+                                          'Banco de dados, Metodologias Ágeis',
+                 salary: '8.000,00', grade: 'Especialista',
+                 submit_end_date: 14.days.from_now,
+                 headhunter_id: headhunter.id }
+
+      post api_v1_opportunities_path, params: params
+
+      body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:unauthorized)
+      expect(body[:message]).to eq 'User Not Authorized'
+    end
+
+    it 'or raise error 403 if user not allowed to access this resource' do
+      candidate = create(:candidate)
+      token = JWT.encode(
+        {
+          id: candidate.id,
+          class: candidate.class,
+          exp: 7.days.from_now.to_i,
+          jti: SecureRandom.uuid
+        },
+        Rails.application.credentials.secret_key_base
+      )
+
+      params = { title: 'Engenheiro de Software',
+                 company_id: company.id,
+                 work_description: 'Desenvolvimento de aplicações web',
+                 required_abilities: 'Graduação em T.I., Modelagem de '\
+                                          'Banco de dados, Metodologias Ágeis',
+                 salary: '8.000,00', grade: 'Especialista',
+                 submit_end_date: 14.days.from_now,
+                 headhunter_id: headhunter.id }
+
+      post api_v1_opportunities_path, params: params, headers: { 'Authorization': token }
+
+      body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to have_http_status(:forbidden)
+      expect(response).to have_http_status(:forbidden)
+      expect(body[:message]).to eq 'User Not Allowed'
     end
   end
 

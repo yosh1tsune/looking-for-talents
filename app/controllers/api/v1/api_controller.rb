@@ -5,6 +5,7 @@ module API
 
       rescue_from ActiveRecord::ActiveRecordError, with: :database_error
       rescue_from ActiveRecord::RecordNotFound, with: :object_not_found
+      rescue_from Pundit::NotAuthorizedError, with: :forbidden
 
       attr_reader :current_user
 
@@ -20,20 +21,21 @@ module API
         render json: { message: 'Database Error' }, status: :internal_server_error
       end
 
-      def authenticate_user!
-        procces_token
-        return if @current_user.present?
-
-        render json: { message: 'User Not Logged In' }, status: :unauthorized
+      def forbidden
+        render json: { message: 'User Not Allowed' }, status: :forbidden
       end
 
-      def procces_token
-        return if request.headers['Authorization'].blank?
+      def unauthorized
+        render json: { message: 'User Not Authorized' }, status: :unauthorized
+      end
+
+      def authenticate_user!
+        raise StandardError if request.headers['Authorization'].blank?
 
         @jwt_payload = jwt_decode(request.headers['Authorization'])
         @current_user = @jwt_payload['class'].constantize.find(@jwt_payload['id'])
       rescue StandardError
-        render json: { message: 'a' }, status: :unauthorized
+        unauthorized
       end
 
       def jwt_encode(payload, expire = 7.days.from_now)
