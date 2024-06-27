@@ -1,13 +1,13 @@
 module API
   module V1
     class APIController < ActionController::API
+      attr_reader :current_user
+
       include Pundit::Authorization
 
       rescue_from ActiveRecord::ActiveRecordError, with: :database_error
       rescue_from ActiveRecord::RecordNotFound, with: :object_not_found
       rescue_from Pundit::NotAuthorizedError, with: :forbidden
-
-      attr_reader :current_user
 
       SECRET_KEY = Rails.application.credentials.secret_key_base
 
