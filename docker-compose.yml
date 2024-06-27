@@ -35,6 +35,9 @@ services:
   rabbitmq:
     image: rabbitmq:3.13.0-management-alpine
     container_name: looking_for_talents_rabbitmq
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     ports:
       - 5672:5672
       - 15672:15672
