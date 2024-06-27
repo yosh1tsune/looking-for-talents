@@ -41,7 +41,7 @@ jobs:
 
       # Add or replace database setup steps here
       - name: Set up database schema
-        run: bin/rails db:drop db:create db:schema:load db:migrate
+        run: bin/rails db:create db:schema:load db:migrate
       # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec
