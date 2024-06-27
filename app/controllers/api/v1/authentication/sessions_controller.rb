@@ -1,8 +1,8 @@
 # API::V1::Authentication::SessionsController
-module Api
+module API
   module V1
     module Authentication
-      class SessionsController < Api::V1::ApiController
+      class SessionsController < API::V1::APIController
         def create
           if resource.valid_password?(sessions_params[:password])
             token = jwt_encode({ id: resource.id, class: resource.class })

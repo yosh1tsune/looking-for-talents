@@ -1,7 +1,7 @@
 # API::V1::CandidatesController
-module Api
+module API
   module V1
-    class CandidatesController < Api::V1::ApiController
+    class CandidatesController < API::V1::APIController
       def create
         @candidate = Candidate.create!(candidate_params)
 

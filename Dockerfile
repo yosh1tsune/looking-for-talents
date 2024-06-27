@@ -16,5 +16,3 @@ COPY Gemfile Gemfile.lock app/
 RUN gem update --system
 
 RUN bundle install
-
-# RUN rails db:prepare

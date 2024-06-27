@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+  def current_user
+    current_headhunter || current_candidate
+  end
 
   protected
 

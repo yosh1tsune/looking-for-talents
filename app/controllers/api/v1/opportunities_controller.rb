@@ -1,45 +1,42 @@
-module Api
+module API
   module V1
-    class OpportunitiesController < Api::V1::ApiController
-      # before_action :authenticate_user!, only: %i[create update destroy]
+    class OpportunitiesController < API::V1::APIController
+      before_action :authenticate_user!, only: %i[create update destroy]
 
       def index
         @opportunities = Opportunity.all.page(params[:page]).per(params[:per_page])
+        authorize Opportunity
       end
 
       def show
         @opportunity = Opportunity.find(params[:id])
+        authorize Opportunity
       end
 
       def create
-        @opportunity = Opportunity.new(opportunity_params)
-
-        if @opportunity.valid?
-          @opportunity.save!
-          render json: @opportunity, status: :created
-        else
-          render json: 'Opportunity not submited', status: :precondition_failed
-        end
+        @opportunity = Opportunities::CreatorService.new(user: @current_user, attributes: opportunity_params).execute
+        render status: :created
+      rescue ActiveRecord::RecordInvalid => e
+        @opportunity = e.record
+        render status: :precondition_failed
       end
 
       def update
         @opportunity = Opportunity.find(params[:id])
+        authorize @opportunity
         @opportunity.assign_attributes(opportunity_params)
 
         if @opportunity.valid?
           @opportunity.update!(opportunity_params)
-          render json: @opportunity, status: :ok
         else
-          render json: 'Object not updated', status: :precondition_failed
+          render status: :precondition_failed
         end
       end
 
       def destroy
         @opportunity = Opportunity.find(params[:id])
-
+        authorize @opportunity
         @opportunity.destroy
-
-        render json: 'Object deleted', status: :ok
       end
 
       private
