@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_28_204900) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_02_005457) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_204900) do
     t.index ["reset_password_token"], name: "index_candidates_on_reset_password_token", unique: true
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.bigint "headhunter_id", null: false
+    t.bigint "candidate_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["candidate_id"], name: "index_chats_on_candidate_id"
+    t.index ["headhunter_id"], name: "index_chats_on_headhunter_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string "comment"
     t.bigint "profile_id", null: false
@@ -123,6 +132,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_204900) do
     t.string "unconfirmed_email"
     t.index ["email"], name: "index_headhunters_on_email", unique: true
     t.index ["reset_password_token"], name: "index_headhunters_on_reset_password_token", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "chat_id", null: false
+    t.string "from_type", null: false
+    t.bigint "from_id", null: false
+    t.string "to_type", null: false
+    t.bigint "to_id", null: false
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["from_type", "from_id"], name: "index_messages_on_from"
+    t.index ["to_type", "to_id"], name: "index_messages_on_to"
   end
 
   create_table "opportunities", force: :cascade do |t|
@@ -194,10 +217,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_204900) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chats", "candidates"
+  add_foreign_key "chats", "headhunters"
   add_foreign_key "comments", "headhunters"
   add_foreign_key "comments", "profiles"
   add_foreign_key "companies", "headhunters"
   add_foreign_key "experiences", "profiles"
+  add_foreign_key "messages", "chats"
   add_foreign_key "opportunities", "companies"
   add_foreign_key "opportunities", "headhunters"
   add_foreign_key "profiles", "candidates"
