@@ -1,0 +1,11 @@
+<div>
+  <p>Mensagens</p>
+  <% current_headhunter.opportunities.map do |opportunity| %>
+    <% next if opportunity.candidates.blank? %>
+
+    <p><%= opportunity.title %></p>
+    <% opportunity.candidates.map do |candidate| %>
+      <%= link_to candidate.profile.name, new_chat_path(headhunter: current_headhunter, candidate: candidate, destinatary: 'Candidate'), remote: true %></p>
+    <% end %>
+  <% end %>
+</div>

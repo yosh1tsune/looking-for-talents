@@ -29,8 +29,10 @@
       <%= render 'shared/navbars/visitor'%>
     <% elsif candidate_signed_in? %>
       <%= render 'shared/navbars/candidate'%>
+      <%= render 'chats/candidate'%>
     <% elsif headhunter_signed_in? %>
       <%= render 'shared/navbars/headhunter'%>
+      <%= render 'chats/headhunter'%>
     <% end %>
     <%= yield %>
   </body>
