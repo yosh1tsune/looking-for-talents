@@ -125,7 +125,7 @@ hr {
   position: fixed;
   bottom: 0;
   right: 0;
-  z-index: 9998;
+  z-index: 800;
 }
 
 .chat_window {
@@ -133,7 +133,7 @@ hr {
   position: fixed;
   right: 0;
   bottom: 0;
-  z-index: 9999;
+  z-index: 900;
   max-width: 20%;
   max-height: 50%;
   background-color: rgb(21, 29, 39);
@@ -149,6 +149,18 @@ hr {
 .accordion-body {
   color: white;
   background-color: rgb(21, 29, 39);
+}
+
+#accordion_body > .accordion-body {
+  padding: 0;
+  height: 80vh;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.accordion-collapse > .btn {
+  border-width: 1px 0;
+  padding: 0;
+  width: 100%
 }
 
 @media (max-width: 768px) {

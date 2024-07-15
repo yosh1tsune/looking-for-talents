@@ -19,7 +19,7 @@
               </h2>
               <div id="accordion_body_<%= opportunity.id %>" class="accordion-collapse collapse show" data-bs-parent="#ChatListBodyAccordion">
                 <% opportunity.candidates.map do |candidate| %>
-                  <%= link_to new_chat_path(headhunter: current_headhunter, candidate: candidate, destinatary: 'Candidate'), remote: true, class: 'btn w-100 p-0'  do %>
+                  <%= link_to new_chat_path(headhunter: current_headhunter, candidate: candidate, destinatary: 'Candidate'), remote: true, class: 'btn' do %>
                     <div class="accordion-body">
                       <%= candidate.profile.name %>
                     </div>

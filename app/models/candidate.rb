@@ -11,4 +11,8 @@ class Candidate < ApplicationRecord
   def send_on_create_confirmation_instructions
     # send_devise_notification(:confirmation_instructions)
   end
+
+  def full_name
+    profile.name
+  end
 end
