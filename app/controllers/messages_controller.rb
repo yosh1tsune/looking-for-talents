@@ -1,12 +1,8 @@
 class MessagesController < ApplicationController
-  before_action :authenticate_headhunter!
-
   def create
     @message = chat.messages.new(text: messages_params[:text], from: sender, to: destinatary)
     @message.save!
-    respond_to do |format|
-      format.js
-    end
+    respond_to { |format| format.js }
   end
 
   private

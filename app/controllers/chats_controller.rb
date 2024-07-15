@@ -2,9 +2,7 @@ class ChatsController < ApplicationController
   def new
     @chat = Chat.find_or_initialize_by(headhunter_id: chat_params[:headhunter], candidate_id: chat_params[:candidate])
     @destinatary = destinatary
-    respond_to do |format|
-      format.js
-    end
+    respond_to { |format| format.js }
   end
 
   private
