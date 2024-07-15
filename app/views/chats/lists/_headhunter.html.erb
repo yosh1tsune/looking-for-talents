@@ -1,0 +1,35 @@
+<div class="accordion accordion-flush chat-list-accordion" id="ChatListAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion_body" aria-expanded="false" aria-controls="collapseOne">
+        <i class="fas fa-message" style="margin-right: 10px;" aria-hidden="true"></i>
+      </button>
+    </h2>
+    <div id="accordion_body" class="accordion-collapse collapse" data-bs-parent="#ChatListAccordion">
+      <div class="accordion-body" style="height: 80vh">
+        <div class="accordion accordion-flush" id="ChatListBodyAccordion">
+          <% current_headhunter.opportunities.map do |opportunity| %>
+            <% next if opportunity.candidates.blank? %>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion_body_<%= opportunity.id %>" aria-expanded="true" aria-controls="collapseOne">
+                  <%= opportunity.title %>
+                </button>
+              </h2>
+              <div id="accordion_body_<%= opportunity.id %>" class="accordion-collapse collapse show" data-bs-parent="#ChatListBodyAccordion">
+                <% opportunity.candidates.map do |candidate| %>
+                  <%= link_to new_chat_path(headhunter: current_headhunter, candidate: candidate, destinatary: 'Candidate'), remote: true, class: 'btn w-100 p-0'  do %>
+                    <div class="accordion-body">
+                      <%= candidate.profile.name %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

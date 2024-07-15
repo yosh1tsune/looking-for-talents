@@ -1,17 +1,30 @@
-<div id="chat">
-  <div id="messages"></div>
-  <%= form_for @chat.messages.new, remote: true do |form| %>
-    <%= form.hidden_field :headhunter_id, value: @chat.headhunter_id %>
-    <%= form.hidden_field :candidate_id, value: @chat.candidate_id %>
-    <%= form.hidden_field :from_id, value: (current_headhunter || current_candidate).id %>
-    <%= form.hidden_field :from_class, value: (current_headhunter || current_candidate).class %>
-    <%= form.hidden_field :to_id, value: @destinatary.id %>
-    <%= form.hidden_field :to_class, value: @destinatary.class %>
-    <div class="form-group">
-      <%= form.text_field :text, autofocus: true, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= form.submit '', id: 'message_send' %>
-    </div>
-  <% end %>
+<div id="chat" class="chat_window justify-content-between">
+  <div class="message_header">
+    <span style="margin: 0; line-height:35px;"><%= @destinatary.profile.name %></span>
+    <button type="button" class="btn btn-outline-light" title="Fechar" onClick="$('#chat').remove()">
+      <i class="fas fa-close" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="messages_list">
+    <% @chat.messages.map do |message| %>
+      <div id="messages" class="row <%= message.from == (current_headhunter || current_candidate) ? 'message_sent' : 'message_received' %>">
+        <p style="line-break: anywhere"><%= message.text %></p>
+        <p class="message_timestamp" ><%= message.created_at.strftime('%H:%M') %></p>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <%= form_for @chat.messages.new, remote: true, html: { class: 'form-inline' } do |form| %>
+      <%= form.hidden_field :headhunter_id, value: @chat.headhunter_id %>
+      <%= form.hidden_field :candidate_id, value: @chat.candidate_id %>
+      <%= form.hidden_field :from_id, value: (current_headhunter || current_candidate).id %>
+      <%= form.hidden_field :from_class, value: (current_headhunter || current_candidate).class %>
+      <%= form.hidden_field :to_id, value: @destinatary.id %>
+      <%= form.hidden_field :to_class, value: @destinatary.class %>
+      <%= form.text_field :text, style: 'width: 86%', class: 'form-control', placeholder: 'Digite uma mensagem...' %>
+      <%= button_tag type: 'submit', id: 'message_send', style: 'width: 14%', class: "btn btn-outline-light", title: 'Enviar Mensagem' do %>
+        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+      <% end %>
+    <% end %>
+  </div>
 </div>
