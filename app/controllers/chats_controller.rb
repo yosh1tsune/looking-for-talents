@@ -1,6 +1,4 @@
 class ChatsController < ApplicationController
-  before_action :authenticate_headhunter!
-
   def new
     @chat = Chat.find_or_initialize_by(headhunter_id: chat_params[:headhunter], candidate_id: chat_params[:candidate])
     @destinatary = destinatary
