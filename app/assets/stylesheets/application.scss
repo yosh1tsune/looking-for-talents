@@ -149,18 +149,26 @@ hr {
 .accordion-body {
   color: white;
   background-color: rgb(21, 29, 39);
+  padding: 0;
 }
 
 #accordion_body > .accordion-body {
-  padding: 0;
   height: 80vh;
   border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
-.accordion-collapse > .btn {
+.accordion-body > .btn {
+  background-color: rgb(21, 29, 39);
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.125);
   border-width: 1px 0;
-  padding: 0;
-  width: 100%
+  width: 100%;
+  border-radius: 0;
+  padding: 15px;
+}
+
+.accordion-body > .btn:hover {
+  background-color: rgba(151, 149, 149, 0.144);
 }
 
 @media (max-width: 768px) {
