@@ -28,3 +28,22 @@
     <% end %>
   </div>
 </div>
+
+<script>
+    App.cable.subscriptions.create({
+      channel: "ChatChannel",
+      room: "<%= (current_headhunter || current_candidate).class %>_<%= (current_headhunter || current_candidate).id %>",
+      id: "<%= (current_headhunter || current_candidate).id %>",
+      class: "<%= (current_headhunter || current_candidate).class %>"
+    },
+    {
+      received(data) {
+        $("#chat .messages_list").append(`
+          <div id="messages" class="row message_received">
+            <p style="line-break: anywhere">${data['message']}</p>
+            <p class="message_timestamp" >${data['time']}</p>
+          </div>
+        `);
+      }
+    });
+</script>

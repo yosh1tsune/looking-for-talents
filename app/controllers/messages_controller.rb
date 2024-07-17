@@ -2,6 +2,8 @@ class MessagesController < ApplicationController
   def create
     @message = chat.messages.new(text: messages_params[:text], from: sender, to: destinatary)
     @message.save!
+    ActionCable.server.broadcast("chat_#{destinatary.class}_#{destinatary.id}",
+                                 { message: @message.text, time: @message.created_at.strftime('%H:%M') })
     respond_to { |format| format.js }
   end
 
