@@ -21,7 +21,7 @@
                 <% opportunity.candidates.map do |candidate| %>
                   <div class="accordion-body">
                     <%= link_to new_chat_path(headhunter: current_headhunter, candidate: candidate, destinatary: 'Candidate'), remote: true, class: 'btn' do %>
-                        <%= candidate.profile.name %>
+                      <%= candidate.profile.name %>
                     <% end %>
                   </div>
                 <% end %>
