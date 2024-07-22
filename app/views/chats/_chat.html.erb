@@ -15,12 +15,8 @@
   </div>
   <div>
     <%= form_for @chat.messages.new, remote: true, html: { class: 'form-inline' } do |form| %>
-      <%= form.hidden_field :headhunter_id, value: @chat.headhunter_id %>
-      <%= form.hidden_field :candidate_id, value: @chat.candidate_id %>
-      <%= form.hidden_field :from_id, value: (current_headhunter || current_candidate).id %>
-      <%= form.hidden_field :from_class, value: (current_headhunter || current_candidate).class %>
-      <%= form.hidden_field :to_id, value: @destinatary.id %>
-      <%= form.hidden_field :to_class, value: @destinatary.class %>
+      <%= form.hidden_field :destinatary_id, value: @destinatary.id %>
+      <%= form.hidden_field :destinatary_class, value: @destinatary.class %>
       <%= form.text_field :text, style: 'width: 86%', class: 'form-control', placeholder: 'Digite uma mensagem...', required: true %>
       <%= button_tag type: 'submit', id: 'message_send', style: 'width: 14%', class: "btn btn-outline-light", title: 'Enviar Mensagem' do %>
         <i class="fas fa-paper-plane" aria-hidden="true"></i>
