@@ -1,9 +1,8 @@
 class MessagesController < ApplicationController
   def create
-    @message = chat.messages.new(text: messages_params[:text], from: sender, to: destinatary)
+    @message = chat.messages.new(text: messages_params[:text], from: current_user, to: destinatary)
     @message.save!
-    ActionCable.server.broadcast("chat_#{destinatary.class}_#{destinatary.id}",
-                                 { message: @message.text, time: @message.created_at.strftime('%H:%M') })
+    call_action_cable
     respond_to { |format| format.js }
   end
 
@@ -11,20 +10,20 @@ class MessagesController < ApplicationController
 
   def chat
     @chat ||= Chat.find_or_initialize_by(
-      headhunter_id: messages_params[:headhunter_id],
-      candidate_id: messages_params[:candidate_id]
+      headhunter: current_user.is_a?(Headhunter) ? current_user : destinatary,
+      candidate: current_user.is_a?(Candidate) ? current_user : destinatary
     )
   end
 
-  def sender
-    messages_params[:from_class].constantize.find(messages_params[:from_id])
+  def destinatary
+    messages_params[:destinatary_class].constantize.find(messages_params[:destinatary_id])
   end
 
-  def destinatary
-    messages_params[:to_class].constantize.find(messages_params[:to_id])
+  def call_action_cable
+    ChatChannel.broadcast_to(@chat, @message)
   end
 
   def messages_params
-    params.require(:message).permit(:headhunter_id, :candidate_id, :text, :from_id, :from_class, :to_id, :to_class)
+    params.require(:message).permit(:text, :destinatary_id, :destinatary_class)
   end
 end

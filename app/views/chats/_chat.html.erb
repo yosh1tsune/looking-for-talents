@@ -28,16 +28,21 @@
 <script>
     App.cable.subscriptions.create({
       channel: "ChatChannel",
-      room: "<%= (current_headhunter || current_candidate).class %>_<%= (current_headhunter || current_candidate).id %>",
-      id: "<%= (current_headhunter || current_candidate).id %>",
-      class: "<%= (current_headhunter || current_candidate).class %>"
+      id: <%= @chat.id %>
     },
     {
+      connected() {
+        console.log(this)
+      },
       received(data) {
+        if(data['from_type'] == '<%= current_user.class %>' && data['from_id'] == <%= current_user.id %>){
+          return
+        }
+
         $("#chat .messages_list").append(`
           <div id="messages" class="row message_received">
-            <p style="line-break: anywhere">${data['message']}</p>
-            <p class="message_timestamp" >${data['time']}</p>
+            <p style="line-break: anywhere">${data['text']}</p>
+            <p class="message_timestamp" >${new Date(data['created_at']).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
           </div>
         `);
       }
