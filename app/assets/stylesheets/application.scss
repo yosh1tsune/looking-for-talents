@@ -130,15 +130,31 @@ hr {
 
 .chat_window {
   border: 1px solid rgba(255, 255, 255, 0.125);
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  z-index: 900;
   width: 20%;
-  height: 50%;
-  background-color: rgb(21, 29, 39);
-  display: flex;
-  flex-direction: column;
+  min-width: 250px;
+  padding: 0;
+  position: fixed;
+  bottom: 0;
+  right: calc(((var(--chat-index) - 1) * (var(--chat-width) + 10px )) + var(--chat-list-width) + 10px);
+}
+
+.chat_window:not(.chat_window ~ .chat_window) {
+  right: calc(var(--chat-list-width) + 10px);
+}
+
+.chat_window .accordion-button:not(.collapsed)::after {
+  background-image: none
+}
+
+.chat_window .accordion-button::after {
+  background-image: none
+}
+
+@media (max-width: 768px) {
+  .chat_window {
+    width: 100%;
+    right: 0;
+  }
 }
 
 .accordion-button {
@@ -171,23 +187,23 @@ hr {
   background-color: rgba(151, 149, 149, 0.144);
 }
 
-@media (max-width: 768px) {
-  .chat_window {
-    max-width: 100%;
-  }
-}
-
 .message_header {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+}
+
+.message_header > span {
   margin: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.125);
+  line-height: 35px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .messages_list {
-  overflow-y: scroll;
-  padding: 1em;
+  max-height: 300px;
+  min-height: 300px;
+  height: 50%;
 }
 
 .message_received, .message_sent {
@@ -217,4 +233,8 @@ hr {
   color: rgba(255, 255, 255, .6);
   font-size: 11px;
   text-align: right;
+}
+
+.messages-form {
+  background-color: #151d27;
 }

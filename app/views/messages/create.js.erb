@@ -1,4 +1,4 @@
-$("#chat .messages_list").append(`
+$("#chat_<%= @message.chat.websocket_uuid %> .messages_list").append(`
   <div id="messages" class="row message_sent">
     <p style="line-break: anywhere"><%= @message.text %></p>
     <p class="message_timestamp" ><%= @message.created_at.strftime('%H:%M') %></p>

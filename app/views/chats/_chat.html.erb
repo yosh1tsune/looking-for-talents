@@ -1,50 +1,60 @@
-<div id="chat" class="chat_window justify-content-between">
-  <div class="message_header">
-    <span style="margin: 0; line-height:35px;"><%= @destinatary.full_name %></span>
-    <button type="button" class="btn btn-outline-light" title="Fechar" onClick="$('#chat').remove()">
-      <i class="fas fa-close" aria-hidden="true"></i>
-    </button>
-  </div>
-  <div class="messages_list">
-    <% @chat.messages.map do |message| %>
-      <div id="messages" class="row <%= message.from == current_user ? 'message_sent' : 'message_received' %>">
-        <p style="line-break: anywhere"><%= message.text %></p>
-        <p class="message_timestamp" ><%= message.created_at.strftime('%H:%M') %></p>
+<div id="chat_<%= @chat.websocket_uuid %>" class="chat_window">
+  <div class="accordion accordion-flush" id="chat_window_accordion_<%= @destinatary.class %>_<%= @destinatary.id %>">
+    <div class="accordion-item d-flex flex-column">
+      <h2 class="accordion-header message_header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accordion_body_<%= @destinatary.class %>_<%= @destinatary.id %>" aria-expanded="true" aria-controls="collapseOne">
+          <span title="<%= @destinatary.full_name %>"><%= @destinatary.full_name %></span>
+        </button>
+
+        <button type="button" class="btn btn-light" title="Fechar" onClick="$('#chat_<%= @chat.websocket_uuid %>').remove()">
+          <i class="fas fa-close" aria-hidden="true"></i>
+        </button>
+      </h2>
+      <div id="accordion_body_<%= @destinatary.class %>_<%= @destinatary.id %>" class="accordion-collapse collapse show" data-bs-parent="#chat_window_accordion_<%= @destinatary.class %>_<%= @destinatary.id %>">
+        <div class="accordion-body overflow-y-auto messages_list">
+          <% @chat.messages.map do |message| %>
+            <div id="messages" class="row <%= message.from == current_user ? 'message_sent' : 'message_received' %>">
+              <p style="line-break: anywhere"><%= message.text %></p>
+              <p class="message_timestamp" ><%= message.created_at.strftime('%H:%M') %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="messages-form">
+          <%= form_for @chat.messages.new, remote: true, html: { class: 'form-inline' } do |form| %>
+            <%= form.hidden_field :destinatary_id, value: @destinatary.id %>
+            <%= form.hidden_field :destinatary_class, value: @destinatary.class %>
+            <%= form.hidden_field :websocket_uuid, value: @chat.websocket_uuid %>
+            <%= form.text_field :text, style: 'width: 86%', class: 'form-control', placeholder: 'Digite uma mensagem...', required: true %>
+            <%= button_tag type: 'submit', id: 'message_send', style: 'width: 14%', class: "btn btn-outline-light", title: 'Enviar Mensagem' do %>
+              <i class="fas fa-paper-plane" aria-hidden="true"></i>
+            <% end %>
+          <% end %>
+        </div>
       </div>
-    <% end %>
+    </div>
   </div>
-  <div>
-    <%= form_for @chat.messages.new, remote: true, html: { class: 'form-inline' } do |form| %>
-      <%= form.hidden_field :destinatary_id, value: @destinatary.id %>
-      <%= form.hidden_field :destinatary_class, value: @destinatary.class %>
-      <%= form.text_field :text, style: 'width: 86%', class: 'form-control', placeholder: 'Digite uma mensagem...', required: true %>
-      <%= button_tag type: 'submit', id: 'message_send', style: 'width: 14%', class: "btn btn-outline-light", title: 'Enviar Mensagem' do %>
-        <i class="fas fa-paper-plane" aria-hidden="true"></i>
-      <% end %>
-    <% end %>
-  </div>
-</div>
 
-<script>
-    App.cable.subscriptions.create({
-      channel: "ChatChannel",
-      id: <%= @chat.id %>
-    },
-    {
-      connected() {
-        console.log(this)
-      },
-      received(data) {
-        if(data['from_type'] == '<%= current_user.class %>' && data['from_id'] == <%= current_user.id %>){
-          return
+  <script>
+      element = $("#chat_<%= @chat.websocket_uuid %>")
+      element.css("--chat-index", $(".chat_window").length)
+      element.css("--chat-width", $(".chat_window").css("width"))
+      element.css("--chat-list-width", $("#ChatListAccordion").css("width"))
+
+      App.cable.subscriptions.create({ channel: "ChatChannel", id: "<%= @chat.websocket_uuid %>" },
+      {
+        received(data) {
+          if(data['from_type'] == '<%= current_user.class %>' && data['from_id'] == <%= current_user.id %>){
+            return
+          }
+
+          $("#chat_<%= @chat.websocket_uuid %> .messages_list").append(`
+            <div id="messages" class="row message_received">
+              <p style="line-break: anywhere">${data['text']}</p>
+              <p class="message_timestamp" >${new Date(data['created_at']).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+            </div>
+          `);
         }
-
-        $("#chat .messages_list").append(`
-          <div id="messages" class="row message_received">
-            <p style="line-break: anywhere">${data['text']}</p>
-            <p class="message_timestamp" >${new Date(data['created_at']).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
-          </div>
-        `);
-      }
-    });
-</script>
+      });
+  </script>
+</div>
