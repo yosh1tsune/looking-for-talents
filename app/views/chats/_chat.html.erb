@@ -14,7 +14,7 @@
         <div class="accordion-body overflow-y-auto messages_list">
           <% @chat.messages.group_by { |grouped_messages| grouped_messages.created_at.strftime('%d/%m/%Y') }.map do |messages| %>
             <div class="row message_date">
-              <p style="line-break: anywhere"><%= messages[0] %></p>
+              <p><%= messages[0] %></p>
             </div>
             <% messages[1].map do |message| %>
                 <div id="messages" class="row <%= message.from == current_user ? 'message_sent' : 'message_received' %>">
@@ -41,25 +41,25 @@
   </div>
 
   <script>
-      element = $("#chat_<%= @chat.websocket_uuid %>")
-      element.css("--chat-index", $(".chat_window").length)
-      element.css("--chat-width", $(".chat_window").css("width"))
-      element.css("--chat-list-width", $("#ChatListAccordion").css("width"))
+    element = $("#chat_<%= @chat.websocket_uuid %>")
+    element.css("--chat-index", $(".chat_window").length)
+    element.css("--chat-width", $(".chat_window").css("width"))
+    element.css("--chat-list-width", $("#ChatListAccordion").css("width"))
 
-      App.cable.subscriptions.create({ channel: "ChatChannel", id: "<%= @chat.websocket_uuid %>" },
-      {
-        received(data) {
-          if(data['from_type'] == '<%= current_user.class %>' && data['from_id'] == <%= current_user.id %>){
-            return
-          }
-
-          $("#chat_<%= @chat.websocket_uuid %> .messages_list").append(`
-            <div id="messages" class="row message_received">
-              <p style="line-break: anywhere">${data['text']}</p>
-              <p class="message_timestamp" >${new Date(data['created_at']).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
-            </div>
-          `);
+    App.cable.subscriptions.create({ channel: "ChatChannel", id: "<%= @chat.websocket_uuid %>" },
+    {
+      received(data) {
+        if(data['from_type'] == '<%= current_user.class %>' && data['from_id'] == <%= current_user.id %>){
+          return
         }
-      });
+
+        $("#chat_<%= @chat.websocket_uuid %> .messages_list").append(`
+          <div id="messages" class="row message_received">
+            <p style="line-break: anywhere">${data['text']}</p>
+            <p class="message_timestamp" >${new Date(data['created_at']).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+          </div>
+        `);
+      }
+    });
   </script>
 </div>
