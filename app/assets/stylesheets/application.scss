@@ -206,6 +206,13 @@ hr {
   height: 50%;
 }
 
+.message_date {
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  color: rgba(255, 255, 255, .6);
+}
+
 .message_received, .message_sent {
   border-radius: 10px;
   width: 70%;
@@ -225,7 +232,7 @@ hr {
   float: left;
 }
 
-.message_received > p, .message_sent > p {
+.message_received > p, .message_sent > p, .message_date > p {
   margin: 0;
 }
 

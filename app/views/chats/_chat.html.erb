@@ -12,11 +12,16 @@
       </h2>
       <div id="accordion_body_<%= @destinatary.class %>_<%= @destinatary.id %>" class="accordion-collapse collapse show" data-bs-parent="#chat_window_accordion_<%= @destinatary.class %>_<%= @destinatary.id %>">
         <div class="accordion-body overflow-y-auto messages_list">
-          <% @chat.messages.map do |message| %>
-            <div id="messages" class="row <%= message.from == current_user ? 'message_sent' : 'message_received' %>">
-              <p style="line-break: anywhere"><%= message.text %></p>
-              <p class="message_timestamp" ><%= message.created_at.strftime('%H:%M') %></p>
+          <% @chat.messages.group_by { |grouped_messages| grouped_messages.created_at.strftime('%d/%m/%Y') }.map do |messages| %>
+            <div class="row message_date">
+              <p style="line-break: anywhere"><%= messages[0] %></p>
             </div>
+            <% messages[1].map do |message| %>
+                <div id="messages" class="row <%= message.from == current_user ? 'message_sent' : 'message_received' %>">
+                  <p style="line-break: anywhere"><%= message.text %></p>
+                  <p class="message_timestamp" ><%= message.created_at.strftime('%H:%M') %></p>
+                </div>
+            <% end %>
           <% end %>
         </div>
 
