@@ -11,9 +11,14 @@ class Headhunter < ApplicationRecord
   has_many :servicing_headhunters, dependent: :nullify
   has_many :linked_companies, through: :servicing_headhunters,
                               dependent: :destroy, source: :company
+  has_many :chats, dependent: :nullify
 
   def details
     "#{name} #{surname} - #{email}"
+  end
+
+  def full_name
+    "#{name} #{surname}"
   end
 
   def send_on_create_confirmation_instructions

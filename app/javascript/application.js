@@ -26,3 +26,5 @@ import 'toastr'
 import 'bootstrap'
 
 import 'packs'
+import 'channels/consumer'
+import 'channels'

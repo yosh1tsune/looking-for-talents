@@ -14,3 +14,4 @@ pin 'toastr', to: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toast
 pin 'bootstrap', to: 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js'
 
 pin_all_from 'app/javascript/packs', under: 'packs', to: 'packs'
+pin_all_from 'app/javascript/channels', under: 'channels', to: 'channels'

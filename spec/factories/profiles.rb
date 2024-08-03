@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :profile do
     candidate
-    name { 'Bruno Silva' }
-    birth_date { '22/04/1996' }
-    document { '441.723.698-47' }
+    name { Faker::Name.name }
+    birth_date { Faker::Date.birthday(min_age: 16, max_age: 70) }
+    document { Faker::IDNumber.brazilian_citizen_number }
     scholarity { 'Superior Incompleto' }
     professional_resume { 'Estágio em Desenvolvimento Web' }
     avatar do

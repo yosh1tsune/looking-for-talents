@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Looking For Talents - Oportunidades para Desenvolvedores</title>
+    <title>Looking for Talents - Oportunidades para Desenvolvedores</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -29,8 +29,10 @@
       <%= render 'shared/navbars/visitor'%>
     <% elsif candidate_signed_in? %>
       <%= render 'shared/navbars/candidate'%>
+      <%= render 'chats/lists/candidate'%>
     <% elsif headhunter_signed_in? %>
       <%= render 'shared/navbars/headhunter'%>
+      <%= render 'chats/lists/headhunter'%>
     <% end %>
     <%= yield %>
   </body>

@@ -64,7 +64,7 @@ feature 'headhunter see candidates' do
     login_as(headhunter, scope: :headhunter)
     visit root_path
     click_on 'Vagas'
-    click_on 'Desenvolvedor Júnior Ruby on Rails'
+    find('h5', text: opportunity.title).click_link
 
     expect(page).to have_content(profile.name)
     expect(page).to have_content(subscription.registration_resume)
@@ -94,8 +94,8 @@ feature 'headhunter see candidates' do
 
     login_as(headhunter, scope: :headhunter)
     visit opportunities_path
-    click_on 'Desenvolvedor Júnior Ruby on Rails'
-    click_on another_profile.name
+    find('h5', text: opportunity.title).click_link
+    find('dd', text: another_profile.name).click_link
 
     expect(page).to have_content(another_profile.name)
     expect(page).to have_content('Data de nascimento: '\

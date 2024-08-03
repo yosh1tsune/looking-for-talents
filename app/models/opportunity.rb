@@ -13,7 +13,7 @@ class Opportunity < ApplicationRecord
   def date_validator
     return if submit_end_date.blank?
 
-    return unless submit_end_date < 6.days.from_now
+    return unless submit_end_date < 7.days.from_now.to_date
 
     errors.add(:submit_end_date, 'deve ser ao menos daqui a 7 dias')
   end

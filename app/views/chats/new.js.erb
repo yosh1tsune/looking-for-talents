@@ -1,0 +1,4 @@
+if ($('#chat_<%= @chat.websocket_uuid %>')[0] === undefined) {
+  $("body").append("<%= escape_javascript(render partial: 'chats/chat', locals: { chat: @chat, destinatary: @destinatary }) %>");
+  $(".messages_list").scrollTop($(".messages_list")[0].scrollHeight);
+}
