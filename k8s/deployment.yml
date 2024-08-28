@@ -1,0 +1,144 @@
+############################### Deployment PostgreSQL ###############################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        ports:
+          - containerPort: 5432
+        envFrom:
+          - secretRef:
+              name: looking-for-talents-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+  type: ClusterIP
+---
+############################### Deployment RabbitMQ ###############################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:3.13.0-management-alpine
+        ports:
+          - containerPort: 5672
+          - containerPort: 15672
+        envFrom:
+          - secretRef:
+              name: looking-for-talents-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+    - name: amqp
+      port: 5672
+    - name: management
+      port: 15672
+  type: ClusterIP
+---
+############################### Deployment Redis ###############################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:latest
+        ports:
+          - containerPort: 6379
+        envFrom:
+          - secretRef:
+              name: looking-for-talents-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  selector:
+    app: redis
+  ports:
+    - port: 6379
+  type: ClusterIP
+---
+################################ Deployment Application ###############################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: looking-for-talents
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: looking-for-talents
+  template:
+    metadata:
+      labels:
+        app: looking-for-talents
+    spec:
+      containers:
+      - name: looking-for-talents
+        image: yosh1tsune/looking-for-talents:latest
+        ports:
+          - containerPort: 3000
+        envFrom:
+          - secretRef:
+              name: looking-for-talents-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: looking-for-talents
+spec:
+  selector:
+    app: looking-for-talents
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: LoadBalancer
