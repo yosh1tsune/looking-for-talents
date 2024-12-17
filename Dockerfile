@@ -11,8 +11,18 @@ WORKDIR /app
 
 COPY . /app
 
-COPY Gemfile Gemfile.lock app/
+COPY Gemfile* app/
+
+COPY docker-entrypoint.sh ./app
 
 RUN gem update --system
 
 RUN bundle install
+
+EXPOSE 3000
+
+RUN ["chmod", "+x", "/app/docker-entrypoint.sh"]
+
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
+
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
