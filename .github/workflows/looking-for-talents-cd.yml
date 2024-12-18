@@ -1,4 +1,4 @@
-name: "Looking for Talents CI"
+name: "Looking for Talents CD"
 on:
   push:
     branches:
